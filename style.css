@@ -1,0 +1,162 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh; /* Adjust this value according to your needs */
+    width: 100%;
+}
+
+.login-box {
+    width: 700px;
+}
+
+#password, #email, #username, #sendcode, #newpassword {
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+}
+
+.container1 {
+    display: flex;
+}
+
+#captcha-input {
+    margin-left: 100px;
+    border-radius: 10px;
+}
+
+#captcha-container {
+    margin-left: 10px;
+}
+
+#captcha-container, #captcha-input {
+    display: inline-block;
+}
+
+.logo img {
+    max-width: 100px;
+    padding: 30px;
+}
+
+.logo h1 {
+    font-size: 60px;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password {
+    margin: 10px;
+    margin-left: 400px;
+}
+
+.forgot-password a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.lbox_nav {
+    color: #0000007e;
+}
+
+.fucker1 {
+    margin-top: 10px;
+    color: #0000007e;
+}
+
+.container2 {
+    position: relative;
+}
+
+#sendforgotcode {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #eeeeee00;
+    cursor: pointer;
+    margin-right: 110px;
+}
+
+.footer_terms {
+    margin: 20px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #00000080;
+    border-radius: 10px;
+    color: white;
+}
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    border: 1px solid #000000;
+}
+
+.pagebody {
+    position: sticky;
+    top: 0;
+    left: 1300px;
+    border: 1px solid #000000;
+}
+
+#title, #fuckerprofile {
+    display: inline-block;
+}
+
+#title {
+    margin-right: 1500px;
+}
+
