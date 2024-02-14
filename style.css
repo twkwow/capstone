@@ -39,13 +39,14 @@ body {
     display: inline-block;
 }
 
-.logo img {
+.logo {
     max-width: 100px;
-    padding: 30px;
+    margin: 30px;
 }
 
-.logo h1 {
-    font-size: 60px;
+.logo-container {
+    padding: 20px;
+    background-color: red;
 }
 
 .login-box {

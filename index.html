@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>SecureHold</title>
+    <link rel="icon" href="media/logo.png" type="image/png">
 </head>
 
 <body>
-    <div class="logo">
-        <h1><img src="logo.png" alt="IMG"> SecureHold</h1>
-    </div>
+    <img id="logo" src="media/securehold.png" alt="IMG">
     
     <div class="login-container">
         
@@ -19,7 +18,7 @@
             <h2>Admin Login</h2>
             <form onsubmit="handleRequest(event)">
                 
-                <input type="text" id="email" required placeholder="Email Address">
+                <input type="text" id="username" required placeholder="Username">
                 <input type="password" id="password" required placeholder="Password">
 
                 <!-- <div class="container1">
@@ -72,11 +71,11 @@
     function handleRequest(event) {
         event.preventDefault();
         
-        const email = event.target.querySelector("#email").value;
+        const username = event.target.querySelector("#username").value;
         const password = event.target.querySelector("#password").value;
 
         const loginData = new FormData()
-        loginData.append("email", email)
+        loginData.append("username", username)
         loginData.append("password", password)
         axios.post(apiLink + "admins/login", loginData)
         .then( (resp) => {

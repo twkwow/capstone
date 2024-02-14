@@ -49,7 +49,7 @@
             </div>
 
         </div>
-
+        
         <div class="footer_terms">
             <span class="s_pop_terms_1">Terms of Services</span>
              / 
@@ -94,7 +94,7 @@
             newAdmin.append("email", email)
             newAdmin.append("password", password)
 
-            axios.post(apiLink + "admins/insertAdmin", newAdmin)
+            axios.post(apiLink + "admins/register", newAdmin)
             .then( (resp) => {
                 console.log(resp)
                 pageRouting("dashboard.html")  
