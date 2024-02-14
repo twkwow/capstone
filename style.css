@@ -72,7 +72,7 @@ input {
     border-radius: 4px;
 }
 
-button {
+#loginbutton {
     margin-left: 100px;
     margin-right: 100px;
     padding: 10px;
@@ -83,7 +83,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+#loginbutton:hover {
     background-color: #0056b3;
 }
 
@@ -200,6 +200,29 @@ ul {
     margin-top: 20px;
 }
 
-.fuckerbtn {
+#fuckerbtn {
     color: black;
+    width: 100px;
+}
+
+.ann_container {
+    margin-top: 20px;
+    padding: 20px;
+    width: 1000px;
+    background-color: grey;
+}
+
+#funnycontentform {
+    resize: vertical;
+    width: 100%;
+}
+
+#add_ann {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.superdivider {
+    border-bottom: 0.5px solid black;
+    margin-top: 30px;
 }
