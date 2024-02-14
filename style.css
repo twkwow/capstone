@@ -13,6 +13,7 @@ body {
 }
 
 .login-box {
+    position: relative;
     width: 700px;
 }
 
@@ -39,14 +40,10 @@ body {
     display: inline-block;
 }
 
-.logo {
-    max-width: 100px;
-    margin: 30px;
-}
-
 .logo-container {
-    padding: 20px;
-    background-color: red;
+    display: flex;
+    justify-content: center;
+    padding: 80px;
 }
 
 .login-box {
@@ -226,4 +223,24 @@ ul {
 .superdivider {
     border-bottom: 0.5px solid black;
     margin-top: 30px;
+}
+
+.popup-backdrop {
+    background-color: rgb(128, 128, 128, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+}
+
+.popup-container {
+    opacity: 1;
+    background-color: white;
+    width:500px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
 }
