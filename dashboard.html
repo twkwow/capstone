@@ -14,16 +14,15 @@
 </head>
 
 <body style="display: flex;">
+
     <div class="sidebar">
-
         <ul class="main">
-
             <div class="logo2">
                 <h1><img src="logo.png" alt="IMG"> SecureHold</h1>
             </div>
             
             <li>
-                <a href="#">
+                <a href="dashboard.html">
                     <i class="fa-solid fa-layer-group"></i>
                     <span>Dashboard</span>
                 </a>
@@ -42,29 +41,34 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="fa-solid fa-database"></i> 
+                    <i class="fa-solid fa-database"></i>
                     <span>Database</span>
                 </a>
             </li>
         </ul>
-
     </div>
 
-    
-    <div class="pagebody">
-    <!--click for display:block popup-->
-        <div id="title">
-            <h5>Overview</h5>
+    <div class="topbar">
+        <div class="fuckerprofile">
+            <a href="#fuckerclickprofile">
+                <i class="fa-solid fa-user"></i>
+                <span>nigga</span>
+            </a>
         </div>
 
-        <a href="#">
-            <div id="fuckerprofile">
-                <h3><img src="logo.png" alt="profile icon"> SecureHold </h3>
-            </div>
-        </a>
+        <div class="fuckertitle">
+            <span>Dashboard</span>
+        </div>
+
+        <!--this script help when clicking other spots, it disable the fuckerclickprofile-->
+        <script src="clickclick.js"></script>
     </div>
 
-    <div></div>
+    <ul id="fuckerclickprofile" class="fuckerclickprofile">
+        <li><a href="#">Edit Profile</a></li>
+        <li><a href="change_password.html">Change Password</a></li>
+        <li><a href="#">Logout</a></li>
+    </ul>
 
 
 </body>

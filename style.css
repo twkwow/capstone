@@ -139,24 +139,67 @@ button:hover {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 240px;
+    width: 300px;
     height: 100vh;
     padding: 0 1.7rem;
-    border: 1px solid #000000;
+    border-right: 1px solid black;
 }
 
-.pagebody {
-    position: sticky;
-    top: 0;
-    left: 1300px;
-    border: 1px solid #000000;
+.fuckerprofile {
+    position: absolute;
+    right: 0;
+    padding: 20px;
+    margin-top: 20px;
 }
 
-#title, #fuckerprofile {
-    display: inline-block;
+.fuckertitle{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
 }
 
-#title {
-    margin-right: 1500px;
+.topbar {
+    border-bottom: 1px solid black;
+    height: 80px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
 }
 
+.fuckerclickprofile {
+    display: none;
+}
+
+#fuckerclickprofile:target {
+    display: block;
+    background: white;
+    position: absolute;
+    border: 1px solid black;
+    height: 10vh;
+    right: 0;
+    margin-top: 80px;
+    margin-right: 20px;
+    width: 250px;
+}
+
+ul {
+    list-style: none;
+}
+
+.maincontainer {
+    margin-top: 30px;
+}
+
+.funnycontainer {
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+
+.fuckerform {
+    margin-top: 20px;
+}
+
+.fuckerbtn {
+    color: black;
+}
