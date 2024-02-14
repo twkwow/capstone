@@ -16,7 +16,7 @@ body {
     width: 700px;
 }
 
-#password, #email, #username, #sendcode, #newpassword {
+#password, #email, #username, #sendcode, #newpassword, #newpasswordre {
     margin-left: 100px;
     margin-right: 100px;
     border-radius: 10px;

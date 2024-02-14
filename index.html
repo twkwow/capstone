@@ -17,19 +17,21 @@
         
         <div class="login-box">
             <h2>Admin Login</h2>
-            <form action="index.php" method="POST">
+            <form onsubmit="handleRequest(event)">
                 
-                <input type="text" id="username" name="username" required placeholder="Email Address">
-                <input type="password" id="password" name="password" required placeholder="Password">
+                <input type="text" id="email" required placeholder="Email Address">
+                <input type="password" id="password" required placeholder="Password">
 
-                <div class="container1">
+                <!-- <div class="container1">
                     <input type="text" id="captcha-input" name="captcha" required placeholder="Code">
                     <div id="captcha-container" onclick="generateCaptcha()">
                         <img id="captcha-img" src="captcha.php" alt="Captcha Image">
                     </div>
-                </div>
+                </div> -->
 
-                <button type="submit" id="loginbutton">Login</button>
+                <div id="alertText" style="color: red;"></div>
+
+                <input id="loginbutton" type="submit" value="Login">
 
                 <div class="forgot-password">
                     <a href="/forgot_password.html">Forgot Password?</a>
@@ -52,13 +54,42 @@
 
     </div>
 
-    <script>
-        function generateCaptcha() {
-            document.getElementById('captcha-img').src = 'captcha.php?' + Math.random();
-        }
-        generateCaptcha();
-      </script>
+   
 
 </body>
 
 </html>
+
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    // function generateCaptcha() {
+    //     document.getElementById('captcha-img').src = 'captcha.php?' + Math.random();
+    // }
+    // generateCaptcha();
+
+    function handleRequest(event) {
+        event.preventDefault();
+        
+        const email = event.target.querySelector("#email").value;
+        const password = event.target.querySelector("#password").value;
+
+        const loginData = new FormData()
+        loginData.append("email", email)
+        loginData.append("password", password)
+        axios.post(apiLink + "admins/login", loginData)
+        .then( (resp) => {
+            console.log(resp)
+            if (resp.data.status == 200) {
+                pageRouting("dashboard.html")  
+            }
+            else {
+                document.getElementById("alertText").innerHTML = "Invalid login"
+            }
+        })
+        .catch( (error) => {
+            console.log("API Error: " + error)
+        })
+    }
+</script>
