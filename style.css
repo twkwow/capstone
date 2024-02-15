@@ -1,7 +1,12 @@
+@import "styles/verifications.css";
+
 body {
     margin: 0;
     padding: 0;
+    font-family: Tahoma;
 }
+
+
 
 .login-container {
     display: flex;
@@ -12,8 +17,17 @@ body {
     width: 100%;
 }
 
+.login-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 700px;
 
-#password, #email, #username, #sendcode, #newpassword {
+}
+
+#password, #email, #username, #sendcode, #newpassword, #newpasswordre {
     margin-left: 100px;
     margin-right: 100px;
     border-radius: 10px;
@@ -122,14 +136,19 @@ input {
     margin-right: 110px;
 }
 
-.footer_terms {
-    margin: 20px;
-    padding: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: #00000080;
+.footer-terms {
+    display: flex;
+    width: 700px;
+    justify-content: center;
+    background-color: white;
     border-radius: 10px;
-    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    margin-top: 50px;
+    color: black;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar {
@@ -225,30 +244,3 @@ ul {
     margin-top: 30px;
 }
 
-.stupidmonkey {
-    text-decoration: none;
-    color: white;
-}
-
-.pop_up_tos {
-    position: absolute;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 500px; /* Adjust this value according to your needs */
-    width: 700px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    display: none;
-}
-
-.pop_up_title {
-    font-size: 20px;
-    text-align: center;
-}
-
-.pop_up_content {
-    justify-content: left;
-}
