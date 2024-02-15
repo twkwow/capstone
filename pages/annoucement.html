@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/admincontent.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <title>SecureHold</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <script src="/components/sidebar.js" type="text/javascript" defer></script>
+    <script src="/components/header.js" type="text/javascript" defer></script>
+</head>
+
+<body style="display: flex;">
+    <sidebar-component></sidebar-component>
+    <div class="content-container">
+        <!-- <header-component></header-component> -->
+        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
+        <header class="header">
+            <div class="content-title">Annoucements</div>
+
+            <div class="profile">
+                <button id="profileButton">
+                    <i class="fa-solid fa-user"></i>
+                    <span>nigga</span>
+                </button>
+            </div>
+
+            <ul id="profileDropdown" class="profile-dropdown">
+                <li><a href="#">Edit Profile</a></li>
+                <li><a href="change_password.html">Change Password</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </header>
+
+        <div class="content">
+            <div class="section-title">Add Annoucements</div>
+
+            <form class="announcements-container" action="addannoucementfunctionlol.phporwhatever" method="post">
+                <label>Title</label>
+                <textarea required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
+        
+                <label>Content</label>
+                <textarea required class="announcements-textarea" rows="10" placeholder="Add your text"></textarea>
+        
+                <input type="submit" id="add_ann" class="add-annoucements-button" value="Add Annoucement">
+            </form>
+    
+           <hr class="content-divider">
+    
+            <div class="section-title">Previous Annoucements</div>
+
+            <div>le list here</div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="/app.js"></script>
+<script src="/scripts/profileDropdown.js"></script>

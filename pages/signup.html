@@ -4,42 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Sign Up</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
+    <title>SecureHold - Sign Up</title>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
 </head>
 
-<body class="verifications-container" onload="generateCaptcha()">
+<body class="verifications-container">
     <header class="logo-container">
-        <img src="resources/images/securehold.png" alt="securehold">
+        <img src="/resources/images/securehold.png" alt="securehold">
     </header>
     
-    <div class="verification-form">
+    <form class="form-container" onsubmit="handleRequest(event)">
         <h2>Sign Up</h2>
-        <form onsubmit="handleRequest(event)">
-            <input type="text" id="username" required placeholder="Username"/>
-            <input type="email" id="email" required placeholder="Email Address">
-            <div class="container2">
-                <div style="display: flex; flex-direction: column; color:#007bff;">
-                    <input type="text" id="sendcode" name="code" required placeholder="Verification Code">
-                    <div id="sendforgotcode" onclick="sendCode()">Send Code</div>
-                </div>
+
+        <input type="text" id="username" class="form-input" required placeholder="Username"/>
+        <input type="email" id="email" class="form-input" required placeholder="Email Address">
+        <div class="send-code-container">
+            <div style="display: flex; flex-direction: column; color:#007bff;">
+                <input type="text" id="sendcode" class="form-input" required placeholder="Verification Code">
+                <div id="sendforgotcode" class="send-code" onclick="sendCode()">Send Code</div>
             </div>
-            <input type="password" id="newpassword" required placeholder="Password">
-            <input type="password" id="newpasswordre" required placeholder="Re-type Password">
-            <div class="container1">
-                <input type="text" id="captcha-input" name="captcha" required placeholder="Code">
-                <div id="captcha-container" onclick="generateCaptcha()">
-                    <img id="captcha-img" alt="Captcha Image">
-                </div>
-            </div>
-            <div id="alertText" style="color: red;"></div>
-            <input id="loginbutton" type="submit" value="Enter" onclick="printmsg()">
-            <div class="fucker1">
-                Back to
-                <a href="index.html">Log In</a>
-            </div>
-        </form>
-    </div>
+        </div>
+        <input type="password" id="newpassword" class="form-input" required placeholder="Password">
+        <input type="password" id="newpasswordre" class="form-input" required placeholder="Re-type Password">
+        <!-- <div class="container1">
+            <input type="text" id="captcha-input" name="captcha" required placeholder="Code">
+            <div id="captcha-container" onclick="generateCaptcha()">
+                //Causes VSC live server to bug out 
+                <img id="captcha-img" src="captcha.php" alt="Captcha Image">
+            </div> 
+        </div> -->
+        <div id="alertText" class="alert-text"></div>
+        <input type="submit" class="form-button" value="Sign Up">
+        <div class="form-nav">
+            Back to <a href="login.html">Log In</a>
+        </div>
+    </form>
         
     <footer class="footer-terms">
         <span onclick="showPopup('tos', true)">Terms of Services</span>
@@ -58,13 +59,17 @@
 </body>
 </html>
     
-<script src="app.js"></script>
+<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="captcha.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 
 <script>
+    // function generateCaptcha() {
+    //     document.getElementById('captcha-img').src = 'captcha.php?' + Math.random();
+    // }
+    // generateCaptcha();
+
     function sendCode() {
+        //alert email
         alert("testing verification button");
     }
 
