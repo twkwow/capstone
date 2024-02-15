@@ -50,6 +50,24 @@ body {
     display: inline-block;
 }
 
+.logo img {
+    max-width: 100px;
+    padding: 30px;
+}
+
+.logo h1 {
+    font-size: 60px;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 700px;
+}
+
 form {
     display: flex;
     flex-direction: column;
