@@ -9,7 +9,7 @@
     <link rel="icon" href="resources/images/logo.png" type="image/png">
 </head>
 
-<body class="verifications-container">
+<body class="verifications-container" onload="generateCaptcha()">
     <header class="logo-container">
         <img src="resources/images/securehold.png" alt="securehold">
     </header>
@@ -20,16 +20,16 @@
         <input type="text" id="username" required placeholder="Username">
         <input type="password" id="password" required placeholder="Password">
 
-        <!-- <div class="container1">
+        <div class="container1">
             <input type="text" id="captcha-input" name="captcha" required placeholder="Code">
             <div id="captcha-container" onclick="generateCaptcha()">
-                <img id="captcha-img" src="captcha.php" alt="Captcha Image">
+                <img id="captcha-img" alt="Captcha Image">
             </div>
-        </div> -->
+        </div>
 
         <div id="alertText" style="color: red;"></div>
 
-        <input id="loginbutton" type="submit" value="Login">
+        <input id="loginbutton" type="submit" value="Login" onclick="printmsg()">
 
         <div class="forgot-password">
             <a href="/forgot_password.html">Forgot Password?</a>
@@ -61,13 +61,11 @@
 
 <script src="app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="captcha.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
+
 
 <script>
-    // function generateCaptcha() {
-    //     document.getElementById('captcha-img').src = 'captcha.php?' + Math.random();
-    // }
-    // generateCaptcha();
-
     function handleRequest(event) {
         event.preventDefault();
         
