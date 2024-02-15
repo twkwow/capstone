@@ -46,6 +46,10 @@ body {
     margin-left: 10px;
 }
 
+#captcha-img {
+    width: 100px;
+}
+
 #captcha-container, #captcha-input {
     display: inline-block;
 }

@@ -8,7 +8,7 @@
     <title>Sign Up</title>
 </head>
 
-<body class="verifications-container">
+<body class="verifications-container" onload="generateCaptcha()">
     <header class="logo-container">
         <img src="resources/images/securehold.png" alt="securehold">
     </header>
@@ -26,15 +26,14 @@
             </div>
             <input type="password" id="newpassword" required placeholder="Password">
             <input type="password" id="newpasswordre" required placeholder="Re-type Password">
-            <!-- <div class="container1">
+            <div class="container1">
                 <input type="text" id="captcha-input" name="captcha" required placeholder="Code">
                 <div id="captcha-container" onclick="generateCaptcha()">
-                    //Causes VSC live server to bug out 
-                    <img id="captcha-img" src="captcha.php" alt="Captcha Image">
-                </div> 
-            </div> -->
+                    <img id="captcha-img" alt="Captcha Image">
+                </div>
+            </div>
             <div id="alertText" style="color: red;"></div>
-            <input id="loginbutton" type="submit" value="Enter">
+            <input id="loginbutton" type="submit" value="Enter" onclick="printmsg()">
             <div class="fucker1">
                 Back to
                 <a href="index.html">Log In</a>
@@ -61,13 +60,10 @@
     
 <script src="app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="captcha.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 
 <script>
-    // function generateCaptcha() {
-    //     document.getElementById('captcha-img').src = 'captcha.php?' + Math.random();
-    // }
-    // generateCaptcha();
-
     function sendCode() {
         alert("testing verification button");
     }
