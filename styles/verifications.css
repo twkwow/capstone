@@ -1,3 +1,4 @@
+
 .verification-container {
     position: relative;
     height: 100vh;
@@ -8,7 +9,17 @@
     
 }
 
-.verification-form {
+.logo-container {
+    display: flex;
+    justify-content: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 250px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
@@ -19,12 +30,57 @@
     width:700px;
 }
 
-.logo-container {
-    display: flex;
-    justify-content: left;
-    margin-top: 50px;
-    margin-left: 50px;
-    margin-bottom: 250px;
+.form-input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+    display: flex; flex-direction: column; color:#007bff;
+}
+
+.send-code-container {
+    position: relative;
+}
+
+.send-code {
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    background-color: #eeeeee00;
+    cursor: pointer;
+    margin-right: 110px;
+}
+
+.form-button {
+    margin: 0px 100px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password {
+    margin: 10px 100px;
+    text-align: end;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-nav {
+    margin-top: 20px;
+    color: #0000007e;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
 }
 
 .footer-terms {
@@ -61,5 +117,9 @@
     border-radius: 10px;
     height: fit-content;
     padding: 20px;
+}
+
+.alert-text {
+    color:red
 }
 

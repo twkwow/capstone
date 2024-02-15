@@ -1,0 +1,50 @@
+.sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    border-right: 1px solid black;
+}
+
+.sidebar-logo {
+    margin-top: 30px;
+}
+
+.sidebar-nav {
+    list-style: none;
+}
+
+.header {
+    display: flex;
+    border-bottom: 1px solid black;
+    height: 100px;
+    /* width: 100%; */
+}
+
+.content-title{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+
+.profile {
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: auto;
+}
+
+.profile-dropdown {
+    visibility: hidden;
+    list-style: none;
+    background: white;
+    position: absolute;
+    border: 1px solid black;
+    padding: 20px 10px;
+    right: 0;
+    margin-top: 80px;
+    margin-right: 20px;
+    width: 250px;
+}

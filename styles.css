@@ -1,0 +1,22 @@
+/* @import "styles/verifications.css";
+@import "styles/admincontent.css";
+@import "styles/components.css"; */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma;
+}
+
+#captcha-input {
+    margin-left: 100px;
+    border-radius: 10px;
+}
+
+#captcha-container {
+    margin-left: 10px;
+}
+
+#captcha-container, #captcha-input {
+    display: inline-block;
+}
