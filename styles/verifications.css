@@ -9,7 +9,6 @@
 }
 
 .verification-form {
-    display: flex;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
@@ -22,20 +21,22 @@
 
 .logo-container {
     display: flex;
-    justify-content: center;
-    padding: 80px;
+    justify-content: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 250px;
 }
 
 .footer-terms {
     display: flex;
-    width: 700px;
+    width: 350px;
     justify-content: center;
     background-color: white;
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    margin-top: 50px;
+    margin-top: 20px;
     color: black;
     border-radius: 30px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
