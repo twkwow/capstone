@@ -37,8 +37,9 @@
     margin-left: 100px;
     margin-right: 100px;
     border-radius: 10px;
-    display: flex; flex-direction: column; color:#007bff;
+    display: flex; flex-direction: column;
 }
+
 
 .send-code-container {
     position: relative;
@@ -122,4 +123,5 @@
 .alert-text {
     color:red
 }
+
 
