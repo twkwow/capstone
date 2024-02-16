@@ -48,3 +48,70 @@
     margin-right: 20px;
     width: 250px;
 }
+ 
+/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
+.content {
+    display: flex;
+}
+
+.left_container {
+    width: 60%;
+    margin-right: 20px;
+}
+
+.right_container {
+    width: 40%;
+}
+
+.right_content {
+    padding-top: 20px;
+}
+
+.left_content {
+    padding-top: 20px;
+}
+
+.approve_container {
+    display: flex;
+    border: 1px solid lightgrey;
+    height: 100px;
+    
+}
+
+.approve_container1 {
+    width: 20%;
+}
+
+.approve_container2 {
+    width: 60%;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+}
+
+.approve_container3 {
+    width: 20%;
+}
+
+.approve_text {
+    display: flex;
+    padding: 15px;
+}
+
+.fa-check {
+    color: green;
+    font-size: 40px;
+    padding: 5px;
+}
+
+.fa-xmark {
+    color: red;
+    font-size: 40px;
+    padding: 5px;
+}
+
+.check_img {
+    text-align: center;
+    margin: 30px;
+}
+
+/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
