@@ -10,28 +10,36 @@ class Sidebar extends HTMLElement {
         
                 <div class= sidebar-nav-container>
                     <ul class="sidebar-nav-list">
-                        <li class="sidebar-nav-li">
+                        <li class="sidebar-nav-list-li">
                             <a href="dashboard.html">
-                                <i class="fa-solid fa-layer-group", style="padding:10px"></i>
-                                <span style="padding-right: 10px;">Dashboard</span>
+                                <button class="sidebar-nav-btn">
+                                    <i class="fa-solid fa-layer-group", style="padding:7px"></i>
+                                    <span style="padding: 7px;">Dashboard</span>
+                                </button>
                             </a>
                         </li>
-                        <li class="sidebar-nav-li">
+                        <li class="sidebar-nav-list-li">
                             <a href="#">
-                                <i class="fa-solid fa-chart-line", style="padding:10px"></i>
-                                <span style="padding-right: 10px;">Data Analytics</span>
+                                <button class="sidebar-nav-btn">
+                                    <i class="fa-solid fa-chart-line", style="padding:7px"></i>
+                                    <span style="padding: 7px;">Data Analytics</span>
+                                </button>
                             </a>
                         </li>
-                        <li class="sidebar-nav-li">
+                        <li class="sidebar-nav-list-li">
                             <a href="annoucement.html">
-                                <i class="fa-solid fa-bell", style="padding:10px"></i>
-                                <span style="padding-right: 10px;">Announcements</span>
+                                <button class="sidebar-nav-btn">
+                                    <i class="fa-solid fa-bell", style="padding:7px"></i>
+                                    <span style="padding: 7px;">Announcements</span>
+                                </button>
                             </a>
                         </li>
-                        <li class="sidebar-nav-li">
+                        <li class="sidebar-nav-list-li">
                             <a href="#">
-                                <i class="fa-solid fa-database", style="padding:10px"></i>
-                                <span style="padding-right: 10px;">Database</span>
+                                <button class="sidebar-nav-btn">
+                                    <i class="fa-solid fa-database", style="padding:7px"></i>
+                                    <span style="padding: 7px;">Database</span>
+                                </button>
                             </a>
                         </li>
                     </ul>
