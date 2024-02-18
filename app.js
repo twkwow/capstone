@@ -5,6 +5,6 @@ function pageRouting(link) {
     window.location.href = link
 }
 
-function showPopup(id, toShow) {
-    document.getElementById(id).style.visibility = toShow ? 'visible' : 'hidden'
-}
+// function showPopup(id, toShow) {
+//     document.getElementById(id).style.visibility = toShow ? 'visible' : 'hidden'
+// }

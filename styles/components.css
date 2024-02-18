@@ -1,3 +1,4 @@
+/* sidebar */
 .sidebar {
     position: sticky;
     top: 0;
@@ -16,7 +17,9 @@
 .sidebar-nav {
     list-style: none;
 }
+/* sidebar */
 
+/* header */
 .header {
     display: flex;
     border-bottom: 1px solid black;
@@ -48,6 +51,48 @@
     margin-right: 20px;
     width: 250px;
 }
+/* header */
+
+/* snackbar css */
+.snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    right: 50px;
+    bottom: 30px;
+    font-size: 17px;
+  }
+  
+.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+/* snackbar css */
+
  
 /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
 .content {
@@ -91,6 +136,14 @@
 
 .approve_container3 {
     width: 30%;
+    margin-right: 20px;
+
+}
+
+.approve-buttons {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .approve_text {
@@ -110,20 +163,10 @@
     padding: 5px;
 }
 
-.check_img {
-    text-align: center;
-    margin: 40px;
-    display: flex;
-}
-
-.check_img a {
-    text-decoration: none;
-}
-
 .approve_btn, .reject_btn {
     margin-left: 15px;
     width: 70px;
-    height: 20px;
+    padding: 5px;
     border: 1px solid;
     border-radius: 10px;
 }
@@ -133,9 +176,16 @@
     color: white;
 }
 
+.approve_btn:hover {
+    background-color: #055ab6;
+}
+
 .reject_btn {
     color: black;
 }
 
+.reject_btn:hover {
+    background-color: lightgrey;
+}
 
 /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
