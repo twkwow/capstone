@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/admincontent.css">
     <link rel="stylesheet" href="/styles/components.css">
     <link rel="stylesheet" href="/styles/annoucement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
@@ -82,74 +83,51 @@
                             <span>8:50pm</span>
                         </div>
                         <div class="annoucement-delete">
-                            <div class="ann-delete-text">
-                                <a href="#">
+                            <div class="ann-delete-text" onclick="showPopup('ann-delete', true)">
+                                <a href="#" role="button">
                                     Delete
                                 </a>
                             </div>
                         </div>
                     </div>
-
-                    <div class="annoucement-container">
-                        <div class="annoucement-container1">
-                            <div class="annoucement-title">
-                                <span>locker maintenance today</span>
-                            </div>
-                            <div class="annoucement-content">
-                                <span> AFASJDAFKSDFLSKAFJSAFL
-                                    ASKJADSFLasdsadadasAKFASJ
-                                    FSAFSLKFJAFDSLAFADJF
-                                    KLDFDJsldksad;alkdsa;ldksal;dksal;dsakl;dsakl;sdakl;askdasl;dkasl;sdakl;dsakl;adskdl;asksdla;kdsa;ladksl;daskl;daskdl;askl;</span>
-                            </div>
-                        </div>
-                        <div class="annoucement-container2">
-                            <span>Admin Username</span>
-                        </div>
-                        <div class="annoucement-container3">
-                            <span>8:50pm</span>
-                        </div>
-                        <div class="annoucement-delete">
-                            <div class="ann-delete-text">
-                                <a href="#">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="annoucement-container">
-                        <div class="annoucement-container1">
-                            <div class="annoucement-title">
-                                <span>locker maintenance today</span>
-                            </div>
-                            <div class="annoucement-content">
-                                <span> AFASJDAFKSDFLSKAFJSAFL</span>
-                            </div>
-                        </div>
-                        <div class="annoucement-container2">
-                            <span>Admin Username</span>
-                        </div>
-                        <div class="annoucement-container3">
-                            <span>8:50pm</span>
-                        </div>
-                        <div class="annoucement-delete">
-                            <div class="ann-delete-text">
-                                <a href="#">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 
             </div>
         </div>
+    </div>
+
+    <div id='ann-delete' class="popup-backdrop" onclick="showPopup('ann-delete', false)">
+        <div id='ligma' class="popup-container-ann-delete" onclick="event.stopPropagation();">
+            <div class="ann-delete-text1">
+                <strong>Delete Annoucement</strong>
+            </div>
+            <div class="ann-delete-text1" style="margin-top: 10px;">
+                Permanently delete the annoucement? You can't undo this
+            </div>
+            <div class="pop-container">
+                <div class="annoucement-cancel-pop">
+                    <a href="#" role="button">
+                        <div class="ann-cancel-text" onclick="showPopup('ann-delete', false)">
+                            Cancel
+                        </div>
+                    </a>
+                </div>
+                <div class="annoucement-confirm-pop">
+                    <a href="#">
+                        <div class="ann-delete-text">
+                            Confirm
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </div>
+
 </body>
 
 </html>
 
 <script src="/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/scripts/profileDropdown.js"></script>

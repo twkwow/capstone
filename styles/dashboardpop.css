@@ -1,0 +1,7 @@
+.dylan-container {
+    background-color: white;
+    width:300px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
+}

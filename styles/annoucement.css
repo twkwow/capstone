@@ -39,17 +39,56 @@
     background-color: #007bff;
 }
 
-.ann-delete-text {
-    text-align: center;
+.annoucement-confirm-pop, .annoucement-cancel-pop {
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
-.ann-delete-text a {
+.pop-container {
+    text-align: right;
+}
+
+.annoucement-confirm-pop {
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    width: 70px;
+    background-color: #007bff;
+}
+
+.annoucement-cancel-pop {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 70px;
+    background-color: white;
+}
+
+.annoucement-cancel-pop a {
+    text-decoration: none;
+    color: black;
+}
+
+.annoucement-confirm-pop a {
     text-decoration: none;
     color: white;
 }
 
+.ann-cancel-text {
+    text-align: center;
+}
+
+.ann-delete-text {
+    text-align: center;
+}
+
+
 .annoucement-content {
     overflow-wrap: break-word;
+}
+
+.ann-delete-text a {
+    color: white;
+    text-decoration: none;;
 }
 
 .announcements-container {
@@ -92,4 +131,16 @@
 .add-ann-btn {
     margin: 20px;
     display: flex;
+}
+
+.popup-container-ann-delete {
+    background-color: white;
+    width:300px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
+}
+
+.ann-delete-text1 {
+    text-align: left;
 }

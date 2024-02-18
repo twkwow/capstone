@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/styles/admincontent.css">
     <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/dashboardpop.css">
+    <link rel="stylesheet" href="/styles/annoucement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
@@ -101,12 +104,12 @@
                             <div class="approve_container3">
                                 <div class="check_img">
                                     <a href="#">
-                                        <div class="approve_btn">
+                                        <div class="approve_btn" onclick="showPopup('admin-approve', true)">
                                             Approve
                                         </div>
                                     </a>
                                     <a href="#">
-                                        <div class="reject_btn">
+                                        <div class="reject_btn" onclick="showPopup('admin-reject', true)">
                                             Reject
                                         </div>
                                     </a>
@@ -115,34 +118,61 @@
                         </div>
                         <!-- Sample approve container ends from here-->
 
-                        <!-- second instance of approve container starts from here-->
-                        <div class="approve_container">
-                            <div class="approve_container1">
-                                <span class="approve_text">Username</span>
-                                <span class="approve_text">Email</span>
-                            </div>
-                            <div class="approve_container2">
-                                <span class="approve_text" style="color: blue;">fuckermonkey66</span>
-                                <span class="approve_text" style="color: blue;">blackiespam@gmail.com</span>
-                            </div>
-                            <div class="approve_container3">
-                                <div class="check_img">
-                                    <a href="#">
-                                        <div class="approve_btn">
-                                            Approve
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="reject_btn">
-                                            Reject
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- second instance of approve container ends here-->
-
                     </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-approve" class="popup-backdrop" onclick="showPopup('admin-approve', false)">
+        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
+            <div class="ann-delete-text1">
+                <strong>Approve Admin User</strong>
+            </div>
+            <div class="ann-delete-text1" style="margin-top: 10px;">
+                Are you sure to add this admin?
+            </div>
+            <div class="pop-container">
+                <div class="annoucement-cancel-pop">
+                    <a href="#">
+                        <div class="ann-cancel-text" onclick="showPopup('admin-approve', false)">
+                            Cancel
+                        </div>
+                    </a>
+                </div>
+                <div class="annoucement-confirm-pop">
+                    <a href="#">
+                        <div class="ann-delete-text">
+                            Confirm
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-reject" class="popup-backdrop" onclick="showPopup('admin-reject', false)">
+        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
+            <div class="ann-delete-text1">
+                <strong>Reject Admin User</strong>
+            </div>
+            <div class="ann-delete-text1" style="margin-top: 10px;">
+                Are you sure to reject this admin?
+            </div>
+            <div class="pop-container">
+                <div class="annoucement-cancel-pop">
+                    <a href="#">
+                        <div class="ann-cancel-text" onclick="showPopup('admin-reject', false)">
+                            Cancel
+                        </div>
+                    </a>
+                </div>
+                <div class="annoucement-confirm-pop">
+                    <a href="#">
+                        <div class="ann-delete-text">
+                            Confirm
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -153,4 +183,5 @@
 </html>
 
 <script src="/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/scripts/profileDropdown.js"></script>
