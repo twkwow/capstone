@@ -6,7 +6,7 @@
     bottom: 0;
     width: 250px;
     height: 100vh;
-    padding: 0 1.3rem;
+    /* margin: 0 1.3rem; */
     border-right: 1px solid black;
     flex-direction: column;
     align-items: center;
@@ -50,20 +50,24 @@
     display: flex;
     border-bottom: 1px solid black;
     height: 100px;
-    width: 100%;
+    /* width: 100%; */
     padding-left: 20px;
+    align-items: center;
 }
 
-.content-title{
+.header-title {
+    font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-top: 20px;
+    margin-right: auto;
 }
 
 .profile {
-    padding: 20px;
-    margin-top: 20px;
+    /* padding: 20px; */
+    /* margin-top: 20px; */
+    display: inline-block;
     margin-left: auto;
+    margin-right: 20px;
 }
 
 .profile-dropdown {
@@ -77,28 +81,6 @@
     margin-top: 80px;
     margin-right: 20px;
     width: 250px;
-}
- 
-/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
-.content {
-    display: flex;
-}
-
-.left_container {
-    width: 60%;
-    margin-right: 20px;
-}
-
-.right_container {
-    width: 40%;
-}
-
-.right_content {
-    padding-top: 20px;
-}
-
-.left_content {
-    padding-top: 20px;
 }
 
 .approve_container {

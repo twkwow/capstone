@@ -1,27 +1,45 @@
 .content-container {
     display: flex;
     flex-direction: column;
-    width: 87vw;
-    /* margin:; */
+    width: 100%;
 }
 
 .content-title {
     font-weight: bold;
     width: 100%;
-    padding-left: 5px 10px;
-    margin:0px 0px 0px 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .content {
-    margin-top: 0px;
     display: flex;
     flex-direction: column;
     padding-left: 20px;
 }
 
+
+/* might not be used */
 .content-divider {
     border: 0.5px solid black;
     margin: 30px 0px;
+}
+
+.content-split-left {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.content-top-container {
+    width: 100%;
+}
+
+.content-bottom-container {
+    width: 100%;
+}
+
+.content-item {
+    
 }
 
 .section-title {
