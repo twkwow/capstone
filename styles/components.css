@@ -1,20 +1,49 @@
 .sidebar {
+    display: flex;
     position: sticky;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 300px;
+    width: 250px;
     height: 100vh;
-    padding: 0 1.7rem;
+    /* margin: 0 1.3rem; */
     border-right: 1px solid black;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sidebar-logo {
-    margin-top: 30px;
+    margin: 30px 0px;
+    width: 200px;
+    display: inline-block;
+    /* min-width: ; */
 }
 
-.sidebar-nav {
-    list-style: none;
+.sidebar-nav-container {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-nav-list {
+    flex-direction: column;
+    margin: 0;
+    padding: 0px;
+    display: flex;
+}
+
+.sidebar-nav-list a {
+    text-decoration: none;
+}
+
+.sidebar-nav-li {
+    padding: 10px 10px;
+    margin: 10px 10px;
+    background-color: #a7b3ec;
+    align-content: center;
+    display: inline-block;
+    width: 165px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header {
@@ -22,18 +51,23 @@
     border-bottom: 1px solid black;
     height: 100px;
     /* width: 100%; */
+    padding-left: 20px;
+    align-items: center;
 }
 
-.content-title{
+.header-title {
+    font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-top: 20px;
+    margin-right: auto;
 }
 
 .profile {
-    padding: 20px;
-    margin-top: 20px;
+    /* padding: 20px; */
+    /* margin-top: 20px; */
+    display: inline-block;
     margin-left: auto;
+    margin-right: 20px;
 }
 
 .profile-dropdown {
@@ -47,28 +81,6 @@
     margin-top: 80px;
     margin-right: 20px;
     width: 250px;
-}
- 
-/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
-.content {
-    display: flex;
-}
-
-.left_container {
-    width: 60%;
-    margin-right: 20px;
-}
-
-.right_container {
-    width: 40%;
-}
-
-.right_content {
-    padding-top: 20px;
-}
-
-.left_content {
-    padding-top: 20px;
 }
 
 .approve_container {
