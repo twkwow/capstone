@@ -11,12 +11,10 @@ class Sidebar extends HTMLElement {
                 <div class= sidebar-nav-container>
                     <ul class="sidebar-nav-list">
                         <li class="sidebar-nav-li">
-                            <div>
-                                <a href="dashboard.html">
-                                    <i class="fa-solid fa-layer-group", style="padding:5px 5px 5px 10px"></i>
-                                    <span style="padding-right: 10px;">Dashboard</span>
-                                </a>
-                            </div>
+                            <a href="dashboard.html">
+                                <i class="fa-solid fa-layer-group", style="padding:10px"></i>
+                                <span style="padding-right: 10px;">Dashboard</span>
+                            </a>
                         </li>
                         <li class="sidebar-nav-li">
                             <a href="#">
