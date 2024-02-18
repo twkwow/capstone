@@ -48,3 +48,94 @@
     margin-right: 20px;
     width: 250px;
 }
+ 
+/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
+.content {
+    display: flex;
+}
+
+.left_container {
+    width: 60%;
+    margin-right: 20px;
+}
+
+.right_container {
+    width: 40%;
+}
+
+.right_content {
+    padding-top: 20px;
+}
+
+.left_content {
+    padding-top: 20px;
+}
+
+.approve_container {
+    display: flex;
+    border: 1px solid lightgrey;
+    height: 100px;
+    margin-bottom: 30px;
+    
+}
+
+.approve_container1 {
+    width: 20%;
+}
+
+.approve_container2 {
+    width: 50%;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+}
+
+.approve_container3 {
+    width: 30%;
+}
+
+.approve_text {
+    display: flex;
+    padding: 15px;
+}
+
+.fa-check {
+    color: green;
+    font-size: 40px;
+    padding: 5px;
+}
+
+.fa-xmark {
+    color: red;
+    font-size: 40px;
+    padding: 5px;
+}
+
+.check_img {
+    text-align: center;
+    margin: 40px;
+    display: flex;
+}
+
+.check_img a {
+    text-decoration: none;
+}
+
+.approve_btn, .reject_btn {
+    margin-left: 15px;
+    width: 70px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.approve_btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.reject_btn {
+    color: black;
+}
+
+
+/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */

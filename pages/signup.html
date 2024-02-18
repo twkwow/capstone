@@ -10,7 +10,7 @@
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
 </head>
 
-<body class="verifications-container">
+<body class="verifications-container" onload="generateCaptcha()">
     <header class="logo-container">
         <img src="/resources/images/securehold.png" alt="securehold">
     </header>
@@ -28,15 +28,14 @@
         </div>
         <input type="password" id="newpassword" class="form-input" required placeholder="Password">
         <input type="password" id="newpasswordre" class="form-input" required placeholder="Re-type Password">
-        <!-- <div class="container1">
+        <div class="container1">
             <input type="text" id="captcha-input" name="captcha" required placeholder="Code">
             <div id="captcha-container" onclick="generateCaptcha()">
-                //Causes VSC live server to bug out 
-                <img id="captcha-img" src="captcha.php" alt="Captcha Image">
-            </div> 
-        </div> -->
+                <img id="captcha-img" alt="Captcha Image">
+            </div>
+        </div>
         <div id="alertText" class="alert-text"></div>
-        <input type="submit" class="form-button" value="Sign Up">
+        <input type="submit" class="form-button" value="Sign Up" onclick="printmsg()">
         <div class="form-nav">
             Back to <a href="login.html">Log In</a>
         </div>
@@ -67,13 +66,10 @@
     
 <script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/captcha.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 
 <script>
-    // function generateCaptcha() {
-    //     document.getElementById('captcha-img').src = 'captcha.php?' + Math.random();
-    // }
-    // generateCaptcha();
-
     function sendCode() {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const email = document.getElementById("email").value
