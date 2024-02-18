@@ -19,7 +19,7 @@
         <h2>Sign Up</h2>
 
         <input type="text" id="username" class="form-input" required placeholder="Username"/>
-        <input type="email" id="email" class="form-input" required placeholder="Email Address">
+        <input type="email" id="email" class="form-input" title="dsadsadas" required placeholder="Email Address">
         <div class="send-code-container">
             <div style="display: flex; flex-direction: column; color:#007bff;">
                 <input type="text" id="sendcode" class="form-input" required placeholder="Verification Code">
@@ -51,8 +51,14 @@
     </footer>
     
     <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
-        <div id='ligma' class="popup-container" onclick="event.stopPropagation();">
+        <div class="popup-container" onclick="event.stopPropagation();">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+    </div>
+
+    <div id='codeSent' class="popup-backdrop" onclick="showPopup('codeSent', false)">
+        <div class="popup-container" onclick="event.stopPropagation();">
+            A code has been sent to your email !
         </div>
     </div>
     
@@ -69,8 +75,23 @@
     // generateCaptcha();
 
     function sendCode() {
-        //alert email
-        alert("testing verification button");
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const email = document.getElementById("email").value
+
+        if (!emailPattern.test(email)) {
+            return document.getElementById("alertText").innerHTML = "Please enter a valid email address"
+        }
+             
+        const emailForm = new FormData()
+        emailForm.append("email", email)
+
+        axios.post(apiLink + "admins/sendCode", emailForm)
+        .then( (resp) => {
+            showPopup('codeSent', true)
+        })
+        .catch( (error) => {
+            console.log("API Error: " + error)
+        })
     }
 
     function handleRequest(event) {
@@ -81,27 +102,23 @@
         const password = event.target.querySelector("#newpassword").value;
         const passwordRe = event.target.querySelector("#newpasswordre").value;
 
-
-        console.log(username, email, password, passwordRe)
-
-        if (password == passwordRe) {
-            const newAdmin = new FormData()
-            newAdmin.append("username", username)
-            newAdmin.append("email", email)
-            newAdmin.append("password", password)
-
-            axios.post(apiLink + "admins/register", newAdmin)
-            .then( (resp) => {
-                console.log(resp)
-                pageRouting("dashboard.html")  
-            })
-            .catch( (error) => {
-                console.log("API Error: " + error)
-            })
+        //code if password don't match
+        if (password != passwordRe) {
+            return document.getElementById("alertText").innerHTML = "Passwords not matching"
         }
-        else {
-            //code if password don't match
-            document.getElementById("alertText").innerHTML = "Passwords not matching"
-        }
+
+        const newAdmin = new FormData()
+        newAdmin.append("username", username)
+        newAdmin.append("email", email)
+        newAdmin.append("password", password)
+
+        axios.post(apiLink + "admins/register", newAdmin)
+        .then( (resp) => {
+            console.log(resp)
+            pageRouting("dashboard.html")  
+        })
+        .catch( (error) => {
+            console.log("API Error: " + error)
+        })
     }
 </script>
