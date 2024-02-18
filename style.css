@@ -1,4 +1,5 @@
 @import "styles/verifications.css";
+@import "styles/tnc.css";
 
 body {
     margin: 0;
@@ -88,7 +89,7 @@ input {
     margin-left: 100px;
     margin-right: 100px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #5183e9;
     color: #fff;
     border: none;
     border-radius: 10px;

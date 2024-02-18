@@ -45,14 +45,47 @@
     <footer class="footer-terms">
         <span onclick="showPopup('tos', true)">Terms of Services</span>
         &nbsp; | &nbsp;
-        <span>Privacy Policy</span>
+        <span onclick="showPopup('pp', true)">Privacy Policy</span>
         &nbsp; | &nbsp;
-         <span>Disclaimer</span>      	
+        <span onclick="showPopup('ds', true)">Disclaimer</span>
     </footer>
     
     <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
-        <div id='ligma' class="popup-container" onclick="event.stopPropagation();">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div id='tosContent' class="popup-container" onclick="event.stopPropagation();">
+            <script>
+                fetch('tos.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('tosContent').innerHTML = html;
+                    })
+                    .catch(error => console.error('Error fetching tos.html:', error));
+            </script>
+        </div>
+    </div>
+    
+    <div id='pp' class="popup-backdrop" onclick="showPopup('pp', false)">
+        <div id='ppContent' class="popup-container" onclick="event.stopPropagation();">
+            <script>
+                fetch('privacy.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('ppContent').innerHTML = html;
+                    })
+                    .catch(error => console.error('Error fetching privacy.html:', error));
+            </script>
+        </div>
+    </div>
+
+    <div id='ds' class="popup-backdrop" onclick="showPopup('ds', false)">
+        <div id='dsContent' class="popup-container" onclick="event.stopPropagation();">
+            <script>
+                fetch('disclaimer.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('dsContent').innerHTML = html;
+                    })
+                    .catch(error => console.error('Error fetching disclaimer.html:', error));
+            </script>
         </div>
     </div>
     

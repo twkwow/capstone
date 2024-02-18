@@ -43,23 +43,28 @@
 }
 
 .popup-backdrop {
-    background-color: rgb(128, 128, 128, 0.8);
+    background-color: rgb(128, 128, 128, 0.8); /* Grey color with 80% opacity */
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    visibility: hidden;
+    position: fixed; /* Fixed position to cover the entire viewport */
     top: 0;
-    left: 0
+    left: 0;
+    height: 100vh; /* Full height of the viewport */
+    width: 100%; /* Full width of the viewport */
+    z-index: 999; /* Ensure the backdrop is above other content */
+    visibility: hidden; /* Initially hidden */
 }
+
 
 .popup-container {
     background-color: white;
-    width:500px;
+    width: 850px;
     border-radius: 10px;
-    height: fit-content;
+    height: auto; /* Adjust height based on content */
+    max-height: 80vh; /* Limit maximum height to 80% of viewport height */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
     padding: 20px;
 }
+
 
