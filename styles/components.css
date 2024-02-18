@@ -1,20 +1,49 @@
 .sidebar {
+    display: flex;
     position: sticky;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 300px;
+    width: 250px;
     height: 100vh;
-    padding: 0 1.7rem;
+    padding: 0 1.3rem;
     border-right: 1px solid black;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sidebar-logo {
-    margin-top: 30px;
+    margin: 30px 0px;
+    width: 200px;
+    display: inline-block;
+    /* min-width: ; */
 }
 
-.sidebar-nav {
-    list-style: none;
+.sidebar-nav-container {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-nav-list {
+    flex-direction: column;
+    margin: 0;
+    padding: 0px;
+    display: flex;
+}
+
+.sidebar-nav-list a {
+    text-decoration: none;
+}
+
+.sidebar-nav-li {
+    padding: 10px 10px;
+    margin: 10px 10px;
+    background-color: #a7b3ec;
+    align-content: center;
+    display: inline-block;
+    width: 165px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header {
@@ -75,6 +104,7 @@
     display: flex;
     border: 1px solid lightgrey;
     height: 100px;
+    margin-bottom: 30px;
     
 }
 
@@ -83,13 +113,13 @@
 }
 
 .approve_container2 {
-    width: 60%;
+    width: 50%;
     border-left: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
 }
 
 .approve_container3 {
-    width: 20%;
+    width: 30%;
 }
 
 .approve_text {
@@ -111,7 +141,30 @@
 
 .check_img {
     text-align: center;
-    margin: 30px;
+    margin: 40px;
+    display: flex;
 }
+
+.check_img a {
+    text-decoration: none;
+}
+
+.approve_btn, .reject_btn {
+    margin-left: 15px;
+    width: 70px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.approve_btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.reject_btn {
+    color: black;
+}
+
 
 /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
