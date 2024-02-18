@@ -19,7 +19,7 @@ class Sidebar extends HTMLElement {
                             </a>
                         </li>
                         <li class="sidebar-nav-list-li">
-                            <a href="#">
+                            <a href="analytics.html">
                                 <button class="sidebar-nav-btn">
                                     <i class="fa-solid fa-chart-line", style="padding:7px"></i>
                                     <span style="padding: 7px;">Data Analytics</span>
