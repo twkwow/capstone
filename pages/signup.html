@@ -16,7 +16,7 @@
         <img src="/resources/images/securehold.png" alt="securehold">
     </header>
     
-    <form class="form-container" onsubmit="submitApproval(event)">
+    <form class="form-container" onsubmit="submitApprovalForm(event)">
         <h2>Sign Up</h2>
 
         <input type="text" id="username" class="form-input" required placeholder="Username"/>
@@ -84,6 +84,7 @@
     const submitApproval = "You have successfully signed up and is being sent for approval!"
 
     function sendCode() {
+        console.log("dsafdasfgasdf")
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const email = document.getElementById("email").value
 
@@ -103,7 +104,7 @@
         })
     }
 
-    function submitApproval(event) {
+    function submitApprovalForm(event) {
         event.preventDefault();
         
         const username = event.target.querySelector("#username").value;
