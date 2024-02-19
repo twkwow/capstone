@@ -23,7 +23,7 @@
         <input type="email" id="email" class="form-input" title="dsadsadas" required placeholder="Email Address">
         <div class="send-code-container">
             <div style="display: flex; flex-direction: column; color:#007bff;">
-                <input type="text" id="sendcode" class="form-input" required placeholder="Verification Code">
+                <input type="text" id="verifyCode" class="form-input" required placeholder="Verification Code">
                 <div id="sendforgotcode" class="send-code" onclick="sendCode()">Send Code</div>
             </div>
         </div>
@@ -49,42 +49,21 @@
         &nbsp; | &nbsp;
          <span>Disclaimer</span>      	
     </footer>
-    
-    <!-- <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
-        <div class="popup-container" onclick="event.stopPropagation();">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-    </div>
 
-    <div id='codeSent' class="popup-backdrop" onclick="showPopup('codeSent', false)">
-        <div class="popup-container" onclick="event.stopPropagation();">
-            A code has been sent to your email !
-        </div>
-    </div>
-    
-    <div id='submitApproval' class="popup-backdrop" onclick="showPopup('submitApproval', false)">
-        <div class="popup-container" onclick="event.stopPropagation();">
-            You have successfully signed up and is being sent for approval!
-        </div>
-    </div> -->
+    <button onclick="pageRouting('login.html?event=passwordReset')">testing</button>
 
-    <popupmodal-component></popupmodal-component>
+    <popupmodal-component modalId="codeSent">A code has been sent to your email !</popupmodal-component>
+    <popupmodal-component modalId="submitApproval">You have successfully signed up and is being sent for approval!</popupmodal-component>
 </body>
 </html>
     
-<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/captcha.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
+<script src="/app.js"></script>
+<script src="/captcha.js"></script>
 
 <script>
-    //popupmodal messages
-    const tos = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    const codeSent = "A code has been sent to your email !"
-    const submitApproval = "You have successfully signed up and is being sent for approval!"
-
     function sendCode() {
-        console.log("dsafdasfgasdf")
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const email = document.getElementById("email").value
 
@@ -94,13 +73,12 @@
              
         const emailForm = new FormData()
         emailForm.append("email", email)
-
         axios.post(apiLink + "admins/sendCode", emailForm)
         .then( (resp) => {
-            showPopup(codeSent, true)
+            return showPopup("codeSent", true)
         })
         .catch( (error) => {
-            console.log("API Error: " + error)
+            return console.log("API Error: " + error)
         })
     }
 
@@ -111,6 +89,7 @@
         const email = event.target.querySelector("#email").value;
         const password = event.target.querySelector("#newpassword").value;
         const passwordRe = event.target.querySelector("#newpasswordre").value;
+        const code = event.target.querySelector("#verifyCode").value;
 
         //code if password don't match
         if (password != passwordRe) {
@@ -121,11 +100,17 @@
         approvalRequest.append("username", username)
         approvalRequest.append("email", email)
         approvalRequest.append("password", password)
+        approvalRequest.append("code", code)
 
         axios.post(apiLink + "admins/submitApproval", approvalRequest)
         .then( (resp) => {
             console.log(resp)
-            showPopup(submitApproval, true)
+            switch(resp.data.status) {
+                case 200: showPopup('submitApproval', true); break;
+                case 409: console.log("Email already in use"); break;
+                case 401: console.log("Verification code not matching"); break;
+                case 400: console.log("Please press send code to verify your email"); break;
+            }
         })
         .catch( (error) => {
             console.log("API Error: " + error)
