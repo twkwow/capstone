@@ -35,24 +35,32 @@
     text-decoration: none;
 }
 
-.sidebar-nav-li {
-    padding: 10px 10px;
-    margin: 10px 10px;
-    background-color: #a7b3ec;
-    align-content: center;
+.sidebar-nav-list-li {
     display: inline-block;
-    width: 165px;
+    margin: 10px 10px;
+}
+
+.sidebar-nav-btn {
+    text-align: left;
+    padding: 10px 10px;
+    background-color: #e8e8e9;
+    width: 175px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-nav-btn:hover {
+    cursor: pointer;
+    background-color: #a7b3ec;
 }
 
 .header {
     display: flex;
     border-bottom: 1px solid black;
     height: 100px;
-    /* width: 100%; */
     padding-left: 20px;
     align-items: center;
+    padding-right: 100px;
 }
 
 .header-title {
@@ -62,14 +70,19 @@
     margin-right: auto;
 }
 
-.profile {
-    /* padding: 20px; */
-    /* margin-top: 20px; */
-    display: inline-block;
-    margin-left: auto;
-    margin-right: 20px;
+.profile-button {
+    text-align: left;
+    padding: 10px 10px;
+    background-color: #e8e8e9;
+    width: auto;
+    border-radius: 360px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.profile-button:hover {
+    cursor: pointer;
+    background-color: #a7b3ec;
+}
 .profile-dropdown {
     visibility: hidden;
     list-style: none;
@@ -88,7 +101,6 @@
     border: 1px solid lightgrey;
     height: 100px;
     margin-bottom: 30px;
-    
 }
 
 .approve_container1 {
@@ -102,6 +114,9 @@
 }
 
 .approve_container3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30%;
 }
 
@@ -133,11 +148,15 @@
 }
 
 .approve_btn, .reject_btn {
-    margin-left: 15px;
-    width: 70px;
-    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 30px;
     border: 1px solid;
     border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
 }
 
 .approve_btn {
