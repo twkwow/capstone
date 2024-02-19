@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/styles/admincontent.css">
     <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/dashboardpop.css">
+    <link rel="stylesheet" href="/styles/annoucement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <link rel="icon" href="/resources/images/locker.png" type="image/png">
@@ -85,6 +88,11 @@
                     </div>
                 </div>
                 <div class="content">
+                        test
+                    </div>
+                </div>
+
+                <div class="content-bottom-container">
                     <!-- Sample approve container starts from here-->
                     <span class="content-title">Admin Approval</span>
                     <div>
@@ -100,6 +108,18 @@
                             <div class="approve_container3">
                                 <button class="approve_btn">Approve</button>
                                 <button class="reject_btn">Reject</button>
+                                <div class="check_img">
+                                    <a href="#">
+                                        <div class="approve_btn" onclick="showPopup('admin-approve', true)">
+                                            Approve
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div class="reject_btn" onclick="showPopup('admin-reject', true)">
+                                            Reject
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <!-- Sample approve container ends from here-->
@@ -120,6 +140,61 @@
                             </div>
                         </div>
                     </div>    
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-approve" class="popup-backdrop" onclick="showPopup('admin-approve', false)">
+        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
+            <div class="ann-delete-text1">
+                <strong>Approve Admin User</strong>
+            </div>
+            <div class="ann-delete-text1" style="margin-top: 10px;">
+                Are you sure to add this admin?
+            </div>
+            <div class="pop-container">
+                <div class="annoucement-cancel-pop">
+                    <a href="#">
+                        <div class="ann-cancel-text" onclick="showPopup('admin-approve', false)">
+                            Cancel
+                        </div>
+                    </a>
+                </div>
+                <div class="annoucement-confirm-pop">
+                    <a href="#">
+                        <div class="ann-delete-text">
+                            Confirm
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-reject" class="popup-backdrop" onclick="showPopup('admin-reject', false)">
+        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
+            <div class="ann-delete-text1">
+                <strong>Reject Admin User</strong>
+            </div>
+            <div class="ann-delete-text1" style="margin-top: 10px;">
+                Are you sure to reject this admin?
+            </div>
+            <div class="pop-container">
+                <div class="annoucement-cancel-pop">
+                    <a href="#">
+                        <div class="ann-cancel-text" onclick="showPopup('admin-reject', false)">
+                            Cancel
+                        </div>
+                    </a>
+                </div>
+                <div class="annoucement-confirm-pop">
+                    <a href="#">
+                        <div class="ann-delete-text">
+                            Confirm
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -165,4 +240,5 @@
 </html>
 
 <script src="/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/scripts/profileDropdown.js"></script>
