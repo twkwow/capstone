@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold - Sign Up</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
 </head>
 
 <body class="verifications-container" onload="generateCaptcha()">
@@ -15,11 +16,11 @@
         <img src="/resources/images/securehold.png" alt="securehold">
     </header>
     
-    <form class="form-container" onsubmit="handleRequest(event)">
+    <form class="form-container" onsubmit="submitApprovalForm(event)">
         <h2>Sign Up</h2>
 
         <input type="text" id="username" class="form-input" required placeholder="Username"/>
-        <input type="email" id="email" class="form-input" required placeholder="Email Address">
+        <input type="email" id="email" class="form-input" title="dsadsadas" required placeholder="Email Address">
         <div class="send-code-container">
             <div style="display: flex; flex-direction: column; color:#007bff;">
                 <input type="text" id="sendcode" class="form-input" required placeholder="Verification Code">
@@ -35,26 +36,39 @@
             </div>
         </div>
         <div id="alertText" class="alert-text"></div>
-        <input type="submit" class="form-button" value="Sign Up" onclick="printmsg()">
+        <input type="submit" class="form-button" value="Sign Up">
         <div class="form-nav">
             Back to <a href="login.html">Log In</a>
         </div>
     </form>
         
     <footer class="footer-terms">
-        <span onclick="showPopup('tos', true)">Terms of Services</span>
+        <span onclick="showPopup(tos, true)">Terms of Services</span>
         &nbsp; | &nbsp;
         <span>Privacy Policy</span>
         &nbsp; | &nbsp;
          <span>Disclaimer</span>      	
     </footer>
     
-    <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
-        <div id='ligma' class="popup-container" onclick="event.stopPropagation();">
+    <!-- <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
+        <div class="popup-container" onclick="event.stopPropagation();">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
     </div>
+
+    <div id='codeSent' class="popup-backdrop" onclick="showPopup('codeSent', false)">
+        <div class="popup-container" onclick="event.stopPropagation();">
+            A code has been sent to your email !
+        </div>
+    </div>
     
+    <div id='submitApproval' class="popup-backdrop" onclick="showPopup('submitApproval', false)">
+        <div class="popup-container" onclick="event.stopPropagation();">
+            You have successfully signed up and is being sent for approval!
+        </div>
+    </div> -->
+
+    <popupmodal-component></popupmodal-component>
 </body>
 </html>
     
@@ -64,12 +78,33 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 
 <script>
+    //popupmodal messages
+    const tos = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    const codeSent = "A code has been sent to your email !"
+    const submitApproval = "You have successfully signed up and is being sent for approval!"
+
     function sendCode() {
-        //alert email
-        alert("testing verification button");
+        console.log("dsafdasfgasdf")
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const email = document.getElementById("email").value
+
+        if (!emailPattern.test(email)) {
+            return document.getElementById("alertText").innerHTML = "Please enter a valid email address"
+        }
+             
+        const emailForm = new FormData()
+        emailForm.append("email", email)
+
+        axios.post(apiLink + "admins/sendCode", emailForm)
+        .then( (resp) => {
+            showPopup(codeSent, true)
+        })
+        .catch( (error) => {
+            console.log("API Error: " + error)
+        })
     }
 
-    function handleRequest(event) {
+    function submitApprovalForm(event) {
         event.preventDefault();
         
         const username = event.target.querySelector("#username").value;
@@ -77,27 +112,23 @@
         const password = event.target.querySelector("#newpassword").value;
         const passwordRe = event.target.querySelector("#newpasswordre").value;
 
-
-        console.log(username, email, password, passwordRe)
-
-        if (password == passwordRe) {
-            const newAdmin = new FormData()
-            newAdmin.append("username", username)
-            newAdmin.append("email", email)
-            newAdmin.append("password", password)
-
-            axios.post(apiLink + "admins/register", newAdmin)
-            .then( (resp) => {
-                console.log(resp)
-                pageRouting("dashboard.html")  
-            })
-            .catch( (error) => {
-                console.log("API Error: " + error)
-            })
+        //code if password don't match
+        if (password != passwordRe) {
+            return document.getElementById("alertText").innerHTML = "Passwords not matching"
         }
-        else {
-            //code if password don't match
-            document.getElementById("alertText").innerHTML = "Passwords not matching"
-        }
+
+        const approvalRequest = new FormData()
+        approvalRequest.append("username", username)
+        approvalRequest.append("email", email)
+        approvalRequest.append("password", password)
+
+        axios.post(apiLink + "admins/submitApproval", approvalRequest)
+        .then( (resp) => {
+            console.log(resp)
+            showPopup(submitApproval, true)
+        })
+        .catch( (error) => {
+            console.log("API Error: " + error)
+        })
     }
 </script>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold - Login</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
 </head>
 
 <body class="verifications-container" onload="generateCaptcha()">
@@ -15,7 +16,7 @@
         <img src="/resources/images/securehold.png" alt="securehold">
     </header>
     
-    <form class="form-container" onsubmit="handleRequest(event)">
+    <form class="form-container" onsubmit="login(event)">
         <h2>Admin Login</h2>
 
         <input type="text" id="username" class="form-input" required placeholder="Username">
@@ -40,19 +41,20 @@
     </form>   
 
     <footer class="footer-terms">
-        <span onclick="showPopup('tos', true)">Terms of Services</span>
+        <span onclick="showPopup(tos, true)">Terms of Services</span>
         &nbsp; | &nbsp;
         <span>Privacy Policy</span>
         &nbsp; | &nbsp;
          <span>Disclaimer</span>      	
     </footer>
 
-    <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
+    <!-- <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
         <div id='ligma' class="popup-container" onclick="event.stopPropagation();">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
-    </div>
+    </div> -->
 
+    <popupmodal-component></popupmodal-component>
 </body>
 
 </html>
@@ -63,7 +65,9 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 
 <script>
-    function handleRequest(event) {
+    const tos = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+    function login(event) {
         event.preventDefault();
         
         const username = event.target.querySelector("#username").value;
@@ -72,7 +76,7 @@
         const loginData = new FormData()
         loginData.append("username", username)
         loginData.append("password", password)
-        axios.post(apiLink + "admins/login", loginData)
+        axios.post(apiLink + "admins/login", loginData, {withCredentials: true})
         .then( (resp) => {
             console.log(resp)
             if (resp.data.status == 200) {

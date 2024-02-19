@@ -17,43 +17,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
 </head>
 
 <body style="display: flex;">
     <sidebar-component></sidebar-component>
-
-    <!-- <div class="sidebar">
-        <ul class="main">
-            <div class="logo2">
-                <h1><img src="logo.png" alt="IMG"> SecureHold</h1>
-            </div>
-            
-            <li>
-                <a href="dashboard.html">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <span>Data Analytics</span>
-                </a>
-            </li>
-            <li>
-                <a href="annoucement.html">
-                    <i class="fa-solid fa-bell"></i>
-                    <span>Announcements</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-database"></i>
-                    <span>Database</span>
-                </a>
-            </li>
-        </ul>
-    </div> -->
 
     <div class="content-container">
         <!-- <header-component></header-component> -->
@@ -234,3 +202,56 @@
 <script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/scripts/profileDropdown.js"></script>
+
+<script>
+    hasSession(false)
+
+    function pendingApprovalHTML(_id, username, email) {
+        return `
+        <div class="approve_container">
+            <div class="approve_container1">
+                <span class="approve_text">Username</span>
+                <span class="approve_text">Email</span>
+            </div>
+            <div class="approve_container2">
+                <span class="approve_text" style="color: blue;">${username}</span>
+                <span class="approve_text" style="color: blue;">${email}</span>
+            </div>
+            <div class="approve_container3">
+                <div class="approve-buttons">
+                    <button onclick="approveOrRejectAdmin('${_id}',true)" class="approve_btn"> Approve </button>
+                    <button onclick="approveOrRejectAdmin('${_id}',false)" class="reject_btn"> Reject </button>
+                </div>
+            </div>
+        </div>
+        `
+    }
+
+    function renderPendingApprovals() {
+        axios.get(apiLink + "admins/getAllPendingApprovals")
+        .then ( (res) => {
+            //limit show up to 5 approvals
+            const approvalArr = res.data.data.slice(0,5)
+            var innerHTML = ""
+            approvalArr.forEach( (admin) => {
+                innerHTML += pendingApprovalHTML(admin._id, admin.username, admin.email)
+            })
+            document.getElementById("rightContent").innerHTML = innerHTML
+        })
+    }
+    renderPendingApprovals()
+
+    function approveOrRejectAdmin(_id, approve) {
+        const newAdmin = new FormData()
+        newAdmin.append("_id", _id)
+
+        axios.post(apiLink + (approve ? "admins/insertAdmin" : "admins/rejectAdmin"), newAdmin)
+        .then( () => {
+            showSnackbar(approve ? "Admin Approved" : "Admin Rejected")
+            renderPendingApprovals()
+        })
+        .catch ((e) => {
+            console.log("API Error: " + e)
+        })
+    }
+</script>
