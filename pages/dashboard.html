@@ -68,11 +68,12 @@
 </body>
 </html>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/app.js"></script>
 <script src="/scripts/profileDropdown.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
+    hasSession(false)
 
     function pendingApprovalHTML(_id, username, email) {
         return `
@@ -98,6 +99,7 @@
     function renderPendingApprovals() {
         axios.get(apiLink + "admins/getAllPendingApprovals")
         .then ( (res) => {
+            //limit show up to 5 approvals
             const approvalArr = res.data.data.slice(0,5)
             var innerHTML = ""
             approvalArr.forEach( (admin) => {
