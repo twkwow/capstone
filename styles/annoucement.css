@@ -25,7 +25,7 @@
 
 .annoucement-container3 {
     width: 10%;
-    text-align: center;
+    text-align: justify;
 }
 
 .annoucement-title {
@@ -37,6 +37,7 @@
     border-radius: 10px;
     width: 70px;
     background-color: #007bff;
+    margin: auto;
 }
 
 .annoucement-confirm-pop, .annoucement-cancel-pop {
