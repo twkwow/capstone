@@ -20,7 +20,7 @@ class PopupModal extends HTMLElement {
 }
 
 function showPopup(id, toShow) {
-document.getElementById(id).style.visibility = toShow ? 'visible' : 'hidden'
+    document.getElementById(id).style.visibility = toShow ? 'visible' : 'hidden'
 }
 
 customElements.define('popupmodal-component', PopupModal);

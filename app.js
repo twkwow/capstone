@@ -6,30 +6,13 @@ function pageRouting(link) {
     window.location.href = link
 }
 
-// function showPopup(id, toShow) {
-//     document.getElementById(id).style.visibility = toShow ? 'visible' : 'hidden'
-// }
-
-// function hasSession() {
-//     return new Promise((resolve, reject) => {
-//         axios.get(apiLink +"checkToken", {withCredentials: true})
-//         .then((resp) => {
-//             resolve(resp.data.status == 200);
-//         })
-//         .catch((error) => {
-//             console.log("API Error: " + error);
-//             reject(false);
-//         });
-//     })
-// }
-
-function hasSession(goDashboard) {
+function checkSession() {
     axios.get(apiLink +"checkToken", {withCredentials: true})
     .then((resp) => {
         if (resp.data.status == 200) {
-            return pageRouting( goDashboard ? "pages/dashboard.html" : "")
+            return (window.location.pathname == "/") ?  pageRouting("pages/dashboard.html") : null
         }
-        return pageRouting("/pages/login.html")
+        return pageRouting( (window.location.pathname == "/") ? "/pages/login.html" : "/pages/login.html?event=sessionLost")
     })
     .catch((error) => {
         console.log("API Error: " + error);
