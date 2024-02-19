@@ -152,15 +152,20 @@
     align-items: center;
     justify-content: center;
     width: 75px;
-    height: 30px;
+    height: 50px;
     border: 1px solid;
     border-radius: 10px;
     margin: 5px;
     padding: 10px;
 }
 
+.approve_btn, .reject_btn:hover {
+    cursor:pointer;
+}
+
 .approve_btn {
     background-color: #007bff;
+    border-color: #007bff;
     color: white;
 }
 
