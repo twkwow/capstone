@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/styles/admincontent.css">
     <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/dashboardpop.css">
+    <link rel="stylesheet" href="/styles/annoucement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <link rel="icon" href="/resources/images/locker.png" type="image/png">
+    <link rel="icon" href="/resources/images/sample chart.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
@@ -21,55 +26,181 @@
     <div class="content-container">
         <!-- <header-component></header-component> -->
         <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
-        <header class="header">
-            <div class="content-title">
-                <span>Dashboard</span>
+        <div class="header">
+            <div class="header-title">
+                <span style="text-align: right;">Dashboard</span>
             </div>
 
-            <div class="profile">
-                <button id="profileButton">
+            <a href="#">
+                <button class="profile-button" id="profileButton">
                     <i class="fa-solid fa-user"></i>
-                    <span>nigga</span>
+                    <span style="padding: 7px;">Profile</span>
                 </button>
-            </div>
+            </a>
 
             <ul id="profileDropdown" class="profile-dropdown">
                 <li><a href="#">Edit Profile</a></li>
                 <li><a href="change_password.html">Change Password</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
-        </header>
-
-        <div class="content">
-
-            <!-- LEFT -->
-            <div class="left_container">
-                <div class="content-title"> Whatever put Title</div>
-                <div class="left_content">
-                    <img src="https://i.pinimg.com/236x/5b/66/00/5b66006e97bcb6b4d3e5c86769bd1daa.jpg">
-                    <p>What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.</p>
-                </div>
-                <button onclick="showSnackbar('Test snackbar')">Test snackbar</button>
-            </div>
-
-            <!-- RIGHT -->
-            <div class="right_container">
-                <span class="content-title"> Admin Approval</span>
-                <div id="rightContent" class="right_content">
-                    <!-- approval container is in pendingApprovalHTML() in script below-->
-                </div>    
-            </div>
-
         </div>
+        
+        <div class="body">
+            <div class="content-split-left">
+                <div class="content">
+                    <div class="content-title">Locker Occupancy Count</div>
+                    <div class="content-item">
+                        <div style="border-radius: 8px; overflow: hidden;">
+                            <img src="/resources/images/sample chart.png" style="width: 100%; height: 350px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <!-- Sample approve container starts from here-->
+                    <div class="content-title">Admin Approval</div>
+                    <div>
+                        <div class="approve_container">
+                            <div class="approve_container1">
+                                <span class="approve_text">Username</span>
+                                <span class="approve_text">Email</span>
+                            </div>
+                            <div class="approve_container2">
+                                <span class="approve_text" style="color: blue;">fuckermonkey66</span>
+                                <span class="approve_text" style="color: blue;">blackiespam@gmail.com</span>
+                            </div>
+                            <div class="approve_container3">
+                                <div class="check_img">
+                                    <a href="#" style="text-decoration: none;">
+                                        <button class="approve_btn" onclick="showPopup('admin-approve', true)">Approve</button>
+                                    </a>
+                                    <a href="#" style="text-decoration: none;">
+                                        <button class="reject_btn" onclick="showPopup('admin-reject', true)">Reject</button>
+                                    </a>    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sample approve container ends from here-->
 
-        <!-- Snackbar notification -->
-        <snackbar-component></snackbar-component>
+                        <!-- second instance of approve container starts from here-->
+                        <div class="approve_container">
+                            <div class="approve_container1">
+                                <span class="approve_text">Username</span>
+                                <span class="approve_text">Email</span>
+                            </div>
+                            <div class="approve_container2">
+                                <span class="approve_text" style="color: blue;">fuckermonkey66</span>
+                                <span class="approve_text" style="color: blue;">blackiespam@gmail.com</span>
+                            </div>
+                            <div class="approve_container3">
+                                <a href="#" style="text-decoration: none;">
+                                    <button class="approve_btn" onclick="showPopup('admin-approve', true)">Approve</button>
+                                </a>
+                                <a href="#" style="text-decoration: none;">
+                                    <button class="reject_btn" onclick="showPopup('admin-reject', true)">Reject</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+
+            <div class="content-split-right">
+                <div class="locker-status-container">
+                    <div class="locker-status-container-title">
+                        <div class="content-title" style="text-align: center;">Locker Status</div>
+                    </div>
+                    <div class="locker-status-container-content">
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div id="admin-approve" class="popup-backdrop" onclick="showPopup('admin-approve', false)">
+        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
+            <div class="ann-delete-text1">
+                <strong>Approve Admin User</strong>
+            </div>
+            <div class="ann-delete-text1" style="margin-top: 10px;">
+                Are you sure to add this admin?
+            </div>
+            <div class="pop-container">
+                <div class="annoucement-cancel-pop">
+                    <a href="#">
+                        <div class="ann-cancel-text" onclick="showPopup('admin-approve', false)">
+                            Cancel
+                        </div>
+                    </a>
+                </div>
+                <div class="annoucement-confirm-pop">
+                    <a href="#">
+                        <div class="ann-delete-text">
+                            Confirm
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-reject" class="popup-backdrop" onclick="showPopup('admin-reject', false)">
+        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
+            <div class="ann-delete-text1">
+                <strong>Reject Admin User</strong>
+            </div>
+            <div class="ann-delete-text1" style="margin-top: 10px;">
+                Are you sure to reject this admin?
+            </div>
+            <div class="pop-container">
+                <div class="annoucement-cancel-pop">
+                    <a href="#">
+                        <div class="ann-cancel-text" onclick="showPopup('admin-reject', false)">
+                            Cancel
+                        </div>
+                    </a>
+                </div>
+                <div class="annoucement-confirm-pop">
+                    <a href="#">
+                        <div class="ann-delete-text">
+                            Confirm
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
 </body>
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/scripts/profileDropdown.js"></script>
 
 <script>
