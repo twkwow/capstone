@@ -14,6 +14,7 @@
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
 </head>
 
 <body style="display: flex;">
@@ -96,33 +97,30 @@
         </div>
     </div>
 
-    <div id='ann-delete' class="popup-backdrop" onclick="showPopup('ann-delete', false)">
-        <div id='ligma' class="popup-container-ann-delete" onclick="event.stopPropagation();">
-            <div class="ann-delete-text1">
-                <strong>Delete Annoucement</strong>
+    <popupmodal-component modalId="ann-delete" modalClass="popup-container-ann-delete">
+        <div class="ann-delete-text1">
+            <strong>Delete Annoucement</strong>
+        </div>
+        <div class="ann-delete-text1" style="margin-top: 10px;">
+            Permanently delete the annoucement? You can't undo this
+        </div>
+        <div class="pop-container">
+            <div class="annoucement-cancel-pop">
+                <a href="#" role="button">
+                    <div class="ann-cancel-text" onclick="showPopup('ann-delete', false)">
+                        Cancel
+                    </div>
+                </a>
             </div>
-            <div class="ann-delete-text1" style="margin-top: 10px;">
-                Permanently delete the annoucement? You can't undo this
-            </div>
-            <div class="pop-container">
-                <div class="annoucement-cancel-pop">
-                    <a href="#" role="button">
-                        <div class="ann-cancel-text" onclick="showPopup('ann-delete', false)">
-                            Cancel
-                        </div>
-                    </a>
-                </div>
-                <div class="annoucement-confirm-pop">
-                    <a href="#">
-                        <div class="ann-delete-text">
-                            Confirm
-                        </div>
-                    </a>
-                </div>
+            <div class="annoucement-confirm-pop">
+                <a href="#">
+                    <div class="ann-delete-text">
+                        Confirm
+                    </div>
+                </a>
             </div>
         </div>
-
-    </div>
+    </popupmodal-component>
 
 </body>
 

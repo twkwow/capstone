@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
     <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
 </head>
 
@@ -47,6 +48,7 @@
         
         <div class="body">
             <div class="content-split-left">
+
                 <div class="content">
                     <div class="content-title">Locker Occupancy Count</div>
                     <div class="content-item">
@@ -55,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="content">
                     <!-- Sample approve container starts from here-->
                     <div class="content-title">Admin Approval</div>
@@ -69,14 +72,12 @@
                                 <span class="approve_text" style="color: blue;">blackiespam@gmail.com</span>
                             </div>
                             <div class="approve_container3">
-                                <div class="check_img">
-                                    <a href="#" style="text-decoration: none;">
-                                        <button class="approve_btn" onclick="showPopup('admin-approve', true)">Approve</button>
-                                    </a>
-                                    <a href="#" style="text-decoration: none;">
-                                        <button class="reject_btn" onclick="showPopup('admin-reject', true)">Reject</button>
-                                    </a>    
-                                </div>
+                                <a href="#" style="text-decoration: none;">
+                                    <button class="approve_btn" onclick="showPopup('admin-approve', true)">Approve</button>
+                                </a>
+                                <a href="#" style="text-decoration: none;">
+                                    <button class="reject_btn" onclick="showPopup('admin-reject', true)">Reject</button>
+                                </a>
                             </div>
                         </div>
                         <!-- Sample approve container ends from here-->
@@ -100,6 +101,8 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        
                     </div>    
                 </div>
             </div>
@@ -140,62 +143,57 @@
         </div>
     </div>
 
-    <div id="admin-approve" class="popup-backdrop" onclick="showPopup('admin-approve', false)">
-        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
-            <div class="ann-delete-text1">
-                <strong>Approve Admin User</strong>
+    <popupmodal-component modalId="admin-approve" modalClass="dylan-container">
+        <div class="ann-delete-text1">
+            <strong>Approve Admin User</strong>
+        </div>
+        <div class="ann-delete-text1" style="margin-top: 10px;">
+            Are you sure to add this admin?
+        </div>
+        <div class="pop-container">
+            <div class="annoucement-cancel-pop">
+                <a href="#">
+                    <div class="ann-cancel-text" onclick="showPopup('admin-approve', false)">
+                        Cancel
+                    </div>
+                </a>
             </div>
-            <div class="ann-delete-text1" style="margin-top: 10px;">
-                Are you sure to add this admin?
-            </div>
-            <div class="pop-container">
-                <div class="annoucement-cancel-pop">
-                    <a href="#">
-                        <div class="ann-cancel-text" onclick="showPopup('admin-approve', false)">
-                            Cancel
-                        </div>
-                    </a>
-                </div>
-                <div class="annoucement-confirm-pop">
-                    <a href="#">
-                        <div class="ann-delete-text">
-                            Confirm
-                        </div>
-                    </a>
-                </div>
+            <div class="annoucement-confirm-pop">
+                <a href="#">
+                    <div class="ann-delete-text">
+                        Confirm
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
+    </popupmodal-component>
 
-    <div id="admin-reject" class="popup-backdrop" onclick="showPopup('admin-reject', false)">
-        <div id='ligma' class="dylan-container" onclick="event.stopPropagation();">
-            <div class="ann-delete-text1">
-                <strong>Reject Admin User</strong>
+    <popupmodal-component modalId="admin-reject" modalClass="dylan-container">
+        <div class="ann-delete-text1">
+            <strong>Reject Admin User</strong>
+        </div>
+        <div class="ann-delete-text1" style="margin-top: 10px;">
+            Are you sure to reject this admin?
+        </div>
+        <div class="pop-container">
+            <div class="annoucement-cancel-pop">
+                <a href="#">
+                    <div class="ann-cancel-text" onclick="showPopup('admin-reject', false)">
+                        Cancel
+                    </div>
+                </a>
             </div>
-            <div class="ann-delete-text1" style="margin-top: 10px;">
-                Are you sure to reject this admin?
-            </div>
-            <div class="pop-container">
-                <div class="annoucement-cancel-pop">
-                    <a href="#">
-                        <div class="ann-cancel-text" onclick="showPopup('admin-reject', false)">
-                            Cancel
-                        </div>
-                    </a>
-                </div>
-                <div class="annoucement-confirm-pop">
-                    <a href="#">
-                        <div class="ann-delete-text">
-                            Confirm
-                        </div>
-                    </a>
-                </div>
+            <div class="annoucement-confirm-pop">
+                <a href="#">
+                    <div class="ann-delete-text">
+                        Confirm
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
+    </popupmodal-component>
+
 </div>
-
-    
 </body>
 </html>
 
@@ -204,7 +202,7 @@
 <script src="/scripts/profileDropdown.js"></script>
 
 <script>
-    hasSession(false)
+    //hasSession(false)
 
     function pendingApprovalHTML(_id, username, email) {
         return `

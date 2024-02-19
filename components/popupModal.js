@@ -1,22 +1,26 @@
 class PopupModal extends HTMLElement {
-    constructor() {
-      super();
-    }
-  
-    connectedCallback() {
-      this.innerHTML = `
-        <div id='popupModal' class="popup-backdrop" onclick="showPopup('popupModal', false)">
-            <div id="popupModalContent" class="popup-container" onclick="event.stopPropagation();">
+  constructor() {
+    super();
+    this.modalId = "";
+    this.modalClass = "";
+  }
 
-            </div>
-        </div>
-      `;
-    }
+  connectedCallback() {
+    this.modalId = this.getAttribute("modalId");
+    this.modalClass = this.getAttribute("modalClass") || this.modalClass;
+
+    this.innerHTML = `
+      <div id='${this.modalId}' class="popup-backdrop" onclick="showPopup('${this.modalId}', false)">
+          <div id="popupModalContent" class="${this.modalClass}" onclick="event.stopPropagation();">
+            ${this.innerHTML}
+          </div>
+      </div>
+    `;
+  }
 }
 
-function showPopup(html, toShow) {
-  document.getElementById("popupModalContent").innerHTML = html
-  document.getElementById("popupModal").style.visibility = toShow ? 'visible' : 'hidden'
+function showPopup(id, toShow) {
+document.getElementById(id).style.visibility = toShow ? 'visible' : 'hidden'
 }
 
 customElements.define('popupmodal-component', PopupModal);
