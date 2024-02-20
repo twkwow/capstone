@@ -1,0 +1,79 @@
+
+        .titleContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .titleContainer h1 {
+            font-size: 1.875rem; /* 30px */
+            font-weight: 800;
+            padding-top: 1.25rem; /* 20px */
+            padding-bottom: 0.625rem; /* 10px */
+        }
+
+        .titleContainer h2 {
+            font-size: 1.125rem; /* 18px */
+            font-weight: bold;
+            padding-bottom: 0.5rem; /* 8px */
+        }
+
+        .text-lg {
+            font-size: 1.0rem; /* 18px */
+        }
+
+        .text-semibold {
+            font-weight: 600;
+        }
+
+        hr {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border: none;
+            border-top: 1px solid #d1d5db;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .text-xl {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 700;
+            padding-top: 1.125rem; /* 10px */
+        }
+
+        .list-decimal {
+            list-style-type: decimal;
+            padding-left: 2.5rem; /* 40px */
+        }
+
+        .list-outside {
+            list-style-position: outside;
+        }
+
+        .py-3 {
+            padding-top: 0.75rem; /* 12px */
+            padding-bottom: 0.75rem; /* 12px */
+        }
+
+        .text-gray-800 {
+            fill: #2d3748;
+        }
+
+        .text-blue-500 {
+            color: #3b82f6;
+        }
+
+        .contactContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: left;
+        }
+
+        .footer-terms span {
+            cursor: pointer;
+        }
+

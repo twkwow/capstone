@@ -4,27 +4,21 @@ body {
     font-family: Tahoma;
 }
 
-.container1 {
-    display: flex;
+::-webkit-scrollbar {
+    width: 10px;
 }
-
-#captcha-img {
-    width: 100px;
-}
-
-#captcha-container {
-    margin-left: 10px;
-}
-
-#captcha-input {
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    margin-left: 100px;
+  
+::-webkit-scrollbar-track {
+    /* background: #f1f1f1;  */
     border-radius: 10px;
-    display: flex; flex-direction: column;
 }
 
-#captcha-container, #captcha-input {
-    display: inline-block;
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
 }
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+

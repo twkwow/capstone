@@ -99,29 +99,31 @@
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
-.popup-backdrop {
-    background-color: rgb(128, 128, 128, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    visibility: hidden;
-    top: 0;
-    left: 0
-}
-
-.popup-container {
-    background-color: white;
-    width:500px;
-    border-radius: 10px;
-    height: fit-content;
-    padding: 20px;
-}
-
 .alert-text {
     color:red
 }
 
+.container1 {
+    display: flex;
+}
 
+#captcha-img {
+    width: 100px;
+}
+
+#captcha-container {
+    margin-left: 10px;
+}
+
+#captcha-input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    margin-left: 100px;
+    border-radius: 10px;
+    display: flex; flex-direction: column;
+}
+
+#captcha-container, #captcha-input {
+    display: inline-block;
+}

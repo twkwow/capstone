@@ -7,7 +7,7 @@ class PopupModal extends HTMLElement {
 
   connectedCallback() {
     this.modalId = this.getAttribute("modalId");
-    this.modalClass = this.getAttribute("modalClass") || this.modalClass;
+    this.modalClass = this.getAttribute("modalClass") || 'popup-container';
 
     this.innerHTML = `
       <div id='${this.modalId}' class="popup-backdrop" onclick="showPopup('${this.modalId}', false)">

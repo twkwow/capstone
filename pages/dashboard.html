@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
-    <link rel="icon" href="/resources/images/locker.png" type="image/png">
-    <link rel="icon" href="/resources/images/sample chart.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
@@ -162,7 +160,7 @@
 <script src="/scripts/profileDropdown.js"></script>
 
 <script>
-    checkSession()
+    //checkSession()
 
     function pendingApprovalHTML(_id, username, email) {
         return `
@@ -194,6 +192,8 @@
             approvalArr.forEach( (admin) => {
                 innerHTML += pendingApprovalHTML(admin._id, admin.username, admin.email)
             })
+
+            console.log(Boolean(innerHTML))
             document.getElementById("pendingApprovals").innerHTML = innerHTML
         })
     }
