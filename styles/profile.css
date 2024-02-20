@@ -1,0 +1,126 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 100px;
+    padding: 70px 10px 10px 70px;
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+}
+
+.info-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-subcontainer{
+    margin-top: 50px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    padding: 20px
+}
+
+.profile-image-container{
+    position: relative;
+}
+
+.profile-image {
+    border: 5px solid black;
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+}
+
+.edit-profile-image {
+    border: 0px;
+    border-radius: 100%;
+    background-color: rgb(128, 128, 128, 0.5);
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.profile-image-container:hover .edit-profile-image {
+    opacity: 1;
+}
+
+.fields-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 120px;
+    width: 50%;
+    font-size: 20px;
+}
+
+.title{
+    font-size: 30px;
+}
+
+.subtitle{
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.user-input-container{
+    display: flex;
+    width: 100%;
+}
+
+.user-input {
+    width: 90%;
+    padding: 10px 20px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.changepassword-input {
+    width: 95%;
+    padding: 10px 20px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.edit{
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.edit:hover{
+    cursor: pointer;
+    background-color: #a7b3ec;
+}
+
+.changepassword-button-container{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.changepassword-button{
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.changepassword-button:hover{
+    cursor: pointer;
+    background-color: #a7b3ec;
+}

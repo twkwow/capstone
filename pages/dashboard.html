@@ -23,26 +23,8 @@
     <sidebar-component></sidebar-component>
 
     <div class="content-container">
-        <!-- <header-component></header-component> -->
-        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
-        <div class="header">
-            <div class="header-title">
-                <span style="text-align: right;">Dashboard</span>
-            </div>
-
-            <a href="#">
-                <button class="profile-button" id="profileButton">
-                    <i class="fa-solid fa-user"></i>
-                    <span style="padding: 7px;">Profile</span>
-                </button>
-            </a>
-
-            <ul id="profileDropdown" class="profile-dropdown">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
+        <!-- whoever unintentionally fixed the styling for the header, thanks :) -->
+        <header-component headerTitle="Dashboard"></header-component>
         
         <div class="body">
             <div class="content-split-left">
@@ -151,13 +133,14 @@
         </div>
     </popupmodal-component>
 
+    <snackbar-component snackbarId="approve">Admin Approved</snackbar-component>
+    <snackbar-component snackbarId="reject">Admin Rejected</snackbar-component>
 </div>
 </body>
 </html>
 
-<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/scripts/profileDropdown.js"></script>
+<script src="/app.js"></script>
 
 <script>
     //checkSession()
@@ -192,8 +175,6 @@
             approvalArr.forEach( (admin) => {
                 innerHTML += pendingApprovalHTML(admin._id, admin.username, admin.email)
             })
-
-            console.log(Boolean(innerHTML))
             document.getElementById("pendingApprovals").innerHTML = innerHTML
         })
     }
@@ -205,7 +186,7 @@
 
         axios.post(apiLink + (approve ? "dashboard/insertAdmin" : "dashboard/rejectAdmin"), newAdmin)
         .then( () => {
-            showSnackbar(approve ? "Admin Approved" : "Admin Rejected")
+            showSnackbar(approve ? "approve" : "reject")
             renderPendingApprovals()
         })
         .catch ((e) => {

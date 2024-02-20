@@ -102,6 +102,7 @@
 .announcements-textarea {
     resize: vertical;
     width: 100%;
+    white-space: pre-wrap;
 }
 
 .add-annoucements-button {
@@ -132,6 +133,7 @@
 .add-ann-btn {
     margin: 20px;
     display: flex;
+    justify-content: end;
 }
 
 .popup-container-ann-delete {
