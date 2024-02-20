@@ -1,128 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <!-- <meta http-equiv="refresh" content="0; url=pages/login.html"> -->
+        <link rel="icon" href="/resources/images/logo.png" type="image/png">
+        <title>Redirecting</title>
+    </head>
+    <body>
+        <h1>Redirecting you</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>SecureHold</title>
-    <link rel="icon" href="resources/images/logo.png" type="image/png">
-</head>
-
-<body class="verifications-container">
-    <header class="logo-container">
-        <img src="resources/images/securehold.png" alt="securehold">
-    </header>
-    
-    <form class="verification-form" onsubmit="handleRequest(event)">
-        <h2>Admin Login</h2>
-
-        <input type="text" id="username" required placeholder="Username">
-        <input type="password" id="password" required placeholder="Password">
-
-        <!-- <div class="container1">
-            <input type="text" id="captcha-input" name="captcha" required placeholder="Code">
-            <div id="captcha-container" onclick="generateCaptcha()">
-                <img id="captcha-img" src="captcha.php" alt="Captcha Image">
-            </div>
-        </div> -->
-
-        <div id="alertText" style="color: red;"></div>
-
-        <input id="loginbutton" type="submit" value="Login">
-
-        <div class="forgot-password">
-            <a href="/forgot_password.html">Forgot Password?</a>
-        </div>
-
-        <div class="lbox_nav">
-            Do not have an account? 
-            <a href="/signup.html">Sign Up</a>
-        </div>
-    </form>   
-
-    <footer class="footer-terms">
-        <span onclick="showPopup('tos', true)">Terms of Services</span>
-        &nbsp; | &nbsp;
-        <span onclick="showPopup('pp', true)">Privacy Policy</span>
-        &nbsp; | &nbsp;
-        <span onclick="showPopup('ds', true)">Disclaimer</span>
-    </footer>
-    
-    <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
-        <div id='tosContent' class="popup-container" onclick="event.stopPropagation();">
-            <script>
-                fetch('tos.html')
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById('tosContent').innerHTML = html;
-                    })
-                    .catch(error => console.error('Error fetching tos.html:', error));
-            </script>
-        </div>
-    </div>
-    
-    <div id='pp' class="popup-backdrop" onclick="showPopup('pp', false)">
-        <div id='ppContent' class="popup-container" onclick="event.stopPropagation();">
-            <script>
-                fetch('privacy.html')
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById('ppContent').innerHTML = html;
-                    })
-                    .catch(error => console.error('Error fetching privacy.html:', error));
-            </script>
-        </div>
-    </div>
-
-    <div id='ds' class="popup-backdrop" onclick="showPopup('ds', false)">
-        <div id='dsContent' class="popup-container" onclick="event.stopPropagation();">
-            <script>
-                fetch('disclaimer.html')
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById('dsContent').innerHTML = html;
-                    })
-                    .catch(error => console.error('Error fetching disclaimer.html:', error));
-            </script>
-        </div>
-    </div>
-
-</body>
-
+        <h3>If you are not redirected automatically, follow this <a href='pages/login.html'>link to example</a>.</h3>
+    </body>
 </html>
 
-<script src="app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/app.js"></script>
 
 <script>
-    // function generateCaptcha() {
-    //     document.getElementById('captcha-img').src = 'captcha.php?' + Math.random();
-    // }
-    // generateCaptcha();
-
-    function handleRequest(event) {
-        event.preventDefault();
-        
-        const username = event.target.querySelector("#username").value;
-        const password = event.target.querySelector("#password").value;
-
-        const loginData = new FormData()
-        loginData.append("username", username)
-        loginData.append("password", password)
-        axios.post(apiLink + "admins/login", loginData)
-        .then( (resp) => {
-            console.log(resp)
-            if (resp.data.status == 200) {
-                pageRouting("dashboard.html")  
-            }
-            else {
-                document.getElementById("alertText").innerHTML = "Invalid login"
-            }
-        })
-        .catch( (error) => {
-            console.log("API Error: " + error)
-        })
-    }
-    
+    checkSession()
 </script>

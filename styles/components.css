@@ -1,0 +1,271 @@
+/* sidebar */
+.sidebar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh;
+    /* margin: 0 1.3rem; */
+    border-right: 1px solid black;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-logo {
+    margin: 30px 0px;
+    width: 200px;
+    display: inline-block;
+    /* min-width: ; */
+}
+
+.sidebar-nav-container {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-nav-list {
+    flex-direction: column;
+    margin: 0;
+    padding: 0px;
+    display: flex;
+}
+
+.sidebar-nav-list a {
+    text-decoration: none;
+}
+
+.sidebar-nav-list-li {
+    display: inline-block;
+    margin: 10px 10px;
+}
+
+.sidebar-nav-btn {
+    text-align: left;
+    padding: 10px 10px;
+    background-color: #e8e8e9;
+    width: 175px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-nav-btn:hover {
+    cursor: pointer;
+    background-color: #a7b3ec;
+}
+
+.header {
+    display: flex;
+    border-bottom: 1px solid black;
+    height: 100px;
+    padding-left: 20px;
+    align-items: center;
+    padding-right: 100px;
+}
+
+.header-title {
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: auto;
+}
+
+.profile-button {
+    text-align: left;
+    padding: 10px 10px;
+    background-color: #e8e8e9;
+    width: auto;
+    border-radius: 360px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-button:hover {
+    cursor: pointer;
+    background-color: #a7b3ec;
+}
+.profile-dropdown {
+    visibility: hidden;
+    list-style: none;
+    background: white;
+    position: absolute;
+    border: 1px solid black;
+    padding: 20px 10px;
+    right: 0;
+    margin-top: 80px;
+    margin-right: 20px;
+    width: 250px;
+}
+/* header */
+
+/* snackbar css */
+.snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    right: 50px;
+    bottom: 30px;
+    font-size: 17px;
+}
+  
+.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+/* snackbar css */
+
+/* popup modal */
+.popup-backdrop {
+    background-color: rgb(128, 128, 128, 0.8); /* Grey color with 80% opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full height of the viewport */
+    width: 100%; /* Full width of the viewport */
+    z-index: 999; /* Ensure the backdrop is above other content */
+    visibility: hidden; /* Initially hidden */
+}
+
+
+.popup-container {
+    background-color: white;
+    width: 850px;
+    border-radius: 10px;
+    height: auto; /* Adjust height based on content */
+    max-height: 80vh; /* Limit maximum height to 80% of viewport height */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    padding: 20px;
+}
+/* popup modal */
+ 
+/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
+.content {
+    display: flex;
+}
+
+.left_container {
+    width: 60%;
+    margin-right: 20px;
+}
+
+.right_container {
+    width: 40%;
+}
+
+.right_content {
+    padding-top: 20px;
+}
+
+.left_content {
+    padding-top: 20px;
+}
+
+.approve_container {
+    display: flex;
+    border: 1px solid lightgrey;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.approve_container1 {
+    width: 20%;
+}
+
+.approve_container2 {
+    width: 50%;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+}
+
+.approve_container3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.approve-buttons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.approve_text {
+    display: flex;
+    padding: 15px;
+}
+
+.fa-check {
+    color: green;
+    font-size: 40px;
+    padding: 5px;
+}
+
+.fa-xmark {
+    color: red;
+    font-size: 40px;
+    padding: 5px;
+}
+
+.approve_btn, .reject_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.approve_btn, .reject_btn:hover {
+    cursor:pointer;
+}
+
+.approve_btn {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.approve_btn:hover {
+    background-color: #055ab6;
+}
+
+.reject_btn {
+    color: black;
+}
+
+.reject_btn:hover {
+    background-color: lightgrey;
+}
+
+/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */

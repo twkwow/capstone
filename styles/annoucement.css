@@ -1,0 +1,147 @@
+.annoucement-card {
+    width: 100%;
+    border: 1px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.annoucement-container {
+    margin: 10px;
+}
+
+.annoucement-container1, .annoucement-container2, .annoucement-container3, .annoucement-delete {
+    display: inline-block;
+}
+
+.annoucement-container1 {
+    width: 60%;
+}
+
+.annoucement-container2 {
+    width: 20%;
+    text-align: center;
+    color: lightgrey;
+}
+
+.annoucement-container3 {
+    width: 10%;
+    text-align: justify;
+}
+
+.annoucement-title {
+    color: blue;
+}
+
+.annoucement-delete {
+    border: 1px;
+    border-radius: 10px;
+    width: 70px;
+    background-color: #007bff;
+    margin: auto;
+}
+
+.annoucement-confirm-pop, .annoucement-cancel-pop {
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.pop-container {
+    text-align: right;
+}
+
+.annoucement-confirm-pop {
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    width: 70px;
+    background-color: #007bff;
+}
+
+.annoucement-cancel-pop {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 70px;
+    background-color: white;
+}
+
+.annoucement-cancel-pop a {
+    text-decoration: none;
+    color: black;
+}
+
+.annoucement-confirm-pop a {
+    text-decoration: none;
+    color: white;
+}
+
+.ann-cancel-text {
+    text-align: center;
+}
+
+.ann-delete-text {
+    text-align: center;
+}
+
+
+.annoucement-content {
+    overflow-wrap: break-word;
+}
+
+.ann-delete-text a {
+    color: white;
+    text-decoration: none;;
+}
+
+.announcements-container {
+    width: 100%;
+    border: 1px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.announcements-textarea {
+    resize: vertical;
+    width: 100%;
+}
+
+.add-annoucements-button {
+    width: 150px;
+    height: 30px;
+    border: 1px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+
+.add-ann-title {
+    font-size: 15px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.add-ann-content {
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 30px;
+}
+
+.add-ann-btn {
+    margin: 20px;
+    display: flex;
+}
+
+.popup-container-ann-delete {
+    background-color: white;
+    width:300px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
+}
+
+.ann-delete-text1 {
+    text-align: left;
+}

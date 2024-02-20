@@ -1,3 +1,4 @@
+
 .verification-container {
     position: relative;
     height: 100vh;
@@ -8,7 +9,17 @@
     
 }
 
-.verification-form {
+.logo-container {
+    display: flex;
+    justify-content: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 150px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
@@ -19,12 +30,58 @@
     width:700px;
 }
 
-.logo-container {
-    display: flex;
-    justify-content: left;
-    margin-top: 50px;
-    margin-left: 50px;
-    margin-bottom: 250px;
+.form-input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+    display: flex; flex-direction: column;
+}
+
+
+.send-code-container {
+    position: relative;
+}
+
+.send-code {
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    background-color: #eeeeee00;
+    cursor: pointer;
+    margin-right: 110px;
+}
+
+.form-button {
+    margin: 0px 100px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password {
+    margin: 10px 100px;
+    text-align: end;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-nav {
+    margin-top: 20px;
+    color: #0000007e;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
 }
 
 .footer-terms {
@@ -42,29 +99,31 @@
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
-.popup-backdrop {
-    background-color: rgb(128, 128, 128, 0.8); /* Grey color with 80% opacity */
+.alert-text {
+    color:red
+}
+
+.container1 {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed; /* Fixed position to cover the entire viewport */
-    top: 0;
-    left: 0;
-    height: 100vh; /* Full height of the viewport */
-    width: 100%; /* Full width of the viewport */
-    z-index: 999; /* Ensure the backdrop is above other content */
-    visibility: hidden; /* Initially hidden */
 }
 
+#captcha-img {
+    width: 100px;
+}
 
-.popup-container {
-    background-color: white;
-    width: 850px;
+#captcha-container {
+    margin-left: 10px;
+}
+
+#captcha-input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    margin-left: 100px;
     border-radius: 10px;
-    height: auto; /* Adjust height based on content */
-    max-height: 80vh; /* Limit maximum height to 80% of viewport height */
-    overflow-y: auto; /* Add vertical scroll if content overflows */
-    padding: 20px;
+    display: flex; flex-direction: column;
 }
 
-
+#captcha-container, #captcha-input {
+    display: inline-block;
+}

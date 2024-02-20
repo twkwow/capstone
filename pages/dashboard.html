@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/admincontent.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/dashboardpop.css">
+    <link rel="stylesheet" href="/styles/annoucement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
+    <title>SecureHold</title>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <script src="/components/sidebar.js" type="text/javascript" defer></script>
+    <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
+</head>
+
+<body style="display: flex;">
+    <sidebar-component></sidebar-component>
+
+    <div class="content-container">
+        <!-- <header-component></header-component> -->
+        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
+        <div class="header">
+            <div class="header-title">
+                <span style="text-align: right;">Dashboard</span>
+            </div>
+
+            <a href="#">
+                <button class="profile-button" id="profileButton">
+                    <i class="fa-solid fa-user"></i>
+                    <span style="padding: 7px;">Profile</span>
+                </button>
+            </a>
+
+            <ul id="profileDropdown" class="profile-dropdown">
+                <li><a href="#">Edit Profile</a></li>
+                <li><a href="change_password.html">Change Password</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div class="body">
+            <div class="content-split-left">
+
+                <div class="content">
+                    <div class="content-title">Locker Occupancy Count</div>
+                    <div class="content-item">
+                        <div style="border-radius: 8px; overflow: hidden;">
+                            <img src="/resources/images/sample chart.png" style="width: 100%; height: 350px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <!-- Sample approve container starts from here-->
+                    <div class="content-title">Admin Approval</div>
+                    <div id="pendingApprovals">
+                        
+                    </div>    
+                </div>
+            </div>
+
+            <div class="content-split-right">
+                <div class="locker-status-container">
+                    <div class="locker-status-container-title">
+                        <div class="content-title" style="text-align: center;">Locker Status</div>
+                    </div>
+                    <div class="locker-status-container-content">
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                        <div class="locker">
+                            <img src="/resources/images/locker.png">
+                            SS2
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <popupmodal-component modalId="admin-approve" modalClass="dylan-container">
+        <div class="ann-delete-text1">
+            <strong>Approve Admin User</strong>
+        </div>
+        <div class="ann-delete-text1" style="margin-top: 10px;">
+            Are you sure to add this admin?
+        </div>
+        <div class="pop-container">
+            <div class="annoucement-cancel-pop">
+                <a href="#">
+                    <div class="ann-cancel-text" onclick="showPopup('admin-approve', false)">
+                        Cancel
+                    </div>
+                </a>
+            </div>
+            <div class="annoucement-confirm-pop">
+                <a href="#">
+                    <div class="ann-delete-text">
+                        Confirm
+                    </div>
+                </a>
+            </div>
+        </div>
+    </popupmodal-component>
+
+    <popupmodal-component modalId="admin-reject" modalClass="dylan-container">
+        <div class="ann-delete-text1">
+            <strong>Reject Admin User</strong>
+        </div>
+        <div class="ann-delete-text1" style="margin-top: 10px;">
+            Are you sure to reject this admin?
+        </div>
+        <div class="pop-container">
+            <div class="annoucement-cancel-pop">
+                <a href="#">
+                    <div class="ann-cancel-text" onclick="showPopup('admin-reject', false)">
+                        Cancel
+                    </div>
+                </a>
+            </div>
+            <div class="annoucement-confirm-pop">
+                <a href="#">
+                    <div class="ann-delete-text">
+                        Confirm
+                    </div>
+                </a>
+            </div>
+        </div>
+    </popupmodal-component>
+
+</div>
+</body>
+</html>
+
+<script src="/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/scripts/profileDropdown.js"></script>
+
+<script>
+    //checkSession()
+
+    function pendingApprovalHTML(_id, username, email) {
+        return `
+        <div class="approve_container">
+            <div class="approve_container1">
+                <span class="approve_text">Username</span>
+                <span class="approve_text">Email</span>
+            </div>
+            <div class="approve_container2">
+                <span class="approve_text" style="color: blue;">${username}</span>
+                <span class="approve_text" style="color: blue;">${email}</span>
+            </div>
+            <div class="approve_container3">
+                <div class="approve-buttons">
+                    <button onclick="approveOrRejectAdmin('${_id}',true)" class="approve_btn"> Approve </button>
+                    <button onclick="approveOrRejectAdmin('${_id}',false)" class="reject_btn"> Reject </button>
+                </div>
+            </div>
+        </div>
+        `
+    }
+
+    function renderPendingApprovals() {
+        axios.get(apiLink + "dashboard/getAllPendingApprovals")
+        .then ( (res) => {
+            //limit show up to 5 approvals
+            const approvalArr = res.data.data.slice(0,5)
+            var innerHTML = ""
+            approvalArr.forEach( (admin) => {
+                innerHTML += pendingApprovalHTML(admin._id, admin.username, admin.email)
+            })
+
+            console.log(Boolean(innerHTML))
+            document.getElementById("pendingApprovals").innerHTML = innerHTML
+        })
+    }
+    renderPendingApprovals()
+
+    function approveOrRejectAdmin(_id, approve) {
+        const newAdmin = new FormData()
+        newAdmin.append("_id", _id)
+
+        axios.post(apiLink + (approve ? "dashboard/insertAdmin" : "dashboard/rejectAdmin"), newAdmin)
+        .then( () => {
+            showSnackbar(approve ? "Admin Approved" : "Admin Rejected")
+            renderPendingApprovals()
+        })
+        .catch ((e) => {
+            console.log("API Error: " + e)
+        })
+    }
+</script>
