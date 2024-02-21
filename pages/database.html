@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/admincontent.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/dashboardpop.css">
+    <link rel="stylesheet" href="/styles/annoucement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
+    <link rel="stylesheet" href="/styles/database.css">
+    <title>SecureHold</title>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <link rel="icon" href="/resources/images/locker.png" type="image/png">
+    <link rel="icon" href="/resources/images/sample chart.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <script src="/components/sidebar.js" type="text/javascript" defer></script>
+    <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
+</head>
+
+<body style="display: flex;">
+    <sidebar-component></sidebar-component>
+
+    <div class="content-container">
+        <!-- <header-component></header-component> -->
+        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
+        <div class="header">
+            <div class="header-title">
+                <span style="text-align: right;">Database</span>
+            </div>
+
+            <a href="#">
+                <button class="profile-button" id="profileButton">
+                    <i class="fa-solid fa-user"></i>
+                    <span style="padding: 7px;">Profile</span>
+                </button>
+            </a>
+
+            <ul id="profileDropdown" class="profile-dropdown">
+                <li><a href="#">Edit Profile</a></li>
+                <li><a href="change_password.html">Change Password</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div class="body">
+            <div class="content-split-left">
+
+                <div class="content">
+                    <div class="content-title">User Database</div>
+                    <div class="content-item">
+                        <div class="database-border-container">
+                            <div class="database-container">
+                                <div class="database-content">
+                                </div>
+                                <div class="database-name">
+                                    Database name
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="database-border-container">
+                            <div class="database-container">
+                                <div class="database-content">
+                                </div>
+                                <div class="database-name">
+                                    Database name 2
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="database-border-container">
+                            <div class="database-container">
+                                <div class="database-content">
+                                </div>
+                                <div class="database-name">
+                                    Database name
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="database-border-container">
+                            <div class="database-container">
+                                <div class="database-content">
+                                </div>
+                                <div class="database-name">
+                                    Database name 2
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <!-- Sample approve container starts from here-->
+                    <div class="content-title">Locker Database</div>
+                    <div id="pendingApprovals">
+                        
+                    </div>    
+                </div>
+            </div>
+
+            <div class="content-split-right">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
+<script src="/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/scripts/profileDropdown.js"></script>
+
+<script>
+    //checkSession()
+</script>

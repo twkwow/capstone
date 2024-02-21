@@ -6,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/styles/verifications.css">
+    <link rel="stylesheet" href="/styles/components.css">
     <title>SecureHold - Login</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
 </head>
 
-<body class="verifications-container" onload="generateCaptcha()">
+<body class="verifications-container">
     <header class="logo-container">
         <img src="/resources/images/securehold.png" alt="securehold">
     </header>
     
-    <form class="form-container" onsubmit="handleRequest(event)">
+    <form class="form-container" onsubmit="login(event)">
         <h2>Admin Login</h2>
 
         <input type="text" id="username" class="form-input" required placeholder="Username">
@@ -47,23 +50,36 @@
          <span>Disclaimer</span>      	
     </footer>
 
-    <div id='tos' class="popup-backdrop" onclick="showPopup('tos', false)">
-        <div id='ligma' class="popup-container" onclick="event.stopPropagation();">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-    </div>
+    <popupmodal-component modalId="tos" >
+        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+    </popupmodal-component>
 
+    <popupmodal-component modalId="tos" containerClass="popup-container">
+        <span> black black black lol</span>
+    </popupmodal-component>
+    <snackbar-component snackbarId="passwordReset">Password has been reset</snackbar-component>
+    <snackbar-component snackbarId="sessionLost">User session lost</snackbar-component>
 </body>
 
 </html>
 
-<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/captcha.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
+<script src="/app.js"></script>
+<script src="/captcha.js"></script>
 
 <script>
-    function handleRequest(event) {
+    window.onload = () => {
+        generateCaptcha()
+        const params = new URLSearchParams(location.search);
+        const prevEvent = params.get("event");
+        console.log(prevEvent)
+        if (prevEvent) {
+            showSnackbar(prevEvent)
+        }
+    };
+
+    function login(event) {
         event.preventDefault();
         
         const username = event.target.querySelector("#username").value;
@@ -72,7 +88,7 @@
         const loginData = new FormData()
         loginData.append("username", username)
         loginData.append("password", password)
-        axios.post(apiLink + "admins/login", loginData)
+        axios.post(apiLink + "admins/login", loginData, {withCredentials: true})
         .then( (resp) => {
             console.log(resp)
             if (resp.data.status == 200) {
