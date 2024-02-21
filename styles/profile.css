@@ -44,7 +44,12 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     font-size: 20px;
+    text-align: center;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .profile-image-container:hover .edit-profile-image {

@@ -45,92 +45,21 @@
             <hr class="content-divider">
 
             <span class="content-title">Previous Annoucements</span>
-            <div id="prevAnnoucements"></div>
-            <!-- <div class="annoucement-card">
-                <div class="annoucement-container">
-                    <div class="annoucement-container1">
-                        <div class="annoucement-title">
-                            <span>locker maintenance today</span>
-                        </div>
-                        <div class="annoucement-content">
-                            <span> AFASJDAFKSDFLSKAFJSAFLASKJADSFLAKFASJFSAFSLKFJAFDSLAFADJFKLDFDJ</span>
-                        </div>
-                    </div>
-                    <div class="annoucement-container2">
-                        <span>Admin Username</span>
-                    </div>
-                    <div class="annoucement-container3">
-                        <span>18/02/2024 8:50pm</span>
-                    </div>
-                    <div class="annoucement-delete">
-                        <div class="ann-delete-text" onclick="showPopup('ann-delete', true)">
-                            <a href="#" role="button">
-                                Delete
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- <div class="annoucement-card">
-                <div class="annoucement-container">
-                    <div class="annoucement-container1">
-                        <div class="annoucement-title">
-                            <span>locker maintenance today</span>
-                        </div>
-                        <div class="annoucement-content">
-                            <span> AFASJDAFKSDFLSKAFJSasdadsadasdsadsadsadd;ds
-                                adsal;kdsadl;sakdsa;ldksa;ldsakld;sakdl;sakdl;saksd;lasa;ldksadsl;akdsa;ldk;lksd;lak;laks;
-                                a;sldksal;dakdasl;dksal;dksal;dsakl;dsak;dlsakdl;sakdas;ldksal;;l;lakds;la;kl
-                                a;sldkadl;aal;sdksa;lda
-                                AFLASKJADSFLAKFASJFSAFSLKFJAFDSLAFADJFKLDFDJ</span>
-                        </div>
-                    </div>
-                    <div class="annoucement-container2">
-                        <span>Admin Username</span>
-                    </div>
-                    <div class="annoucement-container3">
-                        <span>18/02/2024 8:50pm</span>
-                    </div>
-                    <div class="annoucement-delete">
-                        <div class="ann-delete-text" onclick="showPopup('ann-delete', true)">
-                            <a href="#" role="button">
-                                Delete
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
+            <div id="prevAnnoucements"> <!-- Previous annoucements are here --> </div>
         </div>
     </div>
 
     <popupmodal-component modalId="ann-delete" modalClass="popup-container-ann-delete">
-        <div class="ann-delete-text1">
-            <strong>Delete Annoucement</strong>
-        </div>
-        <div class="ann-delete-text1" style="margin-top: 10px;">
-            Permanently delete the annoucement? You can't undo this
-        </div>
+        <strong>Delete Annoucement</strong>
+        <div class="ann-delete-text1">Permanently delete the annoucement? You can't undo this</div>
         <div class="pop-container">
-            <div class="annoucement-cancel-pop">
-                <div href="#" role="button">
-                    <div class="ann-cancel-text" onclick="showPopup('ann-delete', false)">
-                        Cancel
-                    </div>
-                </div>
-            </div>
-            <div class="annoucement-confirm-pop">
-                <div onclick="deleteAnnoucement()">
-                    <div class="ann-delete-text">
-                        Confirm
-                    </div>
-                </div>
-            </div>
+            <button class="annoucement-cancel-pop" onclick="showPopup('ann-delete', false)">Cancel</button>
+            <button class="annoucement-confirm-pop" onclick="showPopup('ann-delete', false); deleteAnnoucement()">Confirm</button>
         </div>
     </popupmodal-component>
 
     <snackbar-component snackbarId="insertAnnoucement">Annoucement Uploaded</snackbar-component>
+    <snackbar-component snackbarId="deletedAnnoucement">Annoucement Deleted</snackbar-component>
 </body>
 
 </html>
@@ -140,6 +69,8 @@
 <script src="/app.js"></script>
 
 <script>
+    var selectedAnnoucementId = ""
+
     function previousAnnoucementsHTML(_id, title, content, admin, time) {
         return `
         <div class="annoucement-card">
@@ -158,13 +89,7 @@
                 <div class="annoucement-container3">
                     <span>${time}</span>
                 </div>
-                <div class="annoucement-delete">
-                    <div class="ann-delete-text" onclick="showPopup('ann-delete', true)">
-                        <a href="#" role="button">
-                            Delete
-                        </a>
-                    </div>
-                </div>
+                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
             </div>
         </div>
         `
@@ -177,9 +102,18 @@
             const approvalArr = res.data.data.slice(0,5)
             var innerHTML = ""
             approvalArr.forEach( (annoucement) => {
-                innerHTML += previousAnnoucementsHTML(annoucement._id, annoucement.title, annoucement.content, annoucement.admin, moment(annoucement.timestamp).format('DD-MMM-YYYY, h:mm:ss a'))
+                innerHTML += previousAnnoucementsHTML(annoucement._id, annoucement.title, annoucement.content, annoucement.admin, moment(annoucement.timestamp).format('DD-MMM-YYYY h:mm:ss a'))
             })
-            document.getElementById("prevAnnoucements").innerHTML = innerHTML
+            if (innerHTML) {
+                document.getElementById("prevAnnoucements").innerHTML = innerHTML
+            }
+            else {
+                document.getElementById("prevAnnoucements").innerHTML = `No annoucements posted`
+            }
+        })
+        .catch((e) => {
+            document.getElementById("prevAnnoucements").innerHTML = e
+
         })
     }
     getAnnoucements()
@@ -199,9 +133,25 @@
         await axios.post(apiLink + 'annoucements/insertAnnoucement', annoucementForm)
         .then( () => {
             showSnackbar("insertAnnoucement")
+            getAnnoucements()
+
         })
         .catch((e) => {
             console.log(e)
         } )
+    }
+
+    async function deleteAnnoucement() {
+
+        const annoucementForm = new FormData()
+        annoucementForm.append("_id", selectedAnnoucementId)
+
+        await axios.post(apiLink + "annoucements/deleteAnnoucement", annoucementForm )
+        .then( (resp) => {
+            if (resp.data.status == 200) {
+                showSnackbar("deletedAnnoucement")
+                getAnnoucements()
+            }
+        })
     }
 </script>

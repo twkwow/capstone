@@ -28,7 +28,8 @@
             <div class="info-container">
                 <div class="profile-image-container">
                     <img class="profile-image" src="https://i1.sndcdn.com/artworks-QwAlaiMcwYw2VuQk-eOwr0g-t500x500.jpg">
-                    <button class="edit-profile-image" onclick="console.log('test')">Change Profile Picture</button>
+                    <label for="changeImg" class="edit-profile-image" onclick="console.log('aaaaaa')">Change Profile Picture</label>
+                    <input type="file" accept="image/*" id="changeImg" style="display: none;" onchange="handleFileUpload()">
                 </div>
                 <div class="info-subcontainer">
                     <div>Registered date</div>
@@ -70,7 +71,7 @@
                     <input type="password" class="changepassword-input">
 
                     <div class="changepassword-button-container">
-                        <button class="changepassword-button">Save</button>
+                        <button class="changepassword-button">Save Password</button>
                     </div>
                 </section>
             </div>
@@ -88,4 +89,10 @@
 
 <script>
     //checkSession()
+
+    function handleFileUpload() {
+        const fileInput = document.getElementById('changeImg');
+        const selectedFile = fileInput.files[0];
+        console.log('Selected file:', selectedFile);
+    }
 </script>

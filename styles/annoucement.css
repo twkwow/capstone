@@ -33,21 +33,16 @@
 }
 
 .annoucement-delete {
-    border: 1px;
-    border-radius: 10px;
-    width: 70px;
+    border: 0px;
+    border-radius: 5px;
     background-color: #007bff;
-    margin: auto;
+    color: white;
+    padding: 5px 15px;
+    margin-bottom: 10px;
 }
 
-.annoucement-confirm-pop, .annoucement-cancel-pop {
-    display: inline-block;
-    margin-top: 20px;
-    margin-left: 10px;
-}
-
-.pop-container {
-    text-align: right;
+.annoucement-delete:hover {
+    background-color: #0254ab;
 }
 
 .annoucement-confirm-pop {
@@ -57,6 +52,11 @@
     background-color: #007bff;
 }
 
+.annoucement-confirm-pop:hover {
+    background-color: #0254ab;
+
+}
+
 .annoucement-cancel-pop {
     border: 1px solid black;
     border-radius: 5px;
@@ -64,23 +64,22 @@
     background-color: white;
 }
 
-.annoucement-cancel-pop a {
-    text-decoration: none;
-    color: black;
+.annoucement-cancel-pop:hover {
+    background-color: rgb(190, 190, 190);
 }
 
-.annoucement-confirm-pop a {
-    text-decoration: none;
-    color: white;
-}
-
-.ann-cancel-text {
+.annoucement-confirm-pop, .annoucement-cancel-pop {
     text-align: center;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
-.ann-delete-text {
-    text-align: center;
+.pop-container {
+    display: flex;
+    justify-content: end;
 }
+
 
 
 .annoucement-content {
@@ -146,4 +145,5 @@
 
 .ann-delete-text1 {
     text-align: left;
+    margin-top: 10px;
 }
