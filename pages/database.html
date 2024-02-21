@@ -25,12 +25,12 @@
 <body style="display: flex;">
     <sidebar-component></sidebar-component>
 
-    <div class="content-container">
+    <div class="content-container" style="overflow:hidden;">
         <!-- <header-component></header-component> -->
         <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
         <div class="header">
             <div class="header-title">
-                <span style="text-align: right;">Database</span>
+                <span style="text-align: right;">Dashboard</span>
             </div>
 
             <a href="#">
@@ -74,18 +74,13 @@
                             <img src="/resources/images/locker.png">
                             DB 5
                         </div>
-                        <div class="database" onclick="redirectToAnalytics()">
-                            <img src="/resources/images/locker.png">
-                            DB 6
+                        <div id="addNewDatabase" class="database" onclick="addNewDatabase()">
+                            <img src="/resources/images/add database icon.png">
+                            Add New Database
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="content-split-right">
-
-            </div>
-
         </div>
     </div>
 
@@ -110,5 +105,8 @@
     }
     function redirectToDatabase() {
         window.location.href = 'analytics.html';
+    }
+    function addNewDatabase() {
+        console.log("hello nubs");
     }
 </script>
