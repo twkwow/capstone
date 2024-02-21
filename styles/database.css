@@ -8,11 +8,15 @@
     margin-right: 20px;
 }
 
+.database-border-container a {
+    text-decoration: none;
+    color: black;
+}
+
 .database-container {
     border: 1px solid black;
     width: 250px;
-    height: 250px;;
-    position: absolute;
+    height: 250px;
     margin: 22.5px;
     
 }
@@ -27,3 +31,4 @@
     display: flex;
     width: 100%;
 }
+
