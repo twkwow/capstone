@@ -88,6 +88,7 @@
     align-items: center;
     text-align: center;
     overflow: hidden;
+    flex-direction: column;
 }
 
 
