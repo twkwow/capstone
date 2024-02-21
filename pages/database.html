@@ -49,78 +49,35 @@
         
         <div class="body">
             <div class="content-split-left">
-
-                <div class="content">
-                    <div class="content-title">User Database</div>
-                    <div class="content-item">
-
-                        <div class="database-border-container">
-                            <a href="#">
-                                <div class="database-container">
-                                    <div class="database-content">
-                                    </div>
-                                    <div class="database-name">
-                                        Database name
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="database-border-container">
-                            <a href="#">
-                                <div class="database-container">
-                                    <div class="database-content">
-                                    </div>
-                                    <div class="database-name">
-                                        Database name
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="database-border-container">
-                            <a href="#">
-                                <div class="database-container">
-                                    <div class="database-content">
-                                    </div>
-                                    <div class="database-name">
-                                        Database name
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="database-border-container">
-                            <a href="#">
-                                <div class="database-container">
-                                    <div class="database-content">
-                                    </div>
-                                    <div class="database-name">
-                                        ADD DATABASE
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
+                <div class="database-container">
+                    <div class="locker-status-container-title">
+                        <div class="content-title">User Database</div>
                     </div>
-                </div>
-
-                <div class="content">
-                    <div class="content-title">Locker Database</div>
-                    <div class="content-item">
-
-                        <div class="database-border-container">
-                            <a href="#">
-                                <div class="database-container">
-                                    <div class="database-content">
-                                    </div>
-                                    <div class="database-name">
-                                        Database name
-                                    </div>
-                                </div>
-                            </a>
+                    <div class="database-container-content">
+                        <div class="database" onclick="redirectToDashboard()">
+                            <img src="/resources/images/locker.png">
+                            DB 1
                         </div>
-
+                        <div class="database" onclick="redirectToDashboard()">
+                            <img src="/resources/images/locker.png">
+                            DB 2
+                        </div>
+                        <div class="database" onclick="redirectToDashboard()">
+                            <img src="/resources/images/locker.png">
+                            DB 3
+                        </div>
+                        <div class="database" onclick="redirectToDashboard()">
+                            <img src="/resources/images/locker.png">
+                            DB 4
+                        </div>
+                        <div class="database" onclick="redirectToDashboard()">
+                            <img src="/resources/images/locker.png">
+                            DB 5
+                        </div>
+                        <div class="database" onclick="redirectToAnalytics()">
+                            <img src="/resources/images/locker.png">
+                            DB 6
+                        </div>
                     </div>
                 </div>
             </div>
@@ -142,4 +99,16 @@
 
 <script>
     //checkSession()
+    function redirectToDashboard() {
+        window.location.href = 'analytics.html';
+    }
+    function redirectToAnalytics() {
+        window.location.href = 'analytics.html';
+    }
+    function redirectToAnnouncements() {
+        window.location.href = 'analytics.html';
+    }
+    function redirectToDatabase() {
+        window.location.href = 'analytics.html';
+    }
 </script>
