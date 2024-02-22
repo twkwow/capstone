@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/styles/verifications.css">
     <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/tnc.css">
+
     <title>SecureHold - Login</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <script src="/components/popupModal.js" type="text/javascript" defer></script>
@@ -45,20 +47,21 @@
     <footer class="footer-terms">
         <span onclick="showPopup('tos', true)">Terms of Services</span>
         &nbsp; | &nbsp;
-        <span>Privacy Policy</span>
+        <span onclick="showPopup('privacy', true)">Privacy Policy</span>
         &nbsp; | &nbsp;
-         <span>Disclaimer</span>      	
+         <span onclick="showPopup('disclaimer', true)">Disclaimer</span>      	
     </footer>
 
-    <popupmodal-component modalId="tos" >
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-    </popupmodal-component>
+    <popupmodal-component modalId="tos"><div id="tocContent"></div></popupmodal-component>
+    <popupmodal-component modalId="privacy"><div id="privacyContent"></div></popupmodal-component>
+    <popupmodal-component modalId="disclaimer"><div id="disclaimerContent"></div></popupmodal-component>
 
-    <popupmodal-component modalId="tos" containerClass="popup-container">
-        <span> black black black lol</span>
-    </popupmodal-component>
+
     <snackbar-component snackbarId="passwordReset">Password has been reset</snackbar-component>
     <snackbar-component snackbarId="sessionLost">User session lost</snackbar-component>
+    <snackbar-component snackbarId="apiError">User session lost</snackbar-component>
+    <snackbar-component snackbarId="logout">User successfully logged out</snackbar-component>
+
 </body>
 
 </html>
@@ -67,13 +70,19 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 <script src="/app.js"></script>
 <script src="/captcha.js"></script>
+<script src="/scripts/footerHTML.js"></script>
 
 <script>
     window.onload = () => {
         generateCaptcha()
+
+        document.getElementById('tocContent').innerHTML = tnc
+        document.getElementById('privacyContent').innerHTML = privacy
+        document.getElementById('disclaimerContent').innerHTML = disclaimer
+
+
         const params = new URLSearchParams(location.search);
         const prevEvent = params.get("event");
-        console.log(prevEvent)
         if (prevEvent) {
             showSnackbar(prevEvent)
         }
