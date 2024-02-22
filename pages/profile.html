@@ -33,7 +33,7 @@
                 </div>
                 <div class="info-subcontainer">
                     <div>Registered date</div>
-                    <div>9/11/2001</div>                          
+                    <div id="registeredDate">9/11/2001</div>                          
                 </div>
             </div>
             
@@ -45,14 +45,14 @@
 
                     <div class="subtitle">Username</div>
                     <div class="user-input-container">
-                        <input class="user-input" readonly value="username">
-                        <button class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        <input id="username" class="user-input" readonly value="username">
+                        <button id="usernameButton" class="edit-button" onclick="editField('username', event)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                     </div>
                     
                     <div class="subtitle">Email</div>
                     <div class="user-input-container">
-                        <input class="user-input" readonly value="email">
-                        <button class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        <input id="email" class="user-input" readonly value="email">
+                        <button id="emailButton" class="edit-button" onclick="editField('email', event)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                     </div>
                 </section>
                 
@@ -80,6 +80,8 @@
 
     </div>
 
+    <snackbar-component snackbarId="save">Profile Updated</snackbar-component>
+    <snackbar-component snackbarId="apiErr">API Error</snackbar-component>
 </div>
 </body>
 </html>
@@ -88,7 +90,50 @@
 <script src="/app.js"></script>
 
 <script>
-    //checkSession()
+    checkSession().then(() => {
+        document.querySelector('header-component').setAttribute('username', adminProfile.username);
+
+
+        document.getElementById("username").value = adminProfile.username
+        document.getElementById("email").value = adminProfile.email
+        //document.getElementById("registeredDate").innerHTML = adminProfile.registered_date
+
+        console.log(adminProfile)
+    })
+
+    async function editField(id, event) {
+        const inputField = document.getElementById(id)
+        inputField.readOnly = !inputField.readOnly
+        if (!inputField.readOnly) {
+            inputField.focus()
+        }  
+
+        const button = event.currentTarget;
+        const buttonCondition = button.innerHTML.includes('fa-pencil')
+        
+        button.classList.toggle('edit-button', !buttonCondition);
+        button.classList.toggle('save-button', buttonCondition);
+
+        button.innerHTML = buttonCondition ?
+            `<i class='fa fa-check fa-lg' aria-hidden='true'></i>` :
+            `<i class='fa fa-pencil' aria-hidden='true'></i>`;
+        
+        if (!buttonCondition) {
+            const adminData = new FormData()
+            adminData.append("_id", adminProfile._id)
+            adminData.append( id, inputField.value)
+
+            await axios.post(apiLink + "admins/changeAdminData", adminData)
+            .then((resp) => {
+                showSnackbar("save")
+            })
+            .catch((e) => {
+                console.log(e)
+                showSnackbar("apiErr")
+            })
+        }
+        
+    }
 
     function handleFileUpload() {
         const fileInput = document.getElementById('changeImg');
