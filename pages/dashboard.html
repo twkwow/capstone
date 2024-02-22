@@ -8,13 +8,11 @@
     <link rel="stylesheet" href="/styles/admincontent.css">
     <link rel="stylesheet" href="/styles/components.css">
     <link rel="stylesheet" href="/styles/dashboardpop.css">
-    <link rel="stylesheet" href="/styles/annoucement.css">
-    <link rel="stylesheet" href="/styles/verifications.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
-    <link rel="icon" href="/resources/images/locker.png" type="image/png">
-    <link rel="icon" href="/resources/images/sample chart.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
     <script src="/components/popupModal.js" type="text/javascript" defer></script>
@@ -22,29 +20,11 @@
 </head>
 
 <body style="display: flex;">
-    <sidebar-component></sidebar-component>
+    <sidebar-component ></sidebar-component>
 
     <div class="content-container">
-        <!-- <header-component></header-component> -->
-        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
-        <div class="header">
-            <div class="header-title">
-                <span style="text-align: right;">Dashboard</span>
-            </div>
-
-            <a href="#">
-                <button class="profile-button" id="profileButton">
-                    <i class="fa-solid fa-user"></i>
-                    <span style="padding: 7px;">Profile</span>
-                </button>
-            </a>
-
-            <ul id="profileDropdown" class="profile-dropdown">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
+        <!-- whoever unintentionally fixed the styling for the header, thanks :) -->
+        <header-component headerTitle="Dashboard" ></header-component>
         
         <div class="body">
             <div class="content-split-left">
@@ -153,16 +133,19 @@
         </div>
     </popupmodal-component>
 
+    <snackbar-component snackbarId="approve">Admin Approved</snackbar-component>
+    <snackbar-component snackbarId="reject">Admin Rejected</snackbar-component>
 </div>
 </body>
 </html>
 
-<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/scripts/profileDropdown.js"></script>
+<script src="/app.js"></script>
 
 <script>
-    //checkSession()
+    checkSession().then(() => {
+        document.querySelector('header-component').setAttribute('username', adminProfile.username);
+    })
 
     function pendingApprovalHTML(_id, username, email) {
         return `
@@ -205,7 +188,7 @@
 
         axios.post(apiLink + (approve ? "dashboard/insertAdmin" : "dashboard/rejectAdmin"), newAdmin)
         .then( () => {
-            showSnackbar(approve ? "Admin Approved" : "Admin Rejected")
+            showSnackbar(approve ? "approve" : "reject")
             renderPendingApprovals()
         })
         .catch ((e) => {

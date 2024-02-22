@@ -15,115 +15,143 @@
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
     <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
 </head>
 
 <body style="display: flex;">
     <sidebar-component></sidebar-component>
     <div class="content-container">
-        <!-- <header-component></header-component> -->
-        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
-        <div class="header">
-            <div class="header-title">
-                <span style="text-align: right;">Dashboard</span>
-            </div>
+        <header-component></header-component>
 
-            <a href="#">
-                <button class="profile-button" id="profileButton">
-                    <i class="fa-solid fa-user"></i>
-                    <span style="padding: 7px;">Profile</span>
-                </button>
-            </a>
+        <div class="content" style="margin: 30px">
+            <span class="content-title">Add Annoucements</span>
+            <form class="announcements-container" onsubmit="insertAnnoucement(event)">
 
-            <ul id="profileDropdown" class="profile-dropdown">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
+                <div class="add-ann-title">Title</div>
+                <div class="add-ann-content">
+                    <textarea id="title" required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
+                </div>
 
-        
-        <div class="content-split-left">
-            <div class="content">
-                <span class="content-title">Add Announcements</span>
-                <form class="announcements-container" method="post">
-                    <div class="add-ann-title">
-                        <label>Title</label>
-                    </div>
-                    <div class="add-ann-content">
-                        <textarea required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
-                    </div>
-                    <div class="add-ann-title">
-                        <label>Content</label>
-                    </div>
-                    <div class="add-ann-content">
-                        <textarea required class="announcements-textarea" rows="10" placeholder="Add your text"></textarea>
-                    </div>
-                    <div class="add-ann-btn">
-                        <input type="submit" id="add_ann" class="add-announcement-button" value="Add Announcement">
-                    </div>
-                </form>
+                <div class="add-ann-title">Content</div>
+                <div class="add-ann-content">
+                    <textarea id="content" required class="announcements-textarea" rows="10" placeholder="Add your text"></textarea>
+                </div>
 
-                <hr class="content-divider">
+                <div class="add-ann-btn">
+                    <input type="submit" id="add_ann" class="add-announcement-button" value="Add Annoucement">
+                </div>
+            </form>
 
-                <span class="content-title">Previous Announcements</span>
-                <div class="announcement-card">
-                    <!-- add instances of announcements into announcement-card class-->
-                    <div class="announcement-container-1">
-                        <div class="announcement-title">
-                            <span>Beta testing locker system</span>
-                        </div>
-                        <div class="announcement-content">
-                            <span> Have a good day</span>
-                        </div>
-                    </div>
-                    <div class="announcement-container-2">
-                            Admin Username xcvsdvsdvsdv
-                    </div>
-                    <div class="announcement-container-3">
-                        18/02/2024 8:50pm
-                    </div>
-                    <div class="announcement-container-4" onclick="showPopup('ann-delete', true)">
-                        <div class="announcement-delete">
-                            <div class="ann-delete-text">
-                                <a href="#" role="button">
-                                    <i class="fa-solid fa-trash"></i>                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>                
-            </div>
+            <hr class="content-divider">
+
+            <span class="content-title">Previous Annoucements</span>
+            <div id="prevAnnoucements"> <!-- Previous annoucements are here --> </div>
         </div>
     </div>
 
     <popupmodal-component modalId="ann-delete" modalClass="popup-container-ann-delete">
-        <div class="ann-delete-text1">
-            <strong>Delete Announcement</strong>
-        </div>
-        <div class="ann-delete-text1" style="margin-top: 10px;">
-            Permanently delete the announcement? You can't undo this
-        </div>
+        <strong>Delete Annoucement</strong>
+        <div class="ann-delete-text1">Permanently delete the annoucement? You can't undo this</div>
         <div class="pop-container">
-            <div class="announcement-cancel-pop">
-                <a href="#" role="button">
-                    <div class="ann-cancel-text" onclick="showPopup('ann-delete', false)">
-                        Cancel
-                    </div>
-                </a>
-            </div>
-            <div class="announcement-confirm-pop">
-                <a href="#">
-                    <div class="ann-delete-text">
-                        Confirm
-                    </div>
-                </a>
-            </div>
+            <button class="annoucement-cancel-pop" onclick="showPopup('ann-delete', false)">Cancel</button>
+            <button class="annoucement-confirm-pop" onclick="showPopup('ann-delete', false); deleteAnnoucement()">Confirm</button>
         </div>
     </popupmodal-component>
 
+    <snackbar-component snackbarId="insertAnnoucement">Annoucement Uploaded</snackbar-component>
+    <snackbar-component snackbarId="deletedAnnoucement">Annoucement Deleted</snackbar-component>
 </body>
 
 </html>
 
-<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/scripts/profileDropdown.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script src="/app.js"></script>
+
+<script>
+    var selectedAnnoucementId = ""
+
+    function previousAnnoucementsHTML(_id, title, content, admin, time) {
+        return `
+        <div class="annoucement-card">
+            <div class="annoucement-container">
+                <div class="annoucement-container1">
+                    <div class="annoucement-title">
+                        <span>${title}</span>
+                    </div>
+                    <div class="annoucement-content">
+                        <span> ${content} </span>
+                    </div>
+                </div>
+                <div class="annoucement-container2">
+                    <span>${admin}</span>
+                </div>
+                <div class="annoucement-container3">
+                    <span>${time}</span>
+                </div>
+                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
+            </div>
+        </div>
+        `
+    }
+
+    async function getAnnoucements() {
+        await axios.get(apiLink + "annoucements/getAllAnnoucements")
+        .then ( (res) => {
+            //limit show up to 5 annoucements
+            const approvalArr = res.data.data.slice(0,5)
+            var innerHTML = ""
+            approvalArr.forEach( (annoucement) => {
+                innerHTML += previousAnnoucementsHTML(annoucement._id, annoucement.title, annoucement.content, annoucement.admin, moment(annoucement.timestamp).format('DD-MMM-YYYY h:mm:ss a'))
+            })
+            if (innerHTML) {
+                document.getElementById("prevAnnoucements").innerHTML = innerHTML
+            }
+            else {
+                document.getElementById("prevAnnoucements").innerHTML = `No annoucements posted`
+            }
+        })
+        .catch((e) => {
+            document.getElementById("prevAnnoucements").innerHTML = e
+
+        })
+    }
+    getAnnoucements()
+
+    async function insertAnnoucement() {
+        event.preventDefault()
+
+        const title = document.getElementById('title').value
+        const content = document.getElementById('content').value
+        const formattedTitle = title.replace(/\n/g, '<br>');
+        const formattedContent = content.replace(/\n/g, '<br>');
+
+        const annoucementForm = new FormData()
+        annoucementForm.append("title", formattedTitle)
+        annoucementForm.append("content", formattedContent)
+
+        await axios.post(apiLink + 'annoucements/insertAnnoucement', annoucementForm)
+        .then( () => {
+            showSnackbar("insertAnnoucement")
+            getAnnoucements()
+
+        })
+        .catch((e) => {
+            console.log(e)
+        } )
+    }
+
+    async function deleteAnnoucement() {
+
+        const annoucementForm = new FormData()
+        annoucementForm.append("_id", selectedAnnoucementId)
+
+        await axios.post(apiLink + "annoucements/deleteAnnoucement", annoucementForm )
+        .then( (resp) => {
+            if (resp.data.status == 200) {
+                showSnackbar("deletedAnnoucement")
+                getAnnoucements()
+            }
+        })
+    }
+</script>
