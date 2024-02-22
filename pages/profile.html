@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/admincontent.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/profile.css">
+
+    <title>SecureHold</title>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <script src="/components/sidebar.js" type="text/javascript" defer></script>
+    <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
+</head>
+
+<body style="display: flex;">
+    <sidebar-component></sidebar-component>
+
+    <div class="content-container">
+        <header-component headerTitle="Profile"></header-component>
+
+        <main class="profile-container">
+            <div class="info-container">
+                <div class="profile-image-container">
+                    <img class="profile-image" src="https://i1.sndcdn.com/artworks-QwAlaiMcwYw2VuQk-eOwr0g-t500x500.jpg">
+                    <label for="changeImg" class="edit-profile-image" onclick="console.log('aaaaaa')">Change Profile Picture</label>
+                    <input type="file" accept="image/*" id="changeImg" style="display: none;" onchange="handleFileUpload()">
+                </div>
+                <div class="info-subcontainer">
+                    <div>Registered date</div>
+                    <div id="registeredDate">9/11/2001</div>                          
+                </div>
+            </div>
+            
+            <div class="fields-container">
+                <!-- User -->
+                <section>
+                    <div class="title">User</div>
+                    <hr>
+
+                    <div class="subtitle">Username</div>
+                    <div class="user-input-container">
+                        <input id="username" class="user-input" readonly value="username">
+                        <button id="usernameButton" class="edit-button" onclick="editField('username', event)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    </div>
+                    
+                    <div class="subtitle">Email</div>
+                    <div class="user-input-container">
+                        <input id="email" class="user-input" readonly value="email">
+                        <button id="emailButton" class="edit-button" onclick="editField('email', event)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    </div>
+                </section>
+                
+                <!-- Change Password -->
+                <section style="margin-top: 50px;">
+                    <div class="title">Change Password</div>
+                    <hr>
+                    
+                    <div class="subtitle">Current Password</div>
+                    <input type="password" class="changepassword-input">
+
+                    <div class="subtitle">New Password</div>
+                    <input type="password" class="changepassword-input">
+
+                    <div class="subtitle">Re-type New Password</div>
+                    <input type="password" class="changepassword-input">
+
+                    <div class="changepassword-button-container">
+                        <button class="changepassword-button">Save Password</button>
+                    </div>
+                </section>
+            </div>
+            
+        </main>
+
+    </div>
+
+    <snackbar-component snackbarId="save">Profile Updated</snackbar-component>
+    <snackbar-component snackbarId="apiErr">API Error</snackbar-component>
+</div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/app.js"></script>
+
+<script>
+    checkSession().then(() => {
+        document.querySelector('header-component').setAttribute('username', adminProfile.username);
+
+
+        document.getElementById("username").value = adminProfile.username
+        document.getElementById("email").value = adminProfile.email
+        //document.getElementById("registeredDate").innerHTML = adminProfile.registered_date
+
+        console.log(adminProfile)
+    })
+
+    async function editField(id, event) {
+        const inputField = document.getElementById(id)
+        inputField.readOnly = !inputField.readOnly
+        if (!inputField.readOnly) {
+            inputField.focus()
+        }  
+
+        const button = event.currentTarget;
+        const buttonCondition = button.innerHTML.includes('fa-pencil')
+        
+        button.classList.toggle('edit-button', !buttonCondition);
+        button.classList.toggle('save-button', buttonCondition);
+
+        button.innerHTML = buttonCondition ?
+            `<i class='fa fa-check fa-lg' aria-hidden='true'></i>` :
+            `<i class='fa fa-pencil' aria-hidden='true'></i>`;
+        
+        if (!buttonCondition) {
+            const adminData = new FormData()
+            adminData.append("_id", adminProfile._id)
+            adminData.append( id, inputField.value)
+
+            await axios.post(apiLink + "admins/changeAdminData", adminData)
+            .then((resp) => {
+                showSnackbar("save")
+            })
+            .catch((e) => {
+                console.log(e)
+                showSnackbar("apiErr")
+            })
+        }
+        
+    }
+
+    function handleFileUpload() {
+        const fileInput = document.getElementById('changeImg');
+        const selectedFile = fileInput.files[0];
+        console.log('Selected file:', selectedFile);
+    }
+</script>

@@ -55,13 +55,15 @@
     background-color: #a7b3ec;
 }
 
+/* header */
 .header {
+    position: relative; /* Ensure the header is positioned */
+    z-index: 2; /* Higher z-index for the header */
     display: flex;
     border-bottom: 1px solid black;
     height: 100px;
-    padding-left: 20px;
+    padding: 0 30px;
     align-items: center;
-    padding-right: 100px;
 }
 
 .header-title {
@@ -71,10 +73,20 @@
     margin-right: auto;
 }
 
+.profile-button-container {
+    position: relative;
+    z-index: 1; /* Lower z-index for the profile container */
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
 .profile-button {
+    justify-self: end;
     text-align: left;
     padding: 10px 10px;
     background-color: #e8e8e9;
+    margin-left: auto;
     width: auto;
     border-radius: 360px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -90,13 +102,22 @@
     background: white;
     position: absolute;
     border: 1px solid black;
-    padding: 20px 10px;
-    right: 0;
-    margin-top: 80px;
-    margin-right: 20px;
-    width: 250px;
+    right: -50%;
+    top: 110%;
+    width: 200px;
+    z-index: 3; /* Higher z-index for the dropdown */
+}
+.dropdown-item {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    background-color: #a7b3ec;
 }
 /* header */
+
 
 /* snackbar css */
 .snackbar {
@@ -108,7 +129,7 @@
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index:5;
     right: 50px;
     bottom: 30px;
     font-size: 17px;
@@ -165,107 +186,5 @@
 }
 /* popup modal */
  
-/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
-.content {
-    display: flex;
-}
 
-.left_container {
-    width: 60%;
-    margin-right: 20px;
-}
 
-.right_container {
-    width: 40%;
-}
-
-.right_content {
-    padding-top: 20px;
-}
-
-.left_content {
-    padding-top: 20px;
-}
-
-.approve_container {
-    display: flex;
-    border: 1px solid lightgrey;
-    height: 100px;
-    margin-bottom: 30px;
-}
-
-.approve_container1 {
-    width: 20%;
-}
-
-.approve_container2 {
-    width: 50%;
-    border-left: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
-}
-
-.approve_container3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
-}
-
-.approve-buttons {
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-.approve_text {
-    display: flex;
-    padding: 15px;
-}
-
-.fa-check {
-    color: green;
-    font-size: 40px;
-    padding: 5px;
-}
-
-.fa-xmark {
-    color: red;
-    font-size: 40px;
-    padding: 5px;
-}
-
-.approve_btn, .reject_btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70px;
-    height: 20px;
-    border: 1px solid;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 10px;
-}
-
-.approve_btn, .reject_btn:hover {
-    cursor:pointer;
-}
-
-.approve_btn {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-}
-
-.approve_btn:hover {
-    background-color: #055ab6;
-}
-
-.reject_btn {
-    color: black;
-}
-
-.reject_btn:hover {
-    background-color: lightgrey;
-}
-
-/* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */

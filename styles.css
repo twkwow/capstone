@@ -4,6 +4,18 @@ body {
     font-family: Tahoma;
 }
 
+hr {
+    width: 100%;
+    border: 1px solid gray
+}
+
+.content-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
