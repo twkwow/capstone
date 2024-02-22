@@ -35,7 +35,7 @@
 
         <div id="alertText" class="alert-text"></div>
 
-        <input class="form-button" type="submit" value="Login" onclick="printmsg()">
+        <input class="form-button" type="submit" value="Login">
 
         <a class="forgot-password" href="forgot_password.html">Forgot Password?</a>
 
@@ -61,7 +61,7 @@
     <snackbar-component snackbarId="sessionLost">User session lost</snackbar-component>
     <snackbar-component snackbarId="apiError">User session lost</snackbar-component>
     <snackbar-component snackbarId="logout">User successfully logged out</snackbar-component>
-
+    <snackbar-component snackbarId="wrongCaptcha">Incorrect Captcha</snackbar-component>
 </body>
 
 </html>
@@ -90,25 +90,31 @@
 
     function login(event) {
         event.preventDefault();
-        
-        const username = event.target.querySelector("#username").value;
-        const password = event.target.querySelector("#password").value;
+        if (checkCaptcha()) {
+            const username = event.target.querySelector("#username").value;
+            const password = event.target.querySelector("#password").value;
 
-        const loginData = new FormData()
-        loginData.append("username", username)
-        loginData.append("password", password)
-        axios.post(apiLink + "admins/login", loginData, {withCredentials: true})
-        .then( (resp) => {
-            console.log(resp)
-            if (resp.data.status == 200) {
-                pageRouting("dashboard.html")  
-            }
-            else {
-                document.getElementById("alertText").innerHTML = "Invalid login"
-            }
-        })
-        .catch( (error) => {
-            console.log("API Error: " + error)
-        })
+            const loginData = new FormData()
+            loginData.append("username", username)
+            loginData.append("password", password)
+            axios.post(apiLink + "admins/admins/login", loginData, {withCredentials: true})
+            .then( (resp) => {
+                console.log(resp)
+                if (resp.data.status == 200) {
+                    pageRouting("dashboard.html")  
+                }
+                else {
+                    document.getElementById("alertText").innerHTML = "Invalid login"
+                }
+            })
+            .catch( (error) => {
+                console.log("API Error: " + error)
+            })
+        }
+        else {
+            showSnackbar("wrongCaptcha")
+        }
+
+        
     }
 </script>

@@ -96,7 +96,7 @@
     }
 
     async function getAnnoucements() {
-        await axios.get(apiLink + "annoucements/getAllAnnoucements")
+        await axios.get(apiLink + "admins/annoucements/getAllAnnoucements")
         .then ( (res) => {
             //limit show up to 5 annoucements
             const approvalArr = res.data.data.slice(0,5)
@@ -130,7 +130,7 @@
         annoucementForm.append("title", formattedTitle)
         annoucementForm.append("content", formattedContent)
 
-        await axios.post(apiLink + 'annoucements/insertAnnoucement', annoucementForm)
+        await axios.post(apiLink + 'admins/annoucements/insertAnnoucement', annoucementForm)
         .then( () => {
             showSnackbar("insertAnnoucement")
             getAnnoucements()
@@ -146,7 +146,7 @@
         const annoucementForm = new FormData()
         annoucementForm.append("_id", selectedAnnoucementId)
 
-        await axios.post(apiLink + "annoucements/deleteAnnoucement", annoucementForm )
+        await axios.post(apiLink + "admins/annoucements/deleteAnnoucement", annoucementForm )
         .then( (resp) => {
             if (resp.data.status == 200) {
                 showSnackbar("deletedAnnoucement")

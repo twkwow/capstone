@@ -73,6 +73,13 @@
     margin-right: auto;
 }
 
+.header-img {
+    width: 25px;
+    height: 25px;
+    align-self: center;
+    border-radius: 100%;
+    border: 2px solid black
+}
 .profile-button-container {
     position: relative;
     z-index: 1; /* Lower z-index for the profile container */
@@ -82,9 +89,11 @@
 }
 
 .profile-button {
+    display: flex;
     justify-self: end;
     text-align: left;
-    padding: 10px 10px;
+    align-items: center;
+    padding: 5px 10px;
     background-color: #e8e8e9;
     margin-left: auto;
     width: auto;

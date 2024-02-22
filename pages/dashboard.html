@@ -169,7 +169,7 @@
     }
 
     function renderPendingApprovals() {
-        axios.get(apiLink + "dashboard/getAllPendingApprovals")
+        axios.get(apiLink + "admins/dashboard/getAllPendingApprovals")
         .then ( (res) => {
             //limit show up to 5 approvals
             const approvalArr = res.data.data.slice(0,5)
@@ -186,7 +186,7 @@
         const newAdmin = new FormData()
         newAdmin.append("_id", _id)
 
-        axios.post(apiLink + (approve ? "dashboard/insertAdmin" : "dashboard/rejectAdmin"), newAdmin)
+        axios.post(apiLink + (approve ? "admins/dashboard/insertAdmin" : "admins/dashboard/rejectAdmin"), newAdmin)
         .then( () => {
             showSnackbar(approve ? "approve" : "reject")
             renderPendingApprovals()

@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/styles/verifications.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/tnc.css">
     <title>SecureHold - Sign Up</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <script src="/components/popupModal.js" type="text/javascript" defer></script>
 </head>
 
-<body class="verifications-container" onload="generateCaptcha()">
+<body class="verifications-container">
     <header class="logo-container">
         <img src="/resources/images/securehold.png" alt="securehold">
     </header>
@@ -43,14 +45,16 @@
     </form>
         
     <footer class="footer-terms">
-        <span onclick="showPopup(tos, true)">Terms of Services</span>
+        <span onclick="showPopup('tos', true)">Terms of Services</span>
         &nbsp; | &nbsp;
-        <span>Privacy Policy</span>
+        <span onclick="showPopup('privacy', true)">Privacy Policy</span>
         &nbsp; | &nbsp;
-         <span>Disclaimer</span>      	
+         <span onclick="showPopup('disclaimer', true)">Disclaimer</span>      	
     </footer>
 
-    <button onclick="pageRouting('login.html?event=passwordReset')">testing</button>
+    <popupmodal-component modalId="tos"><div id="tocContent"></div></popupmodal-component>
+    <popupmodal-component modalId="privacy"><div id="privacyContent"></div></popupmodal-component>
+    <popupmodal-component modalId="disclaimer"><div id="disclaimerContent"></div></popupmodal-component>
 
     <popupmodal-component modalId="codeSent">A code has been sent to your email !</popupmodal-component>
     <popupmodal-component modalId="submitApproval">You have successfully signed up and is being sent for approval!</popupmodal-component>
@@ -61,8 +65,17 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 <script src="/app.js"></script>
 <script src="/captcha.js"></script>
+<script src="/scripts/footerHTML.js"></script>
 
 <script>
+    window.onload = () => {
+        generateCaptcha()
+
+        document.getElementById('tocContent').innerHTML = tnc
+        document.getElementById('privacyContent').innerHTML = privacy
+        document.getElementById('disclaimerContent').innerHTML = disclaimer
+    };
+
     function sendCode() {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const email = document.getElementById("email").value
@@ -73,7 +86,7 @@
              
         const emailForm = new FormData()
         emailForm.append("email", email)
-        axios.post(apiLink + "admins/sendCode", emailForm)
+        axios.post(apiLink + "admins/admins/sendCode", emailForm)
         .then( (resp) => {
             return showPopup("codeSent", true)
         })
@@ -102,7 +115,7 @@
         approvalRequest.append("password", password)
         approvalRequest.append("code", code)
 
-        axios.post(apiLink + "admins/submitApproval", approvalRequest)
+        axios.post(apiLink + "admins/admins/submitApproval", approvalRequest)
         .then( (resp) => {
             console.log(resp)
             switch(resp.data.status) {
