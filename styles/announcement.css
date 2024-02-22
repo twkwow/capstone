@@ -1,142 +1,94 @@
-.announcement-card {
+.annoucement-card {
     width: 100%;
     border: 1px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    /* padding: 10px; */
-    display: flex;
-    flex-direction: row;
 }
 
-.announcement-container-1, .announcement-container-2, .announcement-container-3, .announcement-container-4, .announcement-delete {
+.annoucement-container {
+    margin: 10px;
+}
+
+.annoucement-container1, .annoucement-container2, .annoucement-container3, .annoucement-delete {
     display: inline-block;
 }
 
-.announcement-container-1 {
-    width: 45%;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    /* background-color: aqua; */
-    border: 1px solid;
-    border-color: black;
-    border-radius: 10px;
-    padding: 10px;
+.annoucement-container1 {
+    width: 60%;
 }
 
-.announcement-container-1 > div {
-    margin-bottom: 10px;
-}
-
-.announcement-container-2 {
-    display: flex;
-    justify-content: center;
+.annoucement-container2 {
     width: 20%;
-    align-items: center;
-    /* color: lightgrey; */
-    margin: 10px;
-    border: 1px solid;
-    border-color: black;
-    border-radius: 10px;
-    padding: 10px;
+    text-align: center;
+    color: lightgrey;
 }
 
-.announcement-container-3 {
-    display: flex;
-    justify-content: center;
-    width: auto;
-    align-items: center;
-    border: 1px solid;
-    border-color: black;
-    border-radius: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
+.annoucement-container3 {
+    width: 10%;
+    text-align: justify;
 }
 
-.announcement-container-4 {
-    display: flex;
-    justify-content: center;
-    width: 80px;
-    align-items: center;
-    border: 1px solid;
-    border-color: black;
-    border-radius: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-}
-
-.announcement-container-4:hover {
-    cursor: pointer;
-}
-
-.announcement-title {
+.annoucement-title {
     color: blue;
 }
 
-.announcement-delete {
-    border: 1px;
-    border-radius: 10px;
-    width: 70px;
-    /* background-color: #007bff; */
-    margin: auto;
+.annoucement-delete {
+    border: 0px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 15px;
+    margin-bottom: 10px;
 }
 
-.announcement-confirm-pop, .announcement-cancel-pop {
-    display: inline-block;
-    margin-top: 20px;
-    margin-left: 10px;
+.annoucement-delete:hover {
+    background-color: #0254ab;
 }
 
-.pop-container {
-    text-align: right;
-}
-
-.announcement-confirm-pop {
+.annoucement-confirm-pop {
     border: 1px solid #007bff;
     border-radius: 5px;
     width: 70px;
     background-color: #007bff;
 }
 
-.announcement-cancel-pop {
+.annoucement-confirm-pop:hover {
+    background-color: #0254ab;
+
+}
+
+.annoucement-cancel-pop {
     border: 1px solid black;
     border-radius: 5px;
     width: 70px;
     background-color: white;
 }
 
-.announcement-cancel-pop a {
-    text-decoration: none;
-    color: black;
+.annoucement-cancel-pop:hover {
+    background-color: rgb(190, 190, 190);
 }
 
-.announcement-confirm-pop a {
-    text-decoration: none;
-    color: white;
-}
-
-.ann-cancel-text {
+.annoucement-confirm-pop, .annoucement-cancel-pop {
     text-align: center;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
-.ann-delete-text {
-    text-align: center;
-    background-color: none;
+.pop-container {
+    display: flex;
+    justify-content: end;
 }
 
 
-.announcement-content {
+
+.annoucement-content {
     overflow-wrap: break-word;
 }
 
 .ann-delete-text a {
-    color: #007bff;
+    color: white;
     text-decoration: none;;
-    font-size:xx-large;
 }
 
 .announcements-container {
@@ -149,13 +101,15 @@
 .announcements-textarea {
     resize: vertical;
     width: 100%;
+    white-space: pre-wrap;
 }
 
-.add-announcements-button {
+.add-annoucement-button {
     width: 150px;
     height: 30px;
     border: 1px;
     border-radius: 5px;
+    background-color: #007bff;
     color: white;
 }
 
@@ -178,6 +132,7 @@
 .add-ann-btn {
     margin: 20px;
     display: flex;
+    justify-content: end;
 }
 
 .popup-container-ann-delete {
@@ -190,4 +145,5 @@
 
 .ann-delete-text1 {
     text-align: left;
+    margin-top: 10px;
 }
