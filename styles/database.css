@@ -79,6 +79,11 @@
     margin-top: 15px;
 }
 
+#addNewDatabase {
+    background-color: #b8bcc4;
+    color: #ffffff;
+}
+
 .database { 
     display: flex;
     align-items: center;
