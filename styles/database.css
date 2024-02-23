@@ -48,7 +48,6 @@
     height: 500px;
     min-width: 372px;
     overflow: hidden;
-
     padding: 10px;
     margin-bottom: 20px;
     padding-left: 20px;
@@ -140,3 +139,23 @@
     justify-content: end;
 }
 
+.actions-container{
+    width: 100%;
+    padding: 5px;
+}
+
+.edit-lol, .delete-lol {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 45%;
+    text-align: center;
+    
+}
+
+.edit-lol {
+    float: left;
+}
+
+.delete-lol {
+    margin-left: 50%;
+}

@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="/styles/admincontent.css">
     <link rel="stylesheet" href="/styles/components.css">
     <link rel="stylesheet" href="/styles/dashboardpop.css">
-    <link rel="stylesheet" href="/styles/annoucement.css">
+    <link rel="stylesheet" href="/styles/announcement.css">
     <link rel="stylesheet" href="/styles/verifications.css">
     <link rel="stylesheet" href="/styles/database.css">
+    <link rel="stylesheet" href="/styles/databasepopup.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <link rel="icon" href="/resources/images/locker.png" type="image/png">
@@ -29,7 +30,7 @@
         <header-component headerTitle="database_name_display_here" ></header-component>
         
         <div class="body">
-            <div class="content-split-left">
+            <div class="content-split-left" style="width: 100%">
 
                 <div class="content">
                     <div class="content-item">
@@ -45,43 +46,79 @@
                             <table id="example" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
+                                        <th>User ID</th>
+                                        <th>Full Name</th>
+                                        <th>RFID ID</th>
                                         <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>NRIC/ Passport</th>
+                                        <th>Phone No.</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011-04-25</td>
-                                        <td>$320,800</td>
-                                        <td>$320,800</td>
+                                        <td>0349201</td>
+                                        <td>Then wen Wen</td>
+                                        <td>12334566774</td>
+                                        <td>5</td>
+                                        <td>010101982233</td>
+                                        <td>0181234567</td>
+                                        <td>
+                                            <div class="actions-container">
+                                                <div class="edit-lol" onclick="showPopup('edit-user-db', true)">
+                                                    <span>Edit</span>
+                                                </div>
+                                                <div class="delete-lol" onclick="showPopup('delete-user-db', true)">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>ABCADA</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
+                                        <td>TRIGGER DIGGEr NI</td>
+                                        <td>E3812091830</td>
                                         <td>61</td>
                                         <td>2011-04-25</td>
                                         <td>$320,800</td>
+                                        <td>
+                                            <div class="actions-container">
+                                                <div class="edit-lol" onclick="showPopup('edit-user-db', true)">
+                                                    <span>Edit</span>
+                                                </div>
+                                                <div class="delete-lol" onclick="showPopup('delete-user-db', true)">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0349221</td>
+                                        <td>Joji nihon</td>
+                                        <td>28390123821093</td>
+                                        <td>61</td>
+                                        <td>2011-04-25</td>
                                         <td>$320,800</td>
+                                        <td>
+                                            <div class="actions-container">
+                                                <div class="edit-lol" onclick="showPopup('edit-user-db', true)">
+                                                    <span>Edit</span>
+                                                </div>
+                                                <div class="delete-lol" onclick="showPopup('delete-user-db', true)">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
+                                        <th>User ID</th>
+                                        <th>Full Name</th>
+                                        <th>RFID ID</th>
                                         <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>NRIC/ Passport</th>
+                                        <th>Phone No.</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>
@@ -93,6 +130,68 @@
             </div>
         </div>
     </div>
+
+    <popupmodal-component modalId="edit-user-db" modalClass="jessica-container">
+        <div class="ann-delete-text1">
+            <strong>Edit User</strong>
+        </div>
+        <div class="edit-user-content-container" style="margin-top: 10px;">
+            <div class="user-id-textfield">
+                <input type="text" class="form-input-same" placeholder="userid">
+            </div>
+            <div class="user-id-textfield">
+                <input type="text" class="form-input-same" placeholder="Then Wen Wen">
+            </div>
+            <div class="user-id-textfield">
+                <input type="text" class="form-input-same" placeholder="RFID ID">
+            </div>
+            <div class="user-id-textfield">
+                <input type="text" class="form-input-same" placeholder="5">
+            </div>
+            <div class="user-id-textfield">
+                <input type="text" class="form-input-same" placeholder="IC HERE">
+            </div>
+            <div class="user-id-textfield">
+                <input type="text" class="form-input-same" placeholder="PHONE 01092702131">
+            </div>
+            <div class="user-id-textfield">
+                <input type="text" class="form-input-diff" placeholder="username:stupidlolfuck" readonly>
+            </div>
+        </div>
+        <div class="pop-container">
+            <div class="announcement-cancel-pop" onclick="showPopup('edit-user-db', false)">
+                <div class="ann-cancel-text">
+                    Cancel
+                </div>
+            </div>
+            <div class="announcement-confirm-pop">
+                <div class="ann-delete-text">
+                    Update
+                </div>
+            </div>
+        </div>
+    </popupmodal-component>
+
+    <popupmodal-component modalId="delete-user-db" modalClass="dylan-container">
+        <div class="ann-delete-text1">
+            <strong>Delete User</strong>
+        </div>
+        <div class="ann-delete-text1" style="margin-top: 10px;">
+            Are you sure to delete this user?
+        </div>
+        <div class="pop-container">
+            <div class="announcement-cancel-pop" onclick="showPopup('delete-user-db', false)">
+                <div class="ann-cancel-text">
+                    Cancel
+                </div>
+            </div>
+            <div class="announcement-confirm-pop">
+                <div class="ann-delete-text">
+                    Delete
+                </div>
+            </div>
+        </div>
+    </popupmodal-component>
 
 </div>
 </body>

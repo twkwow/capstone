@@ -41,34 +41,39 @@
     margin-bottom: 10px;
 }
 
-.annoucement-delete:hover {
+.announcement-delete:hover {
     background-color: #0254ab;
+    cursor: pointer;
 }
 
-.annoucement-confirm-pop {
+.announcement-confirm-pop {
     border: 1px solid #007bff;
     border-radius: 5px;
     width: 70px;
     background-color: #007bff;
 }
 
-.annoucement-confirm-pop:hover {
+.announcement-confirm-pop:hover {
     background-color: #0254ab;
+    cursor: pointer;
 
 }
 
-.annoucement-cancel-pop {
+.announcement-cancel-pop {
     border: 1px solid black;
     border-radius: 5px;
     width: 70px;
     background-color: white;
 }
 
-.annoucement-cancel-pop:hover {
+
+
+.announcement-cancel-pop:hover {
     background-color: rgb(190, 190, 190);
+    cursor: pointer;
 }
 
-.annoucement-confirm-pop, .annoucement-cancel-pop {
+.announcement-confirm-pop, .announcement-cancel-pop {
     text-align: center;
     padding: 5px;
     margin-top: 20px;
@@ -86,7 +91,7 @@
     overflow-wrap: break-word;
 }
 
-.ann-delete-text a {
+.ann-delete-text {
     color: white;
     text-decoration: none;;
 }
