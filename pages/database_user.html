@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/styles/annoucement.css">
     <link rel="stylesheet" href="/styles/verifications.css">
     <link rel="stylesheet" href="/styles/database.css">
-    <link rel="stylesheet" href="/styles/tables.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <link rel="icon" href="/resources/images/locker.png" type="image/png">
@@ -23,53 +22,36 @@
     <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
 </head>
 
-<body style="display: flex;">
+<body style="display: flex; overflow: hidden;" >
     <sidebar-component></sidebar-component>
 
     <div class="content-container">
-        <!-- <header-component></header-component> -->
-        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
-        <div class="header">
-            <div class="header-title">
-                <span style="text-align: right;">Dashboard</span>
-            </div>
-
-            <a href="#">
-                <button class="profile-button" id="profileButton">
-                    <i class="fa-solid fa-user"></i>
-                    <span style="padding: 7px;">Profile</span>
-                </button>
-            </a>
-
-            <ul id="profileDropdown" class="profile-dropdown">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
+        <header-component headerTitle="database_name_display_here" ></header-component>
         
         <div class="body">
             <div class="content-split-left">
 
                 <div class="content">
                     <div class="content-item">
-
-                        <div class="above-table-bar">
-                            <div class="search-bar">
-                                <input type="text" placeholder="Search">
+                        <div class="top-container">
+                            <div class="content-title-lol">User Database</div>
+                            <div class="add-user-btn-container">
+                                <div class="pls-move-btn">
+                                    <input type="button" class="add-user-btn" value="Add User">
+                                </div>
                             </div>
                         </div>
-
                         <div class="table-container">
-                            <table class="fucker-table" style="width:100%">
+                            <table id="example" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>name</th>
-                                        <th>name</th>
-                                        <th>name</th>
-                                        <th>name</th>
-                                        <th>name</th>
+                                        <th>Position</th>
+                                        <th>Office</th>
+                                        <th>Age</th>
+                                        <th>Start date</th>
+                                        <th>Salary</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,22 +62,16 @@
                                         <td>61</td>
                                         <td>2011-04-25</td>
                                         <td>$320,800</td>
+                                        <td>$320,800</td>
                                     </tr>
                                     <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011-07-25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009-01-12</td>
-                                        <td>$86,000</td>
+                                        <td>ABCADA</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                        <td>61</td>
+                                        <td>2011-04-25</td>
+                                        <td>$320,800</td>
+                                        <td>$320,800</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -106,6 +82,7 @@
                                         <th>Age</th>
                                         <th>Start date</th>
                                         <th>Salary</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -127,4 +104,19 @@
 
 <script>
     //checkSession()
+</script>
+
+<!--import datatables shit here-->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap5.css">
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap5.js"></script>
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
 </script>

@@ -102,3 +102,41 @@
     width: auto;
     height: auto;
 }
+
+.table-container {
+    margin-top: 10px;
+}
+
+.top-contaier {
+    width: 100%;
+}
+
+.content-title-lol, .add-user-btn-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 50%;
+}
+
+.add-user-btn-container {
+    margin-left: 50%;
+}
+
+.content-title-lol {
+    font-weight: bold;
+    float: left;
+}
+
+.add-user-btn {
+    width: 100px;
+    height: 30px;
+    border: 1px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+
+.pls-move-btn {
+    display: flex;
+    justify-content: end;
+}
+

@@ -21,31 +21,35 @@
 <body style="display: flex;">
     <sidebar-component></sidebar-component>
     <div class="content-container">
-        <header-component></header-component>
+        <header-component headerTitle="Annoucements"></header-component>
 
-        <div class="content" style="margin: 30px">
-            <span class="content-title">Add Annoucements</span>
-            <form class="announcements-container" onsubmit="insertAnnoucement(event)">
-
-                <div class="add-ann-title">Title</div>
-                <div class="add-ann-content">
-                    <textarea id="title" required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
+        <div class="body">
+            <div class="content-split-left">
+                <div class="content">
+                    <span class="content-title">Add Announcements</span>
+                    <form class="announcements-container" onsubmit="insertAnnoucement(event)">
+        
+                        <div class="add-ann-title">Title</div>
+                        <div class="add-ann-content">
+                            <textarea id="title" required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
+                        </div>
+        
+                        <div class="add-ann-title">Content</div>
+                        <div class="add-ann-content">
+                            <textarea id="content" required class="announcements-textarea" rows="10" placeholder="Add your text"></textarea>
+                        </div>
+        
+                        <div class="add-ann-btn">
+                            <input type="submit" id="add_ann" class="add-announcement-button" value="Add Announcement">
+                        </div>
+                    </form>
                 </div>
 
-                <div class="add-ann-title">Content</div>
-                <div class="add-ann-content">
-                    <textarea id="content" required class="announcements-textarea" rows="10" placeholder="Add your text"></textarea>
+                <div class="content">
+                    <span class="content-title">Previous Annoucements</span>
+                    <div id="prevAnnoucements"> <!-- Previous annoucements are here --> </div>
                 </div>
-
-                <div class="add-ann-btn">
-                    <input type="submit" id="add_ann" class="add-announcement-button" value="Add Annoucement">
-                </div>
-            </form>
-
-            <hr class="content-divider">
-
-            <span class="content-title">Previous Annoucements</span>
-            <div id="prevAnnoucements"> <!-- Previous annoucements are here --> </div>
+            </div>
         </div>
     </div>
 

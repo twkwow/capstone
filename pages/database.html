@@ -25,27 +25,8 @@
 <body style="display: flex;">
     <sidebar-component></sidebar-component>
 
-    <div class="content-container" style="overflow:hidden;">
-        <!-- <header-component></header-component> -->
-        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
-        <div class="header">
-            <div class="header-title">
-                <span style="text-align: right;">Dashboard</span>
-            </div>
-
-            <a href="#">
-                <button class="profile-button" id="profileButton">
-                    <i class="fa-solid fa-user"></i>
-                    <span style="padding: 7px;">Profile</span>
-                </button>
-            </a>
-
-            <ul id="profileDropdown" class="profile-dropdown">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
+    <div class="content-container">
+        <header-component headerTitle="Database" ></header-component>
         
         <div class="body">
             <div class="content-split-left">
@@ -58,21 +39,21 @@
                             <img src="/resources/images/locker.png">
                             DB 1
                         </div>
+                    </div>
+                </div>
+
+                <div class="database-container">
+                    <div class="locker-status-container-title">
+                        <div class="content-title">User Database</div>
+                    </div>
+                    <div class="database-container-content">
+                        <div class="database" onclick="redirectToDashboard()">
+                            <img src="/resources/images/locker.png">
+                            DB 1
+                        </div>
                         <div class="database" onclick="redirectToDashboard()">
                             <img src="/resources/images/locker.png">
                             DB 2
-                        </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 3
-                        </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 4
-                        </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 5
                         </div>
                         <div id="addNewDatabase" class="database" onclick="addNewDatabase()">
                             <img src="/resources/images/add database icon.png">
@@ -95,7 +76,7 @@
 <script>
     //checkSession()
     function redirectToDashboard() {
-        window.location.href = 'analytics.html';
+        window.location.href = 'database_user.html';
     }
     function redirectToAnalytics() {
         window.location.href = 'analytics.html';

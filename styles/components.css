@@ -1,4 +1,14 @@
 /* sidebar */
+
+.sidebar button {
+    font-size: 13px;
+}
+
+.header button {
+    font-size: 13px;
+    line-height: 1.2;
+}
+
 .sidebar {
     display: flex;
     position: sticky;
@@ -45,9 +55,10 @@
     text-align: left;
     padding: 10px 10px;
     background-color: #e8e8e9;
-    width: 175px;
+    width: 185px !important;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 .sidebar-nav-btn:hover {
