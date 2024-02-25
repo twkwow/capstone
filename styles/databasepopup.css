@@ -1,0 +1,29 @@
+.jessica-container {
+    background-color: white;
+    width:600px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
+}
+
+.form-input-same {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.form-input-same::placeholder {
+    color: black;
+}
+
+.form-input-diff {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-bottom: 20px;
+    padding: 5px;
+    pointer-events: none;
+    background-color: lightgrey;
+}
