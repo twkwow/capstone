@@ -10,6 +10,10 @@ hr {
     border: 1px solid gray
 }
 
+/* button:hover {
+    filter: brightness(70%);
+} */
+
 .content-container {
     position: relative;
     display: flex;

@@ -4,58 +4,53 @@ class Datatable extends HTMLElement {
 	    this.datatableData = []
         this.headerHTML = ""
         this.datatableColumns = []
+        this.datatableColumnDefs = []
+        this.dataTableInstance = null; 
     }
 
-    // connectedCallback() {
-    //     console.log(this.datatableData)   
-    // }
-
-    set data(data) {
-        this.datatableData = data;
-    }
-
-    set header(data) {
-        this.headerHTML = data;
-    }
-
-    set columns(data) {
-        this.datatableColumns = data
-    }
+    set data(data) { this.datatableData = data }
+    set header(data) { this.headerHTML = data }
+    set columns(data) { this.datatableColumns = data }
+    set columnDefs(data) { this.datatableColumnDefs = data }
 
 	render() {
 		this.innerHTML = `
-            <table id="dataTable" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>${this.headerHTML}</tr>
-                </thead>
-            </table>
+            <div class="content">
+                <button type="button" class="add-records-button" onclick="">Insert One</button>
+                <div class="table-container">
+                
+                    <table id="dataTable" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>${this.headerHTML}</tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
       	`
-        new DataTable( '#dataTable', {
+        this.dataTableInstance = new DataTable( '#dataTable', {
             data: this.datatableData,
             columns: this.datatableColumns,
-            columnDefs: [
-                {
-                    targets: 3, 
-                    render: function (data, type, row, meta) {
-                        return moment(data).format('DD-MMM-YYYY');
-                    }
-                },
-                {
-                    targets: 0, 
-                    render: function (data, type, row, meta) {
-                        return data == null ? 'N/A' : data;
-                    }
-                },
-            ],
+            columnDefs: this.datatableColumnDefs,
             processing: true,
             scrollY: 550,
         })
-        ;
+        
 	}	
+
+    
 }
 
-function setDatatableOptions(data, columns) {
-    const table = document.querySelector('datatable-component');
+const table = document.querySelector('datatable-component');
+var tableColStructure = {}
+
+function handleActionButton(event, toEdit) {
+    const rowIndex = event.target.closest('td').parentNode;
+    const rowData = table.dataTableInstance.row(rowIndex).data();
+    toEdit ? setEditForm(tableColStructure, rowData, true) : setDeleteForm(rowData._id)
+}
+
+function setDatatableOptions(data, columns, columnDefs) {
+    tableColStructure = columns
 
     const headers = Object.keys(columns)
     var headerHtml = ""
@@ -63,7 +58,7 @@ function setDatatableOptions(data, columns) {
         headerHtml += '<th>' + colName + '</th>';
     });
     headerHtml += '<th>Action</th>';
-    table.header = headerHtml
+    
 
     const dbRecords = Object.values(columns)
     const tableDataColumns = dbRecords.map((record) => {
@@ -72,14 +67,15 @@ function setDatatableOptions(data, columns) {
     tableDataColumns.push({
         "defaultContent": `
             <div class="actions-container">
-                <button class="edit-button" onclick="showPopup('edit-user-db', true)">Edit</button>
-                <button class="delete-button" onclick="showPopup('delete-user-db', true)">Delete</button>
+                <button class="edit-button" onclick="handleActionButton(event, true)">Edit</button>
+                <button class="delete-button" onclick="handleActionButton(event, false)">Delete</button>
             </div>
     `})
-    console.log(tableDataColumns)
-    table.columns = tableDataColumns
 
+    table.header = headerHtml
     table.data = data
+    table.columns = tableDataColumns
+    table.columnDefs = columnDefs
 
     table.render()
 }
