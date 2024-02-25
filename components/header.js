@@ -4,17 +4,17 @@ class Header extends HTMLElement {
     }
 	
 	constructor() {
-      super();
-	  this.headerTitle = ""
-	  this.username = ""
-	  this.picture = ""
-	  this.isProfileOpen = false
+		super();
+		this.headerTitle = ""
+		this.username = ""
+		this.picture = ""
+		this.isProfileOpen = false
     }
 
     connectedCallback() {
 		this.headerTitle = this.getAttribute("headerTitle") || 'Securehold'
 		this.username = this.getAttribute("username") || "Profile"
-		this.picture = this.getAttribute("picture") ? `<img style='width:100px' src='${this.getAttribute("picture")}' >` : "<i class='fa-solid fa-user'></i>"
+		this.picture = this.getAttribute("picture") ? `<img class="header-img" src='${this.getAttribute("picture")}' >` : "<i class='fa-solid fa-user'></i>"
 		this.render()
 
 		document.addEventListener("click", (event) => {

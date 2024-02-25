@@ -141,11 +141,9 @@
 <script src="/app.js"></script>
 
 <script>
-    /*
-    checkSession().then(() => {
-        document.querySelector('header-component').setAttribute('username', adminProfile.username);
-    })
-    */
+    
+    checkSession()
+    
 
     function pendingApprovalHTML(_id, username, email) {
         return `
