@@ -16,38 +16,75 @@ class EditRecordModal extends HTMLElement {
     }
 }
 
+let editColumnStructure = {}
+let editDbId = ""
 
-function setEditForm(cols, data, isUser) {
-    var fieldHTML = ""
+function setEditForm(cols, data) {
+    editColumnStructure = cols
+    editDbId = data._id
+
+    let fieldHTML = ""
     for (const [key, value] of Object.entries(cols)) {
+        const existingValue = formatDataToInput(data, value.dbField, value.type) || ''
         fieldHTML += `
             <div>${key}</div>
-            <input id="${value}" type="text" class="form-input-same" value="${data[value] || ''}">
+            <input type="${value.type}" id="${value.dbField}Edit" type="text" class="form-input-same" value="${existingValue}">
         `
     }
+
     fieldHTML += `
         <div id="editButtons" class="modal-buttons-container">
-            <button class="edit-cancel-button" onclick="showPopup('edit-user-db', false)">Cancel</button>
-            <button class="edit-update-button" onclick="updateRecords(${cols}, ${isUser})">Update</button>
+            <button class="edit-cancel-button" onclick="showPopup('editRecordModal', false)">Cancel</button>
+            <button class="edit-update-button" onclick="editRecords()">Update</button>
         </div>
     `
-
     document.getElementById("editContent").innerHTML = fieldHTML
     showPopup("editRecordModal", true)
 }
 
-async function updateRecords(cols, isUser) {
+async function editRecords() {
+    const editForm = new FormData()
+    editForm.append("_id", editDbId)
+    const dbRecords = Object.values(editColumnStructure).map(col => col.dbField)
+    dbRecords.forEach( (dbName) => {
+        editForm.append(dbName, document.getElementById(dbName + "Edit").value)
+    })
+    const params = new URLSearchParams(location.search);
+    editForm.append("db", params.get("db")) 
     
-    const updateForm = new FormData()
-    updateForm.append("tableStructure", cols)
-    Object.values(cols).forEach( (dbName) => {
-        updateForm.append(dbName, dbName)
+    await axios.post(apiLink + "admins/database/editDb", editForm)
+    .then((resp) => {
+        console.log(resp)
+        showSnackbar("dataEdit")
+        renderTable()
+        showPopup("editRecordModal", false)
+    }) 
+    .catch((e) => {
+        console.log(e)
     })
     
-    if (isUser) {
-        // await axios.post(apiLink + "users/users/updateUser", updateForm)
+}
 
+function formatDataToInput(obj, path, type) {
+    const keys = path.split('.');
+    let result = obj;
+
+    for (const key of keys) {
+        if (result && typeof result === 'object' && key in result) {
+            result = result[key];
+        } else {
+            result = null;
+            break;
+        }
     }
+
+    if (result) {
+        switch (type) {
+            case "date": return moment(result).format("YYYY-MM-DD")
+        }
+    }
+    
+    return result;
 }
   
 customElements.define('edit-record-component', EditRecordModal);

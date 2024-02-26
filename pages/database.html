@@ -35,7 +35,7 @@
                         <div class="content-title">User Database</div>
                     </div>
                     <div class="database-container-content">
-                        <div class="database" onclick="redirectToDashboard()">
+                        <div class="database" onclick="pageRouting('database_view.html?db=users')">
                             <img src="/resources/images/locker.png">
                             DB 1
                         </div>
@@ -47,7 +47,7 @@
                         <div class="content-title">User Database</div>
                     </div>
                     <div class="database-container-content">
-                        <div class="database" onclick="redirectToDashboard()">
+                        <div class="database" onclick="pageRouting('database_view.html?db=lockers&location=a')">
                             <img src="/resources/images/locker.png">
                             DB 1
                         </div>
@@ -69,12 +69,12 @@
 </body>
 </html>
 
-<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/scripts/profileDropdown.js"></script>
+<script src="/app.js"></script>
 
 <script>
-    //checkSession()
+    checkSession()
+
     function redirectToDashboard() {
         window.location.href = 'database_view.html?db=' + "users";
     }

@@ -16,7 +16,7 @@ class Datatable extends HTMLElement {
 	render() {
 		this.innerHTML = `
             <div class="content">
-                <button type="button" class="add-records-button" onclick="">Insert One</button>
+                <button type="button" class="add-records-button" onclick="handleActionButton(null, 'insert')">Insert One</button>
                 <div class="table-container">
                 
                     <table id="dataTable" class="table table-striped" style="width:100%">
@@ -43,10 +43,15 @@ class Datatable extends HTMLElement {
 const table = document.querySelector('datatable-component');
 var tableColStructure = {}
 
-function handleActionButton(event, toEdit) {
+function handleActionButton(event, action) {
+    if (action == 'insert') {
+        setInsertForm(tableColStructure)
+        return
+    }
     const rowIndex = event.target.closest('td').parentNode;
     const rowData = table.dataTableInstance.row(rowIndex).data();
-    toEdit ? setEditForm(tableColStructure, rowData, true) : setDeleteForm(rowData._id)
+
+    action == 'edit' ? setEditForm(tableColStructure, rowData) : setDeleteForm(rowData._id)
 }
 
 function setDatatableOptions(data, columns, columnDefs) {
@@ -60,15 +65,15 @@ function setDatatableOptions(data, columns, columnDefs) {
     headerHtml += '<th>Action</th>';
     
 
-    const dbRecords = Object.values(columns)
+    const dbRecords = Object.values(columns).map(col => col.dbField)
     const tableDataColumns = dbRecords.map((record) => {
         return { data: record}
     })
     tableDataColumns.push({
         "defaultContent": `
             <div class="actions-container">
-                <button class="edit-button" onclick="handleActionButton(event, true)">Edit</button>
-                <button class="delete-button" onclick="handleActionButton(event, false)">Delete</button>
+                <button class="edit-button" onclick="handleActionButton(event, 'edit')">Edit</button>
+                <button class="delete-button" onclick="handleActionButton(event, 'delete')">Delete</button>
             </div>
     `})
 

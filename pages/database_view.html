@@ -19,6 +19,7 @@
     <script src="/components/datatables.js" type="text/javascript" defer></script>
     <script src="/components/dbEditRecordModal.js" type="text/javascript" defer></script>
     <script src="/components/dbDeleteRecordModal.js" type="text/javascript" defer></script>
+    <script src="/components/dbInsertRecordModal.js" type="text/javascript" defer></script>
 </head>
 
 <body style="display: flex; overflow: hidden;" >
@@ -34,9 +35,14 @@
         </div>
     </div>
 
+    <insert-record-component></insert-record-component>
     <edit-record-component></edit-record-component>
     <delete-record-component></delete-record-component>
     
+    <snackbar-component snackbarId="dataInsert">New record added to database</snackbar-component>
+    <snackbar-component snackbarId="dataEdit">Database record updated</snackbar-component>
+    <snackbar-component snackbarId="dataDelete">Database record deleted</snackbar-component>
+
 </div>
 </body>
 </html>
@@ -66,15 +72,15 @@
         switch(db) {
             case "users": 
                 document.querySelector('header-component').setAttribute('headerTitle', "Users database");
-                await axios.get(apiLink + "users/users/getAllusers")
+                await axios.get(apiLink + "admins/database/getAllusers")
                 .then((resp) => { 
                     const headers = {
-                        "User ID": "web_data.user_id",
-                        "Name": "name",
-                        "Locker ID": "locker_id",
-                        "DOB": "dob",
-                        "NRIC / Passport": "nric_passport",
-                        "Phone No": "phone"
+                        "User ID": { dbField: "web_data.user_id", type: "text", required: false},
+                        "Name": { dbField: "name", type: "text", required: true},
+                        "Locker ID": { dbField: "locker_id",  type: "text", required: true},
+                        "DOB": { dbField: "dob", type: "date", required: true},
+                        "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},
+                        "Phone No": { dbField: "phone", type: 'text', required: true}
                     }
                     const dataCustomization = [
                         {

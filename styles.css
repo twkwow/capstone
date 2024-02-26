@@ -21,6 +21,10 @@ hr {
     width: 100%;
 }
 
+.alert-text {
+    color:red
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
