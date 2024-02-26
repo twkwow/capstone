@@ -7,22 +7,24 @@ function pageRouting(link) {
     window.location.href = link
 }
 
-async function checkSession(assignData) {
+async function checkSession() {
     await axios.get(apiLink + "checkToken" , {withCredentials: true})
     .then((resp) => {
         if (resp.data.status == 200) {
             adminProfile = resp.data.user
 
             // assign header data
-            document.querySelector('header-component').setAttribute('username', adminProfile.username);
-            document.querySelector('header-component').setAttribute('picture', adminProfile.profile_picture);
-            if(assignData){ assignData() }
-            return (window.location.pathname == "/") ?  pageRouting("pages/dashboard.html") : null
+            if(window.location.pathname != "/"){ 
+                document.querySelector('header-component').setAttribute('username', adminProfile.username);
+                document.querySelector('header-component').setAttribute('picture', adminProfile.profile_picture);
+                return null
+            }
+            return pageRouting("pages/dashboard.html") 
         }
-        
         return pageRouting( (window.location.pathname == "/") ? "/pages/login.html" : "/pages/login.html?event=sessionLost")
     })
     .catch((error) => {
         return pageRouting("/pages/login.html?event=apiError")
+        
     });
 }

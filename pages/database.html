@@ -37,7 +37,6 @@
                     <div class="database-container-content">
                         <div class="database" onclick="pageRouting('database_view.html?db=users')">
                             <img src="/resources/images/locker.png">
-                            DB 1
                         </div>
                     </div>
                 </div>
@@ -46,19 +45,8 @@
                     <div class="locker-status-container-title">
                         <div class="content-title">User Database</div>
                     </div>
-                    <div class="database-container-content">
-                        <div class="database" onclick="pageRouting('database_view.html?db=lockers&location=a')">
-                            <img src="/resources/images/locker.png">
-                            DB 1
-                        </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 2
-                        </div>
-                        <div id="addNewDatabase" class="database" onclick="addNewDatabase()">
-                            <img src="/resources/images/add database icon.png">
-                            Add New Database
-                        </div>
+                    <div id="lockerDatabases" class="database-container-content">
+                        <!-- locker databases here -->
                     </div>
                 </div>
             </div>
@@ -75,19 +63,18 @@
 <script>
     checkSession()
 
-    function redirectToDashboard() {
-        window.location.href = 'database_view.html?db=' + "users";
-    }
-    function redirectToAnalytics() {
-        window.location.href = 'analytics.html';
-    }
-    function redirectToAnnouncements() {
-        window.location.href = 'analytics.html';
-    }
-    function redirectToDatabase() {
-        window.location.href = 'analytics.html';
-    }
-    function addNewDatabase() {
-        console.log("hello nubs");
-    }
+    axios.get(apiLink + "admins/database/getAllLockerLocations")
+    .then ( (resp) => {
+        const lockerLocations = resp.data.lockerLocationData
+        let lockerHTML =""
+        lockerLocations.forEach( (data) => {
+            lockerHTML += `
+                <div id="${data.name}" class="database" onclick="pageRouting('database_view.html?db=lockers&location=${data.name}&id=${data._id}')">
+                    <img src="/resources/images/locker.png">
+                    ${data.name}
+                </div>
+            `
+        });
+        document.getElementById("lockerDatabases").innerHTML = lockerHTML
+    })
 </script>

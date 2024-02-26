@@ -11,7 +11,7 @@ class DeleteRecordModal extends HTMLElement {
                 
                 <strong>Delete User</strong>
                 
-                <div>Are you sure to delete this user?</div>
+                <div>Are you sure to delete this record?</div>
 
                 <div id="deleteButtons" class="modal-buttons-container">
                     <button class="delete-cancel-button" onclick="showPopup('deleteRecordModal', false)">Cancel</button>

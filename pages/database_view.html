@@ -69,38 +69,59 @@
         const params = new URLSearchParams(location.search);
         const db = params.get("db");
 
-        switch(db) {
-            case "users": 
-                document.querySelector('header-component').setAttribute('headerTitle', "Users database");
-                await axios.get(apiLink + "admins/database/getAllusers")
-                .then((resp) => { 
-                    const headers = {
-                        "User ID": { dbField: "web_data.user_id", type: "text", required: false},
-                        "Name": { dbField: "name", type: "text", required: true},
-                        "Locker ID": { dbField: "locker_id",  type: "text", required: true},
-                        "DOB": { dbField: "dob", type: "date", required: true},
-                        "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},
-                        "Phone No": { dbField: "phone", type: 'text', required: true}
-                    }
-                    const dataCustomization = [
-                        {
-                            targets: 0, render: (data, type, row, meta) => {
-                                return data == null ? 'N/A' : data;
-                            }
-                        },
-                        {
-                            targets: 3, render: (data, type, row, meta) => {
-                                return moment(data).format('DD-MMM-YYYY');
-                            }
-                        },
-                    ]
-                    setDatatableOptions(resp.data.userData, headers, dataCustomization)
-                })
-                .catch((e) => {
-                    console.log(e)
-                })
-                break;
-            case "lockers": 
+        if  (db == "users") {
+            document.querySelector('header-component').setAttribute('headerTitle', "Users database");
+            await axios.get(apiLink + "admins/database/getAllusers")
+            .then((resp) => { 
+                const headers = {
+                    "User ID": { dbField: "web_data.user_id", type: "text", required: false},
+                    "Name": { dbField: "name", type: "text", required: true},
+                    "Locker ID": { dbField: "locker_id",  type: "text", required: true},
+                    "DOB": { dbField: "dob", type: "date", required: true},
+                    "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},
+                    "Phone No": { dbField: "phone", type: 'text', required: true}
+                }
+                const dataCustomization = [
+                    {
+                        targets: 0, render: (data, type, row, meta) => {
+                            return data == null ? 'N/A' : data;
+                        }
+                    },
+                    {
+                        targets: 3, render: (data, type, row, meta) => {
+                            return moment(data).format('DD-MMM-YYYY');
+                        }
+                    },
+                ]
+                setDatatableOptions(resp.data.userData, headers, dataCustomization)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+        }
+        else if (db == "lockers") {
+            const lockerLocation = params.get("location");
+            const lockerId = params.get("id")
+
+            document.querySelector('header-component').setAttribute('headerTitle', "Lockers database - " + lockerLocation);
+
+            const lockerIdForm = new FormData()
+            lockerIdForm.append("_id", lockerId)
+            await axios.post(apiLink + "admins/database/getAllLockers", lockerIdForm)
+            .then((resp) => {
+                console.log(resp)
+                const headers = {
+                    "Current User": { dbField: "occupied_by", type: "text", required: true},
+                    "Door Status": { dbField: "door_status",  type: "text", required: true},
+                    "Door Open Count": { dbField: "open_count", type: "number", required: true},
+                    "Total Usage Time (Minutes)": { dbField: "usage_minutes", type: "number", required: true},
+                    "Last Used": { dbField: "last_used", type: 'date', required: true}
+                }
+                setDatatableOptions(resp.data.lockerData, headers, {})
+            })
+            .catch((e) => {
+                console.log(e)
+            })
         }
     }
 </script>
