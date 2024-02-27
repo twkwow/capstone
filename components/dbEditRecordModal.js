@@ -22,14 +22,13 @@ let editDbId = ""
 function setEditForm(cols, data) {
     editColumnStructure = cols
     editDbId = data._id
-
     let fieldHTML = ""
     for (const [key, value] of Object.entries(cols)) {
         const existingValue = formatDataToInput(data, value.dbField, value.type) || ''
-        fieldHTML += `
-            <div>${key}</div>
-            <input type="${value.type}" id="${value.dbField}Edit" type="text" class="form-input-same" value="${existingValue}">
-        `
+        if (value.type) {
+            fieldHTML += `<div>${key}</div>`
+            fieldHTML += `<input type="${value.type}" id="${value.dbField}Edit" type="text" class="form-input-same" value="${existingValue}">`
+        }
     }
 
     fieldHTML += `
@@ -45,9 +44,12 @@ function setEditForm(cols, data) {
 async function editRecords() {
     const editForm = new FormData()
     editForm.append("_id", editDbId)
-    const dbRecords = Object.values(editColumnStructure).map(col => col.dbField)
-    dbRecords.forEach( (dbName) => {
-        editForm.append(dbName, document.getElementById(dbName + "Edit").value)
+
+    Object.values(editColumnStructure).forEach( (dbRecords) => {
+        console.log(dbRecords)
+        if ( dbRecords.type ) {
+            editForm.append(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
+        }
     })
     const params = new URLSearchParams(location.search);
     editForm.append("db", params.get("db")) 
@@ -80,7 +82,8 @@ function formatDataToInput(obj, path, type) {
 
     if (result) {
         switch (type) {
-            case "date": return moment(result).format("YYYY-MM-DD")
+            case "date": return moment(result).format("YYYY-MM-DD"); break;
+            case "datetime-local": return moment(result).format("YYYY-MM-DDTHH:mm:ss"); break;
         }
     }
     

@@ -32,6 +32,7 @@ class Datatable extends HTMLElement {
             columns: this.datatableColumns,
             columnDefs: this.datatableColumnDefs,
             processing: true,
+            order: [[0, 'desc']],
             scrollY: 550,
         })
         
@@ -44,8 +45,10 @@ const table = document.querySelector('datatable-component');
 var tableColStructure = {}
 
 function handleActionButton(event, action) {
+    const params = new URLSearchParams(location.search);
+    const db = params.get("db")
     if (action == 'insert') {
-        setInsertForm(tableColStructure)
+        db == "users" ? setInsertForm(tableColStructure) : insertRecord(null)
         return
     }
     const rowIndex = event.target.closest('td').parentNode;

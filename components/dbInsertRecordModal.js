@@ -26,10 +26,12 @@ function setInsertForm(cols) {
         <form class="edit-user-content-container" style="margin-top: 10px;" onsubmit="insertRecord(event)">
     `
     for (const [key, value] of Object.entries(cols)) {
-        fieldHTML += `
-            <div>${key}</div>
-            <input type="${value.type}" id="${value.dbField}Insert" type="text" class="form-input-same" ${value.required ? 'required' : ''}>
-        `
+        if (value.type) {
+            fieldHTML += `
+                <div>${key}</div>
+                <input type="${value.type}" id="${value.dbField}Insert" type="text" class="form-input-same" ${value.required ? 'required' : ''}>
+            `
+        }
     }
 
     fieldHTML += `
@@ -47,18 +49,25 @@ function setInsertForm(cols) {
 }
 
 async function insertRecord(event) {    
-    event.preventDefault();
+    if (event) {
+        event.preventDefault();
+    }
 
     const insertForm = new FormData()
 
-    const dbRecords = Object.values(insertColumnStructure).map(col => col.dbField)
-    dbRecords.forEach( (dbName) => {
-        insertForm.append(dbName, document.getElementById(dbName + "Insert").value)
-
-    })
-    
     const params = new URLSearchParams(location.search);
-    insertForm.append("db", params.get("db")) 
+    const db = params.get("db")
+    const locationId = params.get("id")
+    insertForm.append("db", db) 
+    insertForm.append("location", locationId)
+
+    if (db == "users") {
+        const dbRecords = Object.values(insertColumnStructure).map(col => col.dbField)
+        dbRecords.forEach( (dbName) => {
+            insertForm.append(dbName, document.getElementById(dbName + "Insert").value)
+    
+        })
+    }
 
     await axios.post(apiLink + "admins/database/insertDb", insertForm)
     .then((resp) => {

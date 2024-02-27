@@ -74,6 +74,7 @@
             await axios.get(apiLink + "admins/database/getAllusers")
             .then((resp) => { 
                 const headers = {
+                    "Database ID": { dbField: "_id"},
                     "User ID": { dbField: "web_data.user_id", type: "text", required: false},
                     "Name": { dbField: "name", type: "text", required: true},
                     "Locker ID": { dbField: "locker_id",  type: "text", required: true},
@@ -83,12 +84,12 @@
                 }
                 const dataCustomization = [
                     {
-                        targets: 0, render: (data, type, row, meta) => {
+                        targets: 1, render: (data, type, row, meta) => {
                             return data == null ? 'N/A' : data;
                         }
                     },
                     {
-                        targets: 3, render: (data, type, row, meta) => {
+                        targets: 4, render: (data, type, row, meta) => {
                             return moment(data).format('DD-MMM-YYYY');
                         }
                     },
@@ -111,13 +112,26 @@
             .then((resp) => {
                 console.log(resp)
                 const headers = {
-                    "Current User": { dbField: "occupied_by", type: "text", required: true},
-                    "Door Status": { dbField: "door_status",  type: "text", required: true},
+                    "Database ID": { dbField: "_id"},
+                    "Current User": { dbField: "occupied_by", type: "text", required: false},
+                    "Door Status": { dbField: "door_status"},
                     "Door Open Count": { dbField: "open_count", type: "number", required: true},
                     "Total Usage Time (Minutes)": { dbField: "usage_minutes", type: "number", required: true},
-                    "Last Used": { dbField: "last_used", type: 'date', required: true}
+                    "Last Used": { dbField: "last_used", type: 'datetime-local', required: true}
                 }
-                setDatatableOptions(resp.data.lockerData, headers, {})
+                const dataCustomization = [
+                    {
+                        targets: 1, render: (data, type, row, meta) => {
+                            return data == null ? 'N/A' : data;
+                        }
+                    },
+                    {
+                        targets: 5, render: (data, type, row, meta) => {
+                            return data == null ? 'N/A' : moment(data).format('DD-MMM-YYYY h:mm:ss a');
+                        }
+                    },
+                ]
+                setDatatableOptions(resp.data.lockerData, headers, dataCustomization)
             })
             .catch((e) => {
                 console.log(e)
