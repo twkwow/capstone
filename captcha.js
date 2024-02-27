@@ -27,7 +27,7 @@ function generateCaptcha() {
     captcha.src = canvas.toDataURL();
 }
  
-async function printmsg() {
+async function checkCaptcha() {
     const usr_input = document.getElementById("captcha-input").value;
 
     const { data: { text } } = await Tesseract.recognize(
@@ -37,10 +37,11 @@ async function printmsg() {
     );
 
     if (usr_input === text.trim()) {
-        alert("fuckerm., Captch CORRECT matched good lol");
-        generateCaptcha();
+        console.log("Captch CORRECT matched good lol");
+        return true
     } else {
-        alert("WRONG CAPTCHTCAPTCHA FUCK");
+        console.log("WRONG CAPTCHTCAPTCHA FUCK");
         generateCaptcha();
+        return false
     }
 }

@@ -84,6 +84,13 @@
     margin-right: auto;
 }
 
+.header-img {
+    width: 25px;
+    height: 25px;
+    align-self: center;
+    border-radius: 100%;
+    border: 2px solid black
+}
 .profile-button-container {
     position: relative;
     z-index: 1; /* Lower z-index for the profile container */
@@ -93,9 +100,11 @@
 }
 
 .profile-button {
+    display: flex;
     justify-self: end;
     text-align: left;
-    padding: 10px 10px;
+    align-items: center;
+    padding: 5px 10px;
     background-color: #e8e8e9;
     margin-left: auto;
     width: auto;
@@ -113,18 +122,18 @@
     background: white;
     position: absolute;
     border: 1px solid black;
-    right: -50%;
-    top: 110%;
+    right: -30%;
+    top: 105%;
     width: 200px;
-    z-index: 3; /* Higher z-index for the dropdown */
+    z-index: 10; /* Higher z-index for the dropdown */
 }
-.dropdown-item {
+.profile-dropdown-item {
     text-align: center;
     padding: 10px;
     border: 1px solid black;
     cursor: pointer;
 }
-.dropdown-item:hover {
+.profile-dropdown-item:hover {
     background-color: #a7b3ec;
 }
 /* header */
@@ -196,6 +205,65 @@
     padding: 20px;
 }
 /* popup modal */
+
+/* database */
+.add-records-button {
+    margin-left: auto;
+    padding: 5px 20px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+/* database */
  
+/* editModal & deleteModal */
+.delete-modal-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
 
+.modal-buttons-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+}
 
+.edit-cancel-button, .edit-update-button, .delete-cancel-button, .delete-delete-button {
+    width: 90px;
+    height: 30px;
+    border: 1px;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.edit-cancel-button, .delete-cancel-button{
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid black;
+}
+
+.edit-cancel-button:hover , .delete-cancel-button:hover{
+    background-color: #aaaaaa;
+
+}
+
+.edit-update-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-update-button:hover {
+    background-color: #005bbd;
+}
+
+.delete-delete-button {
+    background-color: red;
+    color: white
+}
+
+.delete-delete-button:hover {
+    background-color: rgb(178, 0, 0);
+}
+/* editModal & deleteModal */

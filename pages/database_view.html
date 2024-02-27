@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/admincontent.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/database.css">
+    <link rel="stylesheet" href="/styles/databasepopup.css">
+    <title>SecureHold</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <script src="/components/sidebar.js" type="text/javascript" defer></script>
+    <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
+    <script src="/components/datatables.js" type="text/javascript" defer></script>
+    <script src="/components/dbEditRecordModal.js" type="text/javascript" defer></script>
+    <script src="/components/dbDeleteRecordModal.js" type="text/javascript" defer></script>
+    <script src="/components/dbInsertRecordModal.js" type="text/javascript" defer></script>
+</head>
+
+<body style="display: flex; overflow: hidden;" >
+    <sidebar-component></sidebar-component>
+
+    <div class="content-container">
+        <header-component headerTitle="database_name_display_here" ></header-component>
+        
+        <div class="content-split-left" style="width: 100%">
+            <!-- bro how many divs you wanted jesus there was like 6 just to put a button -->
+            
+            <datatable-component></datatable-component>
+        </div>
+    </div>
+
+    <insert-record-component></insert-record-component>
+    <edit-record-component></edit-record-component>
+    <delete-record-component></delete-record-component>
+    
+    <snackbar-component snackbarId="dataInsert">New record added to database</snackbar-component>
+    <snackbar-component snackbarId="dataEdit">Database record updated</snackbar-component>
+    <snackbar-component snackbarId="dataDelete">Database record deleted</snackbar-component>
+
+</div>
+</body>
+</html>
+
+<!--import datatables shit here-->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap5.css">
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap5.js"></script>
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script src="/app.js"></script>
+
+<script>
+    checkToken()
+    renderTable()
+
+    async function renderTable() {
+        const params = new URLSearchParams(location.search);
+        const db = params.get("db");
+
+        if  (db == "users") {
+            document.querySelector('header-component').setAttribute('headerTitle', "Users database");
+            await axios.get(apiLink + "admins/database/getAllusers")
+            .then((resp) => { 
+                const headers = {
+                    "Database ID": { dbField: "_id"},
+                    "User ID": { dbField: "web_data.user_id", type: "text", required: false},
+                    "Name": { dbField: "name", type: "text", required: true},
+                    "Locker ID": { dbField: "locker_id",  type: "text", required: true},
+                    "DOB": { dbField: "dob", type: "date", required: true},
+                    "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},
+                    "Phone No": { dbField: "phone", type: 'text', required: true}
+                }
+                const dataCustomization = [
+                    {
+                        targets: 1, render: (data, type, row, meta) => {
+                            return data == null ? 'N/A' : data;
+                        }
+                    },
+                    {
+                        targets: 4, render: (data, type, row, meta) => {
+                            return moment(data).format('DD-MMM-YYYY');
+                        }
+                    },
+                ]
+                setDatatableOptions(resp.data.userData, headers, dataCustomization)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+        }
+        else if (db == "lockers") {
+            const lockerLocation = params.get("location");
+            const lockerId = params.get("id")
+
+            document.querySelector('header-component').setAttribute('headerTitle', "Lockers database - " + lockerLocation);
+
+            const lockerIdForm = new FormData()
+            lockerIdForm.append("_id", lockerId)
+            await axios.post(apiLink + "admins/database/getAllLockers", lockerIdForm)
+            .then((resp) => {
+                console.log(resp)
+                const headers = {
+                    "Database ID": { dbField: "_id"},
+                    "Current User": { dbField: "occupied_by", type: "text", required: false},
+                    "Door Status": { dbField: "door_status"},
+                    "Door Open Count": { dbField: "open_count", type: "number", required: true},
+                    "Total Usage Time (Minutes)": { dbField: "usage_minutes", type: "number", required: true},
+                    "Last Used": { dbField: "last_used", type: 'datetime-local', required: true}
+                }
+                const dataCustomization = [
+                    
+                    {
+                        targets: 1, render: (data, type, row, meta) => {
+                            return data == null ? 'N/A' : data.name + "<br>" + data._id;
+                        }
+                    },
+                    {
+                        targets: 2, render: (data, type, row, meta) => {
+                            return Boolean(data)? "Open" : "Locked";
+                        }
+                    },
+                    {
+                        targets: 5, render: (data, type, row, meta) => {
+                            return data == null ? 'N/A' : moment(data).format('DD-MMM-YYYY <br> h:mm:ss a');
+                        }
+                    },
+                ]
+                setDatatableOptions(resp.data.lockerData, headers, dataCustomization)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+        }
+    }
+</script>
