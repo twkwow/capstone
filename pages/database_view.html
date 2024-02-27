@@ -62,7 +62,7 @@
 <script src="/app.js"></script>
 
 <script>
-    checkSession()
+    checkToken()
     renderTable()
 
     async function renderTable() {
@@ -120,14 +120,20 @@
                     "Last Used": { dbField: "last_used", type: 'datetime-local', required: true}
                 }
                 const dataCustomization = [
+                    
                     {
                         targets: 1, render: (data, type, row, meta) => {
-                            return data == null ? 'N/A' : data;
+                            return data == null ? 'N/A' : data.name + "<br>" + data._id;
+                        }
+                    },
+                    {
+                        targets: 2, render: (data, type, row, meta) => {
+                            return Boolean(data)? "Open" : "Locked";
                         }
                     },
                     {
                         targets: 5, render: (data, type, row, meta) => {
-                            return data == null ? 'N/A' : moment(data).format('DD-MMM-YYYY h:mm:ss a');
+                            return data == null ? 'N/A' : moment(data).format('DD-MMM-YYYY <br> h:mm:ss a');
                         }
                     },
                 ]

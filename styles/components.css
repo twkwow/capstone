@@ -122,18 +122,18 @@
     background: white;
     position: absolute;
     border: 1px solid black;
-    right: -50%;
-    top: 110%;
+    right: -30%;
+    top: 105%;
     width: 200px;
-    z-index: 3; /* Higher z-index for the dropdown */
+    z-index: 10; /* Higher z-index for the dropdown */
 }
-.dropdown-item {
+.profile-dropdown-item {
     text-align: center;
     padding: 10px;
     border: 1px solid black;
     cursor: pointer;
 }
-.dropdown-item:hover {
+.profile-dropdown-item:hover {
     background-color: #a7b3ec;
 }
 /* header */

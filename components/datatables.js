@@ -33,7 +33,7 @@ class Datatable extends HTMLElement {
             columnDefs: this.datatableColumnDefs,
             processing: true,
             order: [[0, 'desc']],
-            scrollY: 550,
+            scrollY: "60vh",
         })
         
 	}	

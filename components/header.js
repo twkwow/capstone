@@ -54,9 +54,8 @@ class Header extends HTMLElement {
 
 
 					<div id="profileDropdown" class="profile-dropdown">
-						<div class="dropdown-item" onclick="pageRouting('profile.html')">Edit Profile</div>
-						<div class="dropdown-item" onclick="pageRouting('change_password.html')">Change Password</div>
-						<div class="dropdown-item" onclick="logout()">Logout</div>
+						<div class="profile-dropdown-item" onclick="pageRouting('profile.html')">Edit Profile</div>
+						<div class="profile-dropdown-item" onclick="logout()">Logout</div>
 					</div>
 				<div>
 			</div>

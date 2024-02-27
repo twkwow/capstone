@@ -148,19 +148,10 @@
 .edit-button, .delete-button {
     border: 1px solid black;
     border-radius: 5px;
-    padding:5px;
+    padding:5px ;
     width: 40%;
+    min-width: fit-content;
     margin: 0 5px;
     text-align: center;
-    
 }
-
-.edit-lol {
-    float: left;
-}
-
-.delete-lol {
-    margin-left: 50%;
-}
-
 

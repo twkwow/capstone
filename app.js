@@ -7,7 +7,7 @@ function pageRouting(link) {
     window.location.href = link
 }
 
-async function checkSession() {
+async function checkToken() {
     await axios.get(apiLink + "checkToken" , {withCredentials: true})
     .then((resp) => {
         if (resp.data.status == 200) {
