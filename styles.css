@@ -1,19 +1,28 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Tahoma;
+    font-family: Tahoma !important;
 }
+
 
 hr {
     width: 100%;
     border: 1px solid gray
 }
 
+/* button:hover {
+    filter: brightness(70%);
+} */
+
 .content-container {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.alert-text {
+    color:red
 }
 
 ::-webkit-scrollbar {

@@ -25,27 +25,8 @@
 <body style="display: flex;">
     <sidebar-component></sidebar-component>
 
-    <div class="content-container" style="overflow:hidden;">
-        <!-- <header-component></header-component> -->
-        <!-- Header component issues, styling problem if applied as component, for now just copy and paste the working part below or you know, fix it XD-->
-        <div class="header">
-            <div class="header-title">
-                <span style="text-align: right;">Dashboard</span>
-            </div>
-
-            <a href="#">
-                <button class="profile-button" id="profileButton">
-                    <i class="fa-solid fa-user"></i>
-                    <span style="padding: 7px;">Profile</span>
-                </button>
-            </a>
-
-            <ul id="profileDropdown" class="profile-dropdown">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
+    <div class="content-container">
+        <header-component headerTitle="Database" ></header-component>
         
         <div class="body">
             <div class="content-split-left">
@@ -54,30 +35,18 @@
                         <div class="content-title">User Database</div>
                     </div>
                     <div class="database-container-content">
-                        <div class="database" onclick="redirectToDashboard()">
+                        <div class="database" onclick="pageRouting('database_view.html?db=users')">
                             <img src="/resources/images/locker.png">
-                            DB 1
                         </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 2
-                        </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 3
-                        </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 4
-                        </div>
-                        <div class="database" onclick="redirectToDashboard()">
-                            <img src="/resources/images/locker.png">
-                            DB 5
-                        </div>
-                        <div id="addNewDatabase" class="database" onclick="addNewDatabase()">
-                            <img src="/resources/images/add database icon.png">
-                            Add New Database
-                        </div>
+                    </div>
+                </div>
+
+                <div class="database-container">
+                    <div class="locker-status-container-title">
+                        <div class="content-title">User Database</div>
+                    </div>
+                    <div id="lockerDatabases" class="database-container-content">
+                        <!-- locker databases here -->
                     </div>
                 </div>
             </div>
@@ -88,25 +57,24 @@
 </body>
 </html>
 
-<script src="/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/scripts/profileDropdown.js"></script>
+<script src="/app.js"></script>
 
 <script>
-    //checkSession()
-    function redirectToDashboard() {
-        window.location.href = 'analytics.html';
-    }
-    function redirectToAnalytics() {
-        window.location.href = 'analytics.html';
-    }
-    function redirectToAnnouncements() {
-        window.location.href = 'analytics.html';
-    }
-    function redirectToDatabase() {
-        window.location.href = 'analytics.html';
-    }
-    function addNewDatabase() {
-        console.log("hello nubs");
-    }
+    checkToken()
+
+    axios.get(apiLink + "admins/database/getAllLockerLocations")
+    .then ( (resp) => {
+        const lockerLocations = resp.data.lockerLocationData
+        let lockerHTML =""
+        lockerLocations.forEach( (data) => {
+            lockerHTML += `
+                <div id="${data.name}" class="database" onclick="pageRouting('database_view.html?db=lockers&location=${data.name}&id=${data._id}')">
+                    <img src="/resources/images/locker.png">
+                    ${data.name}
+                </div>
+            `
+        });
+        document.getElementById("lockerDatabases").innerHTML = lockerHTML
+    })
 </script>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/admincontent.css">
     <link rel="stylesheet" href="/styles/components.css">
     <link rel="stylesheet" href="/styles/dashboardpop.css">
+    <link rel="stylesheet" href="/styles/announcement.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
@@ -73,10 +74,11 @@
                             <img src="/resources/images/locker.png">
                             SS2
                         </div>
-                        <div class="locker" onclick="redirectToAnalytics()">
+                        <div class="locker" onclick="showPopup('admin-approve', true)">
                             <img src="/resources/images/locker.png">
                             SS2
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -91,19 +93,15 @@
             Are you sure to add this admin?
         </div>
         <div class="pop-container">
-            <div class="annoucement-cancel-pop">
-                <a href="#">
-                    <div class="ann-cancel-text" onclick="showPopup('admin-approve', false)">
-                        Cancel
-                    </div>
-                </a>
+            <div class="announcement-cancel-pop"  onclick="showPopup('admin-approve', false)">
+                <div class="ann-cancel-text">
+                    Cancel
+                </div>
             </div>
-            <div class="annoucement-confirm-pop">
-                <a href="#">
-                    <div class="ann-delete-text">
-                        Confirm
-                    </div>
-                </a>
+            <div class="announcement-confirm-pop">
+                <div class="ann-delete-text">
+                    Confirm
+                </div>
             </div>
         </div>
     </popupmodal-component>
@@ -116,14 +114,14 @@
             Are you sure to reject this admin?
         </div>
         <div class="pop-container">
-            <div class="annoucement-cancel-pop">
+            <div class="niggerfuck">
                 <a href="#">
                     <div class="ann-cancel-text" onclick="showPopup('admin-reject', false)">
                         Cancel
                     </div>
                 </a>
             </div>
-            <div class="annoucement-confirm-pop">
+            <div class="announcement-confirm-pop">
                 <a href="#">
                     <div class="ann-delete-text">
                         Confirm
@@ -143,9 +141,9 @@
 <script src="/app.js"></script>
 
 <script>
-    checkSession().then(() => {
-        document.querySelector('header-component').setAttribute('username', adminProfile.username);
-    })
+    
+    checkToken()
+    
 
     function pendingApprovalHTML(_id, username, email) {
         return `
@@ -169,7 +167,7 @@
     }
 
     function renderPendingApprovals() {
-        axios.get(apiLink + "dashboard/getAllPendingApprovals")
+        axios.get(apiLink + "admins/dashboard/getAllPendingApprovals")
         .then ( (res) => {
             //limit show up to 5 approvals
             const approvalArr = res.data.data.slice(0,5)
@@ -186,7 +184,7 @@
         const newAdmin = new FormData()
         newAdmin.append("_id", _id)
 
-        axios.post(apiLink + (approve ? "dashboard/insertAdmin" : "dashboard/rejectAdmin"), newAdmin)
+        axios.post(apiLink + (approve ? "admins/dashboard/insertAdmin" : "admins/dashboard/rejectAdmin"), newAdmin)
         .then( () => {
             showSnackbar(approve ? "approve" : "reject")
             renderPendingApprovals()
