@@ -1,18 +1,20 @@
 class Header extends HTMLElement {
     static get observedAttributes() {
-        return ['username'];
+        return ['username', 'picture'];
     }
 	
 	constructor() {
-      super();
-	  this.headerTitle = ""
-	  this.username = ""
-	  this.isProfileOpen = false
+		super();
+		this.headerTitle = ""
+		this.username = ""
+		this.picture = ""
+		this.isProfileOpen = false
     }
 
     connectedCallback() {
 		this.headerTitle = this.getAttribute("headerTitle") || 'Securehold'
 		this.username = this.getAttribute("username") || "Profile"
+		this.picture = this.getAttribute("picture") ? `<img class="header-img" src='${this.getAttribute("picture")}' >` : "<i class='fa-solid fa-user'></i>"
 		this.render()
 
 		document.addEventListener("click", (event) => {
@@ -32,6 +34,7 @@ class Header extends HTMLElement {
 
 	attributeChangedCallback() {
 		this.username = this.getAttribute("username") || "Profile"
+		this.picture = this.getAttribute("picture") ? `<img class="header-img" src='${this.getAttribute("picture")}' >` : "<i class='fa-solid fa-user'></i>"
 		this.render();
 	};
 
@@ -44,15 +47,15 @@ class Header extends HTMLElement {
 
 				<div class="profile-button-container">
 					<button class="profile-button" id="profileButton">
-						<i class="fa-solid fa-user"></i>
-						<span style="padding: 7px;">${this.username}</span>
+						${this.picture}
+						<span style="padding: 7px; margin-right: 5px">${this.username}</span>
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
 					</button>
 
 
 					<div id="profileDropdown" class="profile-dropdown">
-						<div class="dropdown-item" onclick="pageRouting('profile.html')">Edit Profile</div>
-						<div class="dropdown-item" onclick="pageRouting('change_password.html')">Change Password</div>
-						<div class="dropdown-item" onclick="logout()">Logout</div>
+						<div class="profile-dropdown-item" onclick="pageRouting('profile.html')">Edit Profile</div>
+						<div class="profile-dropdown-item" onclick="logout()">Logout</div>
 					</div>
 				<div>
 			</div>
@@ -63,7 +66,6 @@ class Header extends HTMLElement {
   async function logout() {
 	await axios.get(apiLink + "clearToken", {withCredentials: true})
 	.then( (resp) => {
-		console.log(resp)
 		pageRouting("login.html?event=logout")
 	})
 }

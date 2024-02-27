@@ -27,13 +27,13 @@
         <main class="profile-container">
             <div class="info-container">
                 <div class="profile-image-container">
-                    <img class="profile-image" src="https://i1.sndcdn.com/artworks-QwAlaiMcwYw2VuQk-eOwr0g-t500x500.jpg">
-                    <label for="changeImg" class="edit-profile-image" onclick="console.log('aaaaaa')">Change Profile Picture</label>
+                    <img id="profileImg" class="profile-image" src="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg">
+                    <label for="changeImg" class="edit-profile-image">Change Profile Picture</label>
                     <input type="file" accept="image/*" id="changeImg" style="display: none;" onchange="handleFileUpload()">
                 </div>
                 <div class="info-subcontainer">
                     <div>Registered date</div>
-                    <div id="registeredDate">9/11/2001</div>                          
+                    <div id="registeredDate"></div>                          
                 </div>
             </div>
             
@@ -62,16 +62,16 @@
                     <hr>
                     
                     <div class="subtitle">Current Password</div>
-                    <input type="password" class="changepassword-input">
+                    <input id="curPass" type="password" class="changepassword-input">
 
                     <div class="subtitle">New Password</div>
-                    <input type="password" class="changepassword-input">
+                    <input id="newPass" type="password" class="changepassword-input">
 
                     <div class="subtitle">Re-type New Password</div>
-                    <input type="password" class="changepassword-input">
+                    <input id="newPassRe" type="password" class="changepassword-input">
 
                     <div class="changepassword-button-container">
-                        <button class="changepassword-button">Save Password</button>
+                        <button onclick="changePassword()" class="changepassword-button">Save Password</button>
                     </div>
                 </section>
             </div>
@@ -81,25 +81,31 @@
     </div>
 
     <snackbar-component snackbarId="save">Profile Updated</snackbar-component>
+    <snackbar-component snackbarId="savePassword">Password Updated</snackbar-component>
+    <snackbar-component snackbarId="uploadingImg">Image Uploading...</snackbar-component>
+    <snackbar-component snackbarId="changePic">Profile Picture Updated</snackbar-component>
+    <snackbar-component snackbarId="notCurPass">Current password is incorrect</snackbar-component>
+    <snackbar-component snackbarId="passNoMatch">Passwords are not matching</snackbar-component>
     <snackbar-component snackbarId="apiErr">API Error</snackbar-component>
 </div>
 </body>
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
 <script src="/app.js"></script>
 
 <script>
-    checkSession().then(() => {
-        document.querySelector('header-component').setAttribute('username', adminProfile.username);
+    loadTokenData()
 
-
-        document.getElementById("username").value = adminProfile.username
-        document.getElementById("email").value = adminProfile.email
-        //document.getElementById("registeredDate").innerHTML = adminProfile.registered_date
-
-        console.log(adminProfile)
-    })
+    async function loadTokenData() {
+        await checkSession(() => {
+            document.getElementById("username").value = adminProfile.username
+            document.getElementById("email").value = adminProfile.email
+            document.getElementById("profileImg").setAttribute("src", adminProfile.profile_picture)
+            document.getElementById("registeredDate").innerHTML =  moment(adminProfile.registered_date).format('DD MMMM YYYY')
+        })
+    }
 
     async function editField(id, event) {
         const inputField = document.getElementById(id)
@@ -120,12 +126,12 @@
         
         if (!buttonCondition) {
             const adminData = new FormData()
-            adminData.append("_id", adminProfile._id)
             adminData.append( id, inputField.value)
 
-            await axios.post(apiLink + "admins/changeAdminData", adminData)
-            .then((resp) => {
+            await axios.post(apiLink + "admins/profile/changeAdminData", adminData, {withCredentials: true})
+            .then(async (resp) => {
                 showSnackbar("save")
+                await loadTokenData()
             })
             .catch((e) => {
                 console.log(e)
@@ -135,9 +141,49 @@
         
     }
 
-    function handleFileUpload() {
+    async function changePassword() {
+        const curPass = document.getElementById("curPass").value
+        const newPass = document.getElementById("newPass").value
+        const newPassRe = document.getElementById("newPassRe").value
+
+        if (newPass == newPassRe) {
+
+            const passwordForm = new FormData()
+            passwordForm.append("newPassword", newPass)
+            passwordForm.append("oldPassword", curPass)
+
+            await axios.post(apiLink + "admins/profile/changePassword", passwordForm, {withCredentials: true})
+            .then((resp) => {
+                showSnackbar(resp.data.status == 200 ? "savePassword" : resp.data.status == 401 ? "notCurPass" : "apiErr")
+                loadTokenData()
+            })
+            .catch((e) => {
+                console.log(e)
+                showSnackbar("apiErr")
+            })
+            return
+        }
+        return showSnackbar("passNoMatch")
+    }
+
+    async function handleFileUpload() {
+        showSnackbar("uploadingImg")
+
         const fileInput = document.getElementById('changeImg');
         const selectedFile = fileInput.files[0];
-        console.log('Selected file:', selectedFile);
+        
+        const imageForm = new FormData()
+        imageForm.append("image", selectedFile)
+
+        await axios.post(apiLink + "admins/profile/changeProfilePicture", imageForm, { withCredentials: true})
+        .then(() => {
+            showSnackbar("changePic")
+            loadTokenData()
+
+        })
+        .catch((e) => {
+            console.log(e)
+            showSnackbar("apiErr")
+        })
     }
 </script>
