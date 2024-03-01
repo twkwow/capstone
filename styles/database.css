@@ -4,8 +4,6 @@
     background-color: #fff;
     border-radius: 20px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    /* margin-bottom: 20px;
-    margin-right: 20px; */
     padding: 22.5px;
 }
 
@@ -39,9 +37,8 @@
 /* Ying Sheng */
 
 .database-container {
-    border-radius: 8px;
-    border: 0.5px solid black;
-    background-color: #f2f2f2;
+    border-radius: 1px;
+    border: 1px solid lightgrey;
     display: flex;
     flex-direction: column;
     width: 100%;

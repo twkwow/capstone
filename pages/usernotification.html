@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/admincontent.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/announcement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
+    <title>SecureHold</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <script src="/components/sidebar.js" type="text/javascript" defer></script>
+    <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
+</head>
+
+<body style="display: flex;">
+    <sidebar-component></sidebar-component>
+    <div class="content-container">
+        <header-component headerTitle="User Notifications"></header-component>
+        
+        <div class="body">
+            <div class="content-split-left">
+                <div class="content">
+                    <span class="content-title">All User Notifications</span>
+                    <div class="annoucement-card">
+                        <div class="annoucement-container">
+                            <div class="annoucement-container1">
+                                <div class="annoucement-content">
+                                    <span> afk;lfasdkl;fasdkl;fdsadfl;sakf;dlaskf;sdlkfd;salkfd;alsdfs;ldfksa;lfkads;lfdkas;dfaskadfs;lfkdas;lfadskdfs;lkdfas;lfasdkf;dslafdask
+                                        fads;lfdaskfd;alsfkas;lfdska;fldaskfl;daskfdal;sdkfasdfas;lfdkas;f
+                                    al;dkfas;lsdkf;ldaskfds;alf </span>
+                                </div>
+                            </div>
+                            <div class="annoucement-container2">
+                                <span>user_id</span>
+                            </div>
+                            <div class="annoucement-container3">
+                                <span>24 February 2024 5:50pm</span>
+                            </div>
+                            <div class="annoucement-container4">
+                                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="annoucement-card">
+                        <div class="annoucement-container">
+                            <div class="annoucement-container1">
+                                <div class="annoucement-content">
+                                    <span> afk;lfasdkl;fasdkl;fdsadfl;sakf;dlaskf;sdlkfd;salkfd;alsdfs;ldfksa;lfkads;lfdkas;dfaskadfs;lfkdas;lfadskdfs;lkdfas;lfasdkf;dslafdask
+                                        fads;lfdaskfd;alsfkas;lfdska;fldaskfl;daskfdal;sdkfasdfas;lfdkas;f
+                                    al;dkfas;lsdkf;ldaskfds;alf </span>
+                                </div>
+                            </div>
+                            <div class="annoucement-container2">
+                                <span>user_id</span>
+                            </div>
+                            <div class="annoucement-container3">
+                                <span>24 February 2024 5:50pm</span>
+                            </div>
+                            <div class="annoucement-container4">
+                                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <popupmodal-component modalId="ann-delete" modalClass="popup-container-ann-delete">
+            <strong>Delete Annoucement</strong>
+            <div class="ann-delete-text1">Permanently delete the annoucement? You can't undo this</div>
+            <div class="pop-container">
+                <button class="announcement-cancel-pop" onclick="showPopup('ann-delete', false)">Cancel</button>
+                <button class="announcement-confirm-pop" onclick="showPopup('ann-delete', false); deleteAnnoucement()">Confirm</button>
+            </div>
+        </popupmodal-component>
+        
+    </div>
+</div>
+
+    
+</body>
+</html>
+
+<script src="/app.js"></script>

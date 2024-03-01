@@ -54,36 +54,67 @@
                         <div class="content-title" style="text-align: center;">Locker Status</div>
                     </div>
                     <div class="locker-status-container-content">
-                            <div class="locker" onclick="">
-                                <img src="/resources/images/locker.png">
-                                SS2
-                            </div>
-                        <div class="locker">
+                        <div class="locker" onclick="showPopup('locker_click_status', true)">
                             <img src="/resources/images/locker.png">
-                            SS2
+                                Click here
                         </div>
                         <div class="locker">
                             <img src="/resources/images/locker.png">
                             SS2
                         </div>
-                        <div class="locker">
-                            <img src="/resources/images/locker.png">
-                            SS2
-                        </div>
-                        <div class="locker">
-                            <img src="/resources/images/locker.png">
-                            SS2
-                        </div>
-                        <div class="locker" onclick="showPopup('admin-approve', true)">
-                            <img src="/resources/images/locker.png">
-                            SS2
-                        </div>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <popupmodal-component modalId="locker_click_status" modalClass="locker_pop">
+        <div class="locker-pop-container">
+            <div class="x-button-container">
+                <div class="x-button" onclick="showPopup('locker_click_status', false)">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+            </div>
+            <div class="locker-pop-title">
+                <span> Locker Status</span>
+            </div>
+            <div class="locker-pop-img">
+                <img src="/resources/images/locker.png">
+            </div>
+            <div class="locker-pop-content">
+                <div class="locker-pop-content-text">
+                    <span>
+                        Locker ID: KL_001
+                    </span>
+                </div>
+
+                <!--display either 1, online or offline-->
+                <div class="locker-pop-content-text">
+                    <span>
+                        Locker Status: <span style="color: red;">Offline</span>
+                    </span>
+                </div>
+                <div class="locker-pop-content-text">
+                    <span>
+                        Locker Status: <span style="color:lime;">Online</span>
+                    </span>
+                </div>
+                <!--display either 1, online or offline-->
+
+                <div class="locker-pop-content-text">
+                    <span>
+                        Usage: 1/1
+                    </span>
+                </div>
+
+                <div class="locker-pop-content-text">
+                    <span>
+                        Lockers active: 0.1H
+                    </span>
+                </div>
+            </div>
+        </div>
+    </popupmodal-component>
 
     <popupmodal-component modalId="admin-approve" modalClass="dylan-container">
         <div class="ann-delete-text1">
@@ -142,7 +173,7 @@
 
 <script>
     
-    checkToken()
+    //checkToken()
     
 
     function pendingApprovalHTML(_id, username, email) {
