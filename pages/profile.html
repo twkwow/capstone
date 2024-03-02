@@ -97,14 +97,15 @@
 
 <script>
     loadTokenData()
+    console.log(adminProfile)
 
     async function loadTokenData() {
-        await checkSession(() => {
-            document.getElementById("username").value = adminProfile.username
-            document.getElementById("email").value = adminProfile.email
-            document.getElementById("profileImg").setAttribute("src", adminProfile.profile_picture)
-            document.getElementById("registeredDate").innerHTML =  moment(adminProfile.registered_date).format('DD MMMM YYYY')
-        })
+        await checkToken()
+        document.getElementById("username").value = adminProfile.username
+        document.getElementById("email").value = adminProfile.email
+        document.getElementById("profileImg").setAttribute("src", adminProfile.profile_picture)
+        document.getElementById("registeredDate").innerHTML =  moment(adminProfile.registered_date).format('DD MMMM YYYY')
+        
     }
 
     async function editField(id, event) {

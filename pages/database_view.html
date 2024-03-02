@@ -75,8 +75,8 @@
             .then((resp) => { 
                 const headers = {
                     "Database ID": { dbField: "_id"},
-                    "User ID": { dbField: "web_data.user_id", type: "text", required: false},
-                    "Name": { dbField: "name", type: "text", required: true},
+                    "Username": { dbField: "web_data.user_id", type: "text", required: false},
+                    "Full Name": { dbField: "name", type: "text", required: true},
                     "Locker ID": { dbField: "locker_id",  type: "text", required: true},
                     "DOB": { dbField: "dob", type: "date", required: true},
                     "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},

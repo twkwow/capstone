@@ -136,7 +136,7 @@
         annoucementForm.append("title", formattedTitle)
         annoucementForm.append("content", formattedContent)
 
-        await axios.post(apiLink + 'admins/annoucements/insertAnnoucement', annoucementForm)
+        await axios.post(apiLink + 'admins/annoucements/insertAnnoucement', annoucementForm, { withCredentials: true})
         .then( () => {
             showSnackbar("insertAnnoucement")
             getAnnoucements()

@@ -63,9 +63,11 @@ async function insertRecord(event) {
 
     if (db == "users") {
         const dbRecords = Object.values(insertColumnStructure).map(col => col.dbField)
+        console.log(dbRecords)
         dbRecords.forEach( (dbName) => {
-            insertForm.append(dbName, document.getElementById(dbName + "Insert").value)
-    
+            if (dbName != "_id") {
+                insertForm.append(dbName, document.getElementById(dbName + "Insert").value)
+            }
         })
     }
 

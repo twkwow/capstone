@@ -63,7 +63,7 @@ class Header extends HTMLElement {
 	}	
   }
 
-  async function logout() {
+async function logout() {
 	await axios.get(apiLink + "clearToken", {withCredentials: true})
 	.then( (resp) => {
 		pageRouting("login.html?event=logout")
