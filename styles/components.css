@@ -54,16 +54,25 @@
 .sidebar-nav-btn {
     text-align: left;
     padding: 10px 10px;
-    background-color: #e8e8e9;
-    width: 185px !important;
+    background-color: white;
+    width: 200px !important;
+    border: 1px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     
 }
 
 .sidebar-nav-btn:hover {
     cursor: pointer;
     background-color: #a7b3ec;
+}
+
+.footer-text-lol {
+    color: grey;
+    margin-top: 50px;
+    text-align: center;
+    list-style: none;
+    font-size: 15px;
 }
 
 /* header */
@@ -105,11 +114,12 @@
     text-align: left;
     align-items: center;
     padding: 5px 10px;
-    background-color: #e8e8e9;
     margin-left: auto;
     width: auto;
-    border-radius: 360px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
 }
 
 .profile-button:hover {
@@ -121,16 +131,17 @@
     list-style: none;
     background: white;
     position: absolute;
-    border: 1px solid black;
+    border: 1px;
     right: -30%;
-    top: 105%;
+    top: 110%;
     width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 10; /* Higher z-index for the dropdown */
 }
 .profile-dropdown-item {
     text-align: center;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px;
     cursor: pointer;
 }
 .profile-dropdown-item:hover {

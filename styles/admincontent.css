@@ -6,9 +6,7 @@
 }
 
 .content {
-    border-radius: 8px;
-    border: 0.5px solid black;
-    background-color: #f2f2f2;
+    border: 1px solid lightgrey;
     padding: 10px;
     margin-bottom: 20px;
     flex-direction: column;
@@ -47,9 +45,8 @@
 }
 
 .locker-status-container {
-    border-radius: 8px;
-    border: 0.5px solid black;
-    background-color: #f2f2f2;
+    border-radius: 1px;
+    border: 0.5px solid lightgrey;
     display: flex;
     flex-direction: column;
     padding: 10px;

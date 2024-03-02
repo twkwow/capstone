@@ -55,7 +55,7 @@
 
     <popupmodal-component modalId="ann-delete" modalClass="popup-container-ann-delete">
         <strong>Delete Annoucement</strong>
-        <div class="ann-delete-text1">Permanently delete the annoucement? You can't undo this</div>
+        <div class="ann-delete-text1">Permanently delete the notification? You can't undo this</div>
         <div class="pop-container">
             <button class="announcement-cancel-pop" onclick="showPopup('ann-delete', false)">Cancel</button>
             <button class="announcement-confirm-pop" onclick="showPopup('ann-delete', false); deleteAnnoucement()">Confirm</button>
@@ -73,7 +73,7 @@
 <script src="/app.js"></script>
 
 <script>
-    checkToken()
+    //checkToken()
 
     var selectedAnnoucementId = ""
 
@@ -95,7 +95,9 @@
                 <div class="annoucement-container3">
                     <span>${time}</span>
                 </div>
-                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
+                <div class="annoucement-container4">
+                    <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
+                </div>
             </div>
         </div>
         `
