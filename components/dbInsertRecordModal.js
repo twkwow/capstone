@@ -28,7 +28,7 @@ function setInsertForm(cols) {
     for (const [key, value] of Object.entries(cols)) {
         if (value.type) {
             fieldHTML += `
-                <div>${key}</div>
+                <div>${key} ${value.required ? '*' : ''}</div>
                 <input type="${value.type}" id="${value.dbField}Insert" type="text" class="form-input-same" ${value.required ? 'required' : ''}>
             `
         }

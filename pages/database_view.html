@@ -43,6 +43,8 @@
     <snackbar-component snackbarId="dataEdit">Database record updated</snackbar-component>
     <snackbar-component snackbarId="dataDelete">Database record deleted</snackbar-component>
 
+    <snackbar-component snackbarId="apiError">API Error</snackbar-component>
+
 </div>
 </body>
 </html>
@@ -74,17 +76,21 @@
             await axios.get(apiLink + "admins/database/getAllusers")
             .then((resp) => { 
                 const headers = {
-                    "Database ID": { dbField: "_id"},
-                    "Username": { dbField: "web_data.user_id", type: "text", required: false},
+                    "Database ID": { dbField: "_id", showOnly: true},
+                    "Username": { dbField: "web_data.username", type: "text", required: false},
                     "Full Name": { dbField: "name", type: "text", required: true},
                     "Locker ID": { dbField: "locker_id",  type: "text", required: true},
                     "DOB": { dbField: "dob", type: "date", required: true},
                     "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},
-                    "Phone No": { dbField: "phone", type: 'text', required: true}
+                    "Phone No": { dbField: "phone", type: 'text', required: true},
+                    "RFID": {dbField: "auth_data.rfid", type: 'text', required: true},
+                    "Fingerprint": {dbField: "auth_data.fingerprint", inputOnly: true, type: "text", required:true},
+                    "Facial Data": {dbField: "auth_data.face", inputOnly: true, type: "text", required:true}
+
                 }
                 const dataCustomization = [
                     {
-                        targets: 1, render: (data, type, row, meta) => {
+                        targets: [1,3], render: (data, type, row, meta) => {
                             return data == null ? 'N/A' : data;
                         }
                     },
@@ -112,9 +118,9 @@
             .then((resp) => {
                 console.log(resp)
                 const headers = {
-                    "Database ID": { dbField: "_id"},
+                    "Database ID": { dbField: "_id", showOnly: true},
                     "Current User": { dbField: "occupied_by", type: "text", required: false},
-                    "Door Status": { dbField: "door_status"},
+                    "Door Status": { dbField: "door_status", showOnly: true},
                     "Door Open Count": { dbField: "open_count", type: "number", required: true},
                     "Total Usage Time (Minutes)": { dbField: "usage_minutes", type: "number", required: true},
                     "Last Used": { dbField: "last_used", type: 'datetime-local', required: true}

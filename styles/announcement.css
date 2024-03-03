@@ -54,7 +54,7 @@
     width: 70px;
 }
 
-.announcement-delete:hover {
+.annoucement-delete:hover {
     background-color: #0254ab;
     cursor: pointer;
 }
@@ -165,4 +165,35 @@
 .ann-delete-text1 {
     text-align: left;
     margin-top: 10px;
+}
+
+.radio-button-container {
+    display: flex;
+    margin-left: 20px;
+
+}
+
+.radio-button {
+    height: 25px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    margin: 5px;
+    width: 100px;
+}
+
+.radio-button:hover {
+    background-color: #a3a0a0;
+    cursor: pointer;
+}
+
+.selected-radio-button {
+    border: 0 !important;
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+.selected-radio-button:hover {
+    background-color: #014fa2 !important;
 }

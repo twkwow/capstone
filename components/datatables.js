@@ -53,8 +53,8 @@ function handleActionButton(event, action) {
     }
     const rowIndex = event.target.closest('td').parentNode;
     const rowData = table.dataTableInstance.row(rowIndex).data();
-
-    action == 'edit' ? setEditForm(tableColStructure, rowData) : setDeleteForm(rowData._id)
+    
+    action == 'edit' ? setEditForm(tableColStructure, rowData._id) : setDeleteForm(rowData._id)
 }
 
 function setDatatableOptions(data, columns, columnDefs) {
@@ -63,12 +63,14 @@ function setDatatableOptions(data, columns, columnDefs) {
     const headers = Object.keys(columns)
     var headerHtml = ""
     headers.forEach((colName) => {
-        headerHtml += '<th>' + colName + '</th>';
+        if (!columns[colName].inputOnly) {
+            headerHtml += '<th>' + colName + '</th>';
+
+        }
     });
     headerHtml += '<th>Action</th>';
     
-
-    const dbRecords = Object.values(columns).map(col => col.dbField)
+    const dbRecords = Object.values(columns).filter(col => !col.inputOnly).map(col => col.dbField)
     const tableDataColumns = dbRecords.map((record) => {
         return { data: record}
     })

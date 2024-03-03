@@ -22,13 +22,18 @@
     <sidebar-component></sidebar-component>
     <div class="content-container">
         <header-component headerTitle="Annoucements"></header-component>
-
         <div class="body">
             <div class="content-split-left">
                 <div class="content">
                     <span class="content-title">Add Announcements</span>
                     <form class="announcements-container" onsubmit="insertAnnoucement(event)">
         
+                        <div class="add-ann-title">Post to</div>
+                        <div class="radio-button-container">
+                            <input type="button" class="radio-button" id="toUsers" value="Users App" onclick="radioSelect('toUsers')">
+                            <input type="button" class="radio-button" id="toLockers" value="Lockers" onclick="radioSelect('toLockers')">
+                        </div>
+                        
                         <div class="add-ann-title">Title</div>
                         <div class="add-ann-content">
                             <textarea id="title" required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
@@ -73,16 +78,18 @@
 <script src="/app.js"></script>
 
 <script>
-    //checkToken()
+    checkToken()
 
-    var selectedAnnoucementId = ""
+    let currentPostTo = ""
+    let selectedAnnoucementId = ""
 
-    function previousAnnoucementsHTML(_id, title, content, admin, time) {
+    function previousAnnoucementsHTML(_id, type, title, content, admin, time) {
         return `
         <div class="annoucement-card">
             <div class="annoucement-container">
                 <div class="annoucement-container1">
                     <div class="annoucement-title">
+                        <span>[${type}]</span>
                         <span>${title}</span>
                     </div>
                     <div class="annoucement-content">
@@ -106,11 +113,12 @@
     async function getAnnoucements() {
         await axios.get(apiLink + "admins/annoucements/getAllAnnoucements")
         .then ( (res) => {
+            console.log(res)
             //limit show up to 5 annoucements
             const approvalArr = res.data.data.slice(0,5)
             var innerHTML = ""
             approvalArr.forEach( (annoucement) => {
-                innerHTML += previousAnnoucementsHTML(annoucement._id, annoucement.title, annoucement.content, annoucement.admin, moment(annoucement.timestamp).format('DD-MMM-YYYY h:mm:ss a'))
+                innerHTML += previousAnnoucementsHTML(annoucement._id, annoucement.type, annoucement.title, annoucement.content, annoucement.admin.username, moment(annoucement.timestamp).format('DD-MMM-YYYY h:mm:ss a'))
             })
             if (innerHTML) {
                 document.getElementById("prevAnnoucements").innerHTML = innerHTML
@@ -135,6 +143,7 @@
         const formattedContent = content.replace(/\n/g, '<br>');
 
         const annoucementForm = new FormData()
+        annoucementForm.append("type", currentPostTo == "toUsers" ? "Users" : "Lockers")
         annoucementForm.append("title", formattedTitle)
         annoucementForm.append("content", formattedContent)
 
@@ -161,5 +170,18 @@
                 getAnnoucements()
             }
         })
+    }
+
+    function radioSelect(id) {
+        currentPostTo = id
+
+        document.getElementById(id).classList.add("selected-radio-button")
+
+        const otherId = (id === "toUsers") ? "toLockers" : "toUsers";
+        
+        if (document.getElementById(otherId).classList.contains("selected-radio-button")) {
+            document.getElementById(otherId).classList.remove("selected-radio-button");
+        }
+
     }
 </script>

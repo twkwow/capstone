@@ -36,7 +36,8 @@
                     </div>
                     <div class="database-container-content">
                         <div class="database" onclick="pageRouting('database_view.html?db=users')">
-                            <img src="/resources/images/locker.png">
+                            <img class="database-img" src="/resources/images/locker.png">
+                            <div class="database-title">Users</div>
                         </div>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
 <script src="/app.js"></script>
 
 <script>
-    //checkToken()
+    checkToken()
 
     axios.get(apiLink + "admins/database/getAllLockerLocations")
     .then ( (resp) => {
@@ -70,8 +71,8 @@
         lockerLocations.forEach( (data) => {
             lockerHTML += `
                 <div id="${data.name}" class="database" onclick="pageRouting('database_view.html?db=lockers&location=${data.name}&id=${data._id}')">
-                    <img src="/resources/images/locker.png">
-                    ${data.name}
+                    <img class="database-img" src="/resources/images/locker.png">
+                    <div class="database-title">${data.name}</div>
                 </div>
             `
         });
