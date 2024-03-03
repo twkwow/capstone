@@ -36,14 +36,15 @@
                     </div>
                     <div class="database-container-content">
                         <div class="database" onclick="pageRouting('database_view.html?db=users')">
-                            <img src="/resources/images/locker.png">
+                            <img class="database-img" src="/resources/images/locker.png">
+                            <div class="database-title">Users</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="database-container">
                     <div class="locker-status-container-title">
-                        <div class="content-title">User Database</div>
+                        <div class="content-title">Locker Database</div>
                     </div>
                     <div id="lockerDatabases" class="database-container-content">
                         <!-- locker databases here -->
@@ -70,8 +71,8 @@
         lockerLocations.forEach( (data) => {
             lockerHTML += `
                 <div id="${data.name}" class="database" onclick="pageRouting('database_view.html?db=lockers&location=${data.name}&id=${data._id}')">
-                    <img src="/resources/images/locker.png">
-                    ${data.name}
+                    <img class="database-img" src="/resources/images/locker.png">
+                    <div class="database-title">${data.name}</div>
                 </div>
             `
         });

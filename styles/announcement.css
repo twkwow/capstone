@@ -3,14 +3,17 @@
     border: 1px;
     border-radius: 5px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
 
 .annoucement-container {
     margin: 10px;
+    display: flex;
 }
 
-.annoucement-container1, .annoucement-container2, .annoucement-container3, .annoucement-delete {
-    display: inline-block;
+.annoucement-container1, .annoucement-container2, .annoucement-container3, .annoucement-container4 {
+    display: flex;
+    flex-direction: column;
 }
 
 .annoucement-container1 {
@@ -20,28 +23,38 @@
 .annoucement-container2 {
     width: 20%;
     text-align: center;
-    color: lightgrey;
+    color: grey;
+    justify-content: center;
 }
 
 .annoucement-container3 {
     width: 10%;
     text-align: justify;
+    justify-content: center;
+}
+
+.annoucement-container4 {
+    width: 10%;
+    justify-content: center;
+    align-items: center;
 }
 
 .annoucement-title {
     color: blue;
+    margin-bottom: 10px;
 }
 
 .annoucement-delete {
+    height: 25px;
     border: 0px;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
-    padding: 5px 15px;
-    margin-bottom: 10px;
+    margin: 5px;
+    width: 70px;
 }
 
-.announcement-delete:hover {
+.annoucement-delete:hover {
     background-color: #0254ab;
     cursor: pointer;
 }
@@ -101,6 +114,7 @@
     border: 1px;
     border-radius: 5px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .announcements-textarea {
@@ -151,4 +165,35 @@
 .ann-delete-text1 {
     text-align: left;
     margin-top: 10px;
+}
+
+.radio-button-container {
+    display: flex;
+    margin-left: 20px;
+
+}
+
+.radio-button {
+    height: 25px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    margin: 5px;
+    width: 100px;
+}
+
+.radio-button:hover {
+    background-color: #a3a0a0;
+    cursor: pointer;
+}
+
+.selected-radio-button {
+    border: 0 !important;
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+.selected-radio-button:hover {
+    background-color: #014fa2 !important;
 }

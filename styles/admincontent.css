@@ -6,9 +6,8 @@
 }
 
 .content {
-    border-radius: 8px;
-    border: 0.5px solid black;
-    background-color: #f2f2f2;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 20px;
     flex-direction: column;
@@ -47,9 +46,8 @@
 }
 
 .locker-status-container {
-    border-radius: 8px;
-    border: 0.5px solid black;
-    background-color: #f2f2f2;
+    border-radius: 10px;
+    border: 0.5px solid lightgrey;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -203,6 +201,13 @@
 
 .reject_btn:hover {
     background-color: lightgrey;
+}
+.status-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 20px
 }
 
 /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
