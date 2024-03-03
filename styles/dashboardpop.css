@@ -5,3 +5,56 @@
     height: fit-content;
     padding: 20px;
 }
+
+.locker_pop {
+    background-color: white;
+    width: 300px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
+    font-family: Tahoma !important;
+}
+
+.locker-pop-container {
+    height: 100%;
+    width: 100%;
+}
+
+.locker-pop-title {
+    text-align: center;
+    font-size: 20px;
+}
+
+.locker-pop-img {
+    width:100%;
+    text-align: center;
+}
+
+.locker-pop-img img {
+    width: 200px;
+    border-radius: 90px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+}
+
+.locker-pop-content {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.locker-pop-content-text {
+    display: flex;
+    padding: 10px;
+}
+
+.x-button-container {
+    width: 100%;
+}
+
+.x-button {
+    float: left;
+    font-size: 20px;
+    width: 20px;
+
+}

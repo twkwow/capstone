@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles/admincontent.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/announcement.css">
+    <link rel="stylesheet" href="/styles/verifications.css">
+    <title>SecureHold</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
+    <script src="/components/sidebar.js" type="text/javascript" defer></script>
+    <script src="/components/header.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
+</head>
+
+<body style="display: flex;">
+    <sidebar-component></sidebar-component>
+    <div class="content-container">
+        <header-component headerTitle="User Notifications"></header-component>
+        
+        <div class="body">
+            <div class="content-split-left">
+                <div class="content">
+                    <span class="content-title">All User Notifications</span>
+                    <div id="userNotifications">
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <popupmodal-component modalId="ann-delete" modalClass="popup-container-ann-delete">
+        <strong>Delete Annoucement</strong>
+        <div class="ann-delete-text1">Permanently delete the notification? You can't undo this</div>
+        <div class="pop-container">
+            <button class="announcement-cancel-pop" onclick="showPopup('ann-delete', false)">Cancel</button>
+            <button class="announcement-confirm-pop" onclick="showPopup('ann-delete', false); deleteUserNotification()">Confirm</button>
+        </div>
+    </popupmodal-component>
+
+    <snackbar-component snackbarId="deletedNotifications">Notification Deleted</snackbar-component>
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script src="/app.js"></script>
+
+<script>
+    checkToken()
+    getUserNotifications()
+
+    let selectedUserNotifications = ""
+
+    async function getUserNotifications() {
+        await axios.get(apiLink + "admins/annoucements/getAllAdminNotify")
+        .then( (resp) => {
+            let userNotificationsHTML = ""
+
+            resp.data.notifyAdmin.forEach( (notification) => {
+                userNotificationsHTML += `
+                    <div class="annoucement-card">
+                        <div class="annoucement-container">
+                            <div class="annoucement-container1">
+                                <div class="annoucement-content">${notification.message}</div>
+                            </div>
+                            <div class="annoucement-container2">${notification.user.name}</div>
+                            <div class="annoucement-container3">${moment(notification.timestamp).format("DD-MMM-YYYY h:mm:ss a")}</div>
+                            <div class="annoucement-container4">
+                                <button class="annoucement-delete" onclick="selectedUserNotifications = '${notification._id}'; showPopup('ann-delete', true)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                `
+            })
+            document.getElementById("userNotifications").innerHTML = userNotificationsHTML
+        })
+    }
+    
+    async function deleteUserNotification() {
+        const idForm = new FormData()
+        idForm.append("_id", selectedUserNotifications)
+
+        await axios.post(apiLink + "admins/annoucements/deleteAdminNotify", idForm)
+        .then( (resp) => {
+            showSnackbar("deletedNotifications")
+            getUserNotifications()
+        })
+    }
+</script>

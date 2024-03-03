@@ -40,10 +40,9 @@
                 </div>
 
                 <div class="content">
-                    <!-- Sample approve container starts from here-->
                     <div class="content-title">Admin Approval</div>
                     <div id="pendingApprovals">
-                        
+                        <!-- approvals here -->
                     </div>    
                 </div>
             </div>
@@ -53,37 +52,39 @@
                     <div class="locker-status-container-title">
                         <div class="content-title" style="text-align: center;">Locker Status</div>
                     </div>
-                    <div class="locker-status-container-content">
-                            <div class="locker" onclick="">
-                                <img src="/resources/images/locker.png">
-                                SS2
-                            </div>
-                        <div class="locker">
+                    <div id="lockerStatus" class="locker-status-container-content">
+                        <div class="locker" onclick="showPopup('locker_click_status', true)">
                             <img src="/resources/images/locker.png">
-                            SS2
+                                Click here
                         </div>
                         <div class="locker">
                             <img src="/resources/images/locker.png">
                             SS2
                         </div>
-                        <div class="locker">
-                            <img src="/resources/images/locker.png">
-                            SS2
-                        </div>
-                        <div class="locker">
-                            <img src="/resources/images/locker.png">
-                            SS2
-                        </div>
-                        <div class="locker" onclick="showPopup('admin-approve', true)">
-                            <img src="/resources/images/locker.png">
-                            SS2
-                        </div>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <popupmodal-component modalId="locker_click_status" modalClass="locker_pop">
+        <div class="locker-pop-container">
+            <div class="x-button-container">
+                <div class="x-button" onclick="showPopup('locker_click_status', false)">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+            </div>
+            <div class="locker-pop-title">
+                <span> Locker Status</span>
+            </div>
+            <div class="locker-pop-img">
+                <img src="/resources/images/locker.png">
+            </div>
+            <div id="lockerStatusPopup" class="locker-pop-content">
+                
+            </div>
+        </div>
+    </popupmodal-component>
 
     <popupmodal-component modalId="admin-approve" modalClass="dylan-container">
         <div class="ann-delete-text1">
@@ -143,7 +144,8 @@
 <script>
     
     checkToken()
-    
+    renderPendingApprovals()
+    getLockerLocations()
 
     function pendingApprovalHTML(_id, username, email) {
         return `
@@ -166,8 +168,8 @@
         `
     }
 
-    function renderPendingApprovals() {
-        axios.get(apiLink + "admins/dashboard/getAllPendingApprovals")
+    async function renderPendingApprovals() {
+        await axios.get(apiLink + "admins/dashboard/getAllPendingApprovals")
         .then ( (res) => {
             //limit show up to 5 approvals
             const approvalArr = res.data.data.slice(0,5)
@@ -178,13 +180,70 @@
             document.getElementById("pendingApprovals").innerHTML = innerHTML
         })
     }
-    renderPendingApprovals()
 
-    function approveOrRejectAdmin(_id, approve) {
+    async function getLockerLocations() {
+        await axios.get(apiLink + "admins/dashboard/getAllLockerLocations")
+        .then ((resp) => {
+            let lockerLocationHTML = ""
+            resp.data.lockerLocations.forEach((location) => {
+                console.log(typeof(location))
+                lockerLocationHTML += `
+                <div class="locker" onclick="showLockerStatus(${JSON.stringify(location).split('"').join("&quot;")})">
+                    <div class="status-circle" style="background-color:${location.status == 0 ? "red" : location.status == 1 ? "green" : location.status == 2 ? "yellow" : "gray"}"> </div>
+                    <img src="/resources/images/locker.png">
+                        ${location.name}
+                </div>
+                `
+            })
+            console.log(resp)
+            document.getElementById("lockerStatus").innerHTML = lockerLocationHTML
+        })
+    }
+
+    function showLockerStatus(location) {
+        document.getElementById("lockerStatusPopup").innerHTML = 
+        `
+        <div class="locker-pop-content-text">
+            <span>
+                Locker Name: ${location.name}
+            </span>
+        </div>
+        <div class="locker-pop-content-text">
+            <span>
+                Locker Location: ${location.address}
+            </span>
+        </div>
+
+        <!--display either 1, online or offline-->
+        <div class="locker-pop-content-text">
+            <span>
+                Locker Status: 
+                <span style="color: ${location.status == 0 ? "red" : location.status == 1 ? "green" : location.status == 2 ? "yellow" : "gray"}">
+                    ${location.status == 0 ? "Offline" : location.status == 1 ? "Online" : location.status == 2 ? "Require Maintenance" : "Error"}
+                </span>
+            </span>
+        </div>
+
+        <div class="locker-pop-content-text">
+            <span>
+                Usage: 1/1
+            </span>
+        </div>
+
+        <div class="locker-pop-content-text">
+            <span>
+                Lockers active: ${location.active_hours} h
+            </span>
+        </div>
+        `
+        showPopup("locker_click_status", true)
+    }
+
+    async function approveOrRejectAdmin(_id, approve) {
         const newAdmin = new FormData()
         newAdmin.append("_id", _id)
 
-        axios.post(apiLink + (approve ? "admins/dashboard/insertAdmin" : "admins/dashboard/rejectAdmin"), newAdmin)
+        await axios.post(apiLink + (approve ? "admins/dashboard/insertAdmin" : "admins/dashboard/rejectAdmin"), newAdmin)
         .then( () => {
             showSnackbar(approve ? "approve" : "reject")
             renderPendingApprovals()

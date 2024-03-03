@@ -35,12 +35,23 @@ class Sidebar extends HTMLElement {
                             </a>
                         </li>
                         <li class="sidebar-nav-list-li">
+                            <a href="usernotification.html">
+                                <button class="sidebar-nav-btn">
+                                    <i class="fa-solid fa-circle-exclamation", style="padding:7px"></i>
+                                    <span style="padding: 7px;">User Notifications</span>
+                                </button>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-list-li">
                             <a href="database.html">
                                 <button class="sidebar-nav-btn">
                                     <i class="fa-solid fa-database", style="padding:7px"></i>
                                     <span style="padding: 7px;">Database</span>
                                 </button>
                             </a>
+                        </li>
+                        <li class="footer-text-lol">
+                            <span>Powered by Group 3 Final Boss<span>
                         </li>
                     </ul>
                 </div>
