@@ -19,13 +19,23 @@ class EditRecordModal extends HTMLElement {
 let editColumnStructure = {}
 let editDbId = ""
 
-function setEditForm(cols, data) {
+async function setEditForm(cols, _id) {
     editColumnStructure = cols
-    editDbId = data._id
+    editDbId = _id
+
+    const findOneForm = new FormData()
+    findOneForm.append("_id", _id)
+    const params = new URLSearchParams(location.search);
+    findOneForm.append("db", params.get("db")) 
+
+    const data = (await axios.post(apiLink + "admins/database/getOneDB", findOneForm)
+        .catch((e) => { showSnackbar("apiError")})
+    ).data.recordData
+
     let fieldHTML = ""
     for (const [key, value] of Object.entries(cols)) {
-        const existingValue = formatDataToInput(data, value.dbField, value.type) || ''
-        if (value.type) {
+        const existingValue = formatDataToInput(data, value.dbField, value.type)
+        if (!value.showOnly) {
             fieldHTML += `<div>${key}</div>`
             fieldHTML += `<input type="${value.type}" id="${value.dbField}Edit" type="text" class="form-input-same" value="${existingValue}">`
         }
@@ -46,14 +56,15 @@ async function editRecords() {
     editForm.append("_id", editDbId)
 
     Object.values(editColumnStructure).forEach( (dbRecords) => {
-        console.log(dbRecords)
-        if ( dbRecords.type ) {
+        if ( !dbRecords.showOnly ) {
+            console.log(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
             editForm.append(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
         }
     })
+    
     const params = new URLSearchParams(location.search);
     editForm.append("db", params.get("db")) 
-    
+
     await axios.post(apiLink + "admins/database/editDb", editForm)
     .then((resp) => {
         console.log(resp)
@@ -63,31 +74,27 @@ async function editRecords() {
     }) 
     .catch((e) => {
         console.log(e)
+        showSnackbar("apiError")
     })
     
 }
 
-function formatDataToInput(obj, path, type) {
-    const keys = path.split('.');
-    let result = obj;
+function formatDataToInput(data, path, type) {
+    const fieldPath = path.split('.'); // Split the string into parts
+    const result = fieldPath.reduce((obj, key) => obj[key], data);
 
-    for (const key of keys) {
-        if (result && typeof result === 'object' && key in result) {
-            result = result[key];
-        } else {
-            result = null;
-            break;
-        }
-    }
-
-    if (result) {
+    console.log(result)
+    if (result || result === 0) {
         switch (type) {
             case "date": return moment(result).format("YYYY-MM-DD"); break;
             case "datetime-local": return moment(result).format("YYYY-MM-DDTHH:mm:ss"); break;
+            case "number": return result.toString(); break;
+            default : return result
         }
     }
-    
-    return result;
+
+    return '';
 }
+
   
 customElements.define('edit-record-component', EditRecordModal);

@@ -160,7 +160,7 @@
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index:5;
+    z-index: 20;
     right: 50px;
     bottom: 30px;
     font-size: 17px;
@@ -201,10 +201,9 @@
     left: 0;
     height: 100vh; /* Full height of the viewport */
     width: 100%; /* Full width of the viewport */
-    z-index: 999; /* Ensure the backdrop is above other content */
+    z-index: 15; /* Ensure the backdrop is above other content */
     visibility: hidden; /* Initially hidden */
 }
-
 
 .popup-container {
     background-color: white;
