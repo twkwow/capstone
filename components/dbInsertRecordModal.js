@@ -35,8 +35,6 @@ function setInsertForm(cols) {
     }
 
     fieldHTML += `
-            <div id="alertTextInsert" class="alert-text"></div>
-
             <div id="insertButtons" class="modal-buttons-container">
                 <button class="edit-cancel-button" onclick="showPopup('insertRecordModal', false)">Cancel</button>
                 <input type="submit" class="edit-update-button" value="Insert">
@@ -63,7 +61,6 @@ async function insertRecord(event) {
 
     if (db == "users") {
         const dbRecords = Object.values(insertColumnStructure).map(col => col.dbField)
-        console.log(dbRecords)
         dbRecords.forEach( (dbName) => {
             if (dbName != "_id") {
                 insertForm.append(dbName, document.getElementById(dbName + "Insert").value)
@@ -73,19 +70,20 @@ async function insertRecord(event) {
 
     await axios.post(apiLink + "admins/database/insertDb", insertForm)
     .then((resp) => {
-        console.log(resp)
         if (resp.data.status == 200) {
             showSnackbar("dataInsert")
-            renderTable()
+            datatableReload(resp.data.updatedData)
             showPopup("insertRecordModal", false)
         }
         else if ( resp.data.errorField ) {
-            document.getElementById("alertTextInsert").innerHTML = "Error input at " + resp.data.errorField
+            document.getElementById("errorField").innerHTML = "Error input at " + resp.data.errorField
+            showSnackbar("errorField")
             document.getElementById(resp.data.errorField + "Insert").focus()
         }        
     }) 
     .catch((e) => {
         console.log(e)
+        showSnackbar("apiError")
     })
     
 }

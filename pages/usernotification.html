@@ -47,6 +47,7 @@
     </popupmodal-component>
 
     <snackbar-component snackbarId="deletedNotifications">Notification Deleted</snackbar-component>
+    <snackbar-component snackbarId="apiError">API Error</snackbar-component>
 
 </body>
 </html>
@@ -56,8 +57,15 @@
 <script src="/app.js"></script>
 
 <script>
-    checkToken()
-    getUserNotifications()
+    
+    loadData()
+    setInterval(loadData, refreshTime)
+
+    function loadData() {
+        checkToken()
+        getUserNotifications()
+    }
+    
 
     let selectedUserNotifications = ""
 
@@ -73,7 +81,7 @@
                             <div class="annoucement-container1">
                                 <div class="annoucement-content">${notification.message}</div>
                             </div>
-                            <div class="annoucement-container2">${notification.user.name}</div>
+                            <div class="annoucement-container2">${notification.user.name || "Deleted User"}</div>
                             <div class="annoucement-container3">${moment(notification.timestamp).format("DD-MMM-YYYY h:mm:ss a")}</div>
                             <div class="annoucement-container4">
                                 <button class="annoucement-delete" onclick="selectedUserNotifications = '${notification._id}'; showPopup('ann-delete', true)">Delete</button>
@@ -83,6 +91,10 @@
                 `
             })
             document.getElementById("userNotifications").innerHTML = userNotificationsHTML
+        })
+        .catch((e) => {
+            console.log(e)
+            showSnackbar("apiError")
         })
     }
     
@@ -94,6 +106,10 @@
         .then( (resp) => {
             showSnackbar("deletedNotifications")
             getUserNotifications()
+        })
+        .catch((e) => {
+            console.log(e)
+            showSnackbar("apiError")
         })
     }
 </script>
