@@ -69,6 +69,7 @@
 
     <snackbar-component snackbarId="insertAnnoucement">Annoucement Uploaded</snackbar-component>
     <snackbar-component snackbarId="deletedAnnoucement">Annoucement Deleted</snackbar-component>
+    <snackbar-component snackbarId="noPost">Please select where to post announcement</snackbar-component>
     <snackbar-component snackbarId="apiError">API Error</snackbar-component>
 
 </body>
@@ -144,6 +145,9 @@
     async function insertAnnoucement() {
         event.preventDefault()
 
+        if (!currentPostTo) {
+            return showSnackbar("noPost")
+        }
         const title = document.getElementById('title').value
         const content = document.getElementById('content').value
         const formattedTitle = title.replace(/\n/g, '<br>');

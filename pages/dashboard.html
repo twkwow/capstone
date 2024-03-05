@@ -223,7 +223,7 @@
                 ${location.status == 0 ? "Offline" : location.status == 1 ? "Online" : location.status == 2 ? "Require Maintenance" : "Error"}
             </span>
         </div>
-        <div class="locker-pop-content-text">Usage: ${location.occupied}/${location.total_compartments}</div>
+        <div class="locker-pop-content-text">Usage: ${location.occupied}/${location.totalComp}</div>
         <div class="locker-pop-content-text">Lockers active: ${location.active_hours} h</div>
         `
         showPopup("locker_click_status", true)

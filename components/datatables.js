@@ -15,9 +15,9 @@ class Datatable extends HTMLElement {
 
 	render() {
 		this.innerHTML = `
-            <div class="content">
-                <div class="table-container">
-                    <table id="dataTable" class="table table-striped" style="width:100%">
+            <div class="table-container">
+                <div class="table-content-container">
+                    <table id="dataTable" class="table table-striped" style=" font-size:14px">
                         <thead>
                             <tr>${this.headerHTML}</tr>
                         </thead>
@@ -39,7 +39,11 @@ class Datatable extends HTMLElement {
             columnDefs: this.datatableColumnDefs,
             processing: true,
             order: [[0, 'desc']],
-            scrollY: "55vh",
+            scrollResize: true,
+            scrollY: "100",
+            scrollCollapse: true,
+            lengthMenu: [10, 25, 50, 100],
+            // lengthChange: false,
             dom: '<"datatable-buttons"B><"datatables-navi"lf>rt<"datatables-navi"ip>',
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'insert']
         })
@@ -47,7 +51,6 @@ class Datatable extends HTMLElement {
             $(this).removeClass('dt-button')
         })
 	}	
-
 }
 
 const table = document.querySelector('datatable-component');

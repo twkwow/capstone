@@ -36,7 +36,7 @@ async function setEditForm(cols, _id) {
     for (const [key, value] of Object.entries(cols)) {
         const existingValue = formatDataToInput(data, value.dbField, value.type)
         if (!value.showOnly) {
-            fieldHTML += `<div>${key}</div>`
+            fieldHTML += `<div>${key} ${value.required ? '*' : ''}</div>`
             fieldHTML += `<input type="${value.type}" id="${value.dbField}Edit" type="text" class="form-input-same" value="${existingValue}">`
         }
     }
@@ -63,6 +63,7 @@ async function editRecords() {
     
     const params = new URLSearchParams(location.search);
     editForm.append("db", params.get("db")) 
+    editForm.append("location", params.get("id"))
 
     await axios.post(apiLink + "admins/database/editDb", editForm)
     .then((resp) => {

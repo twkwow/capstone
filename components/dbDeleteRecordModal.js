@@ -39,7 +39,7 @@ async function deleteRecord() {
 
     const params = new URLSearchParams(location.search);
     deleteForm.append("db", params.get("db")) 
-    deleteForm.append("location", params.get("location"))
+    deleteForm.append("location", params.get("id"))
     
     await axios.post(apiLink + "admins/database/deleteDb", deleteForm)
     .then((resp) => {

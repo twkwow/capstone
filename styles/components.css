@@ -217,6 +217,25 @@
 /* popup modal */
 
 /* database */
+.table-container {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    padding-left: 20px;
+}
+
+.table-content-container {
+    height: 100%;
+}
+.datatable {
+    height:100%;
+    width: 100%;
+    white-space: nowrap;
+}
+
 .datatable-buttons {
     display: flex;
     width: 100%;
