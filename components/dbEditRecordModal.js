@@ -57,7 +57,6 @@ async function editRecords() {
 
     Object.values(editColumnStructure).forEach( (dbRecords) => {
         if ( !dbRecords.showOnly ) {
-            console.log(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
             editForm.append(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
         }
     })
@@ -67,10 +66,16 @@ async function editRecords() {
 
     await axios.post(apiLink + "admins/database/editDb", editForm)
     .then((resp) => {
-        console.log(resp)
-        showSnackbar("dataEdit")
-        renderTable()
-        showPopup("editRecordModal", false)
+        if (resp.data.status == 200) {
+            showSnackbar("dataEdit")
+            datatableReload(resp.data.updatedData)
+            showPopup("editRecordModal", false)
+        }
+        else if ( resp.data.errorField ) {
+            document.getElementById("errorField").innerHTML = "Error input at " + resp.data.errorField
+            showSnackbar("errorField")
+            document.getElementById(resp.data.errorField + "Insert").focus()
+        }      
     }) 
     .catch((e) => {
         console.log(e)
@@ -83,7 +88,6 @@ function formatDataToInput(data, path, type) {
     const fieldPath = path.split('.'); // Split the string into parts
     const result = fieldPath.reduce((obj, key) => obj[key], data);
 
-    console.log(result)
     if (result || result === 0) {
         switch (type) {
             case "date": return moment(result).format("YYYY-MM-DD"); break;

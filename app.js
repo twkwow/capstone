@@ -1,6 +1,7 @@
 //good fucking lord do not touch this variable
 const apiLink = "http://localhost:3000/"
 var adminProfile = {}
+const refreshTime = 5000
 
 //changing pages
 function pageRouting(link) {

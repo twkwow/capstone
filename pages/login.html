@@ -33,8 +33,6 @@
             </div>
         </div>
 
-        <div id="alertText" class="alert-text"></div>
-
         <input class="form-button" type="submit" value="Login">
 
         <a class="forgot-password" href="forgot_password.html">Forgot Password?</a>
@@ -62,6 +60,8 @@
     <snackbar-component snackbarId="apiError">API Error</snackbar-component>
     <snackbar-component snackbarId="logout">User successfully logged out</snackbar-component>
     <snackbar-component snackbarId="wrongCaptcha">Incorrect Captcha</snackbar-component>
+    <snackbar-component snackbarId="invalidLogin">Invalid Login</snackbar-component>
+
 </body>
 
 </html>
@@ -69,7 +69,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
 <script src="/app.js"></script>
-<script src="/captcha.js"></script>
+<script src="/scripts/captcha.js"></script>
 <script src="/scripts/footerHTML.js"></script>
 
 <script>
@@ -100,16 +100,16 @@
             loginData.append("password", password)
             axios.post(apiLink + "admins/admins/login", loginData, {withCredentials: true})
             .then( (resp) => {
-                console.log(resp)
                 if (resp.data.status == 200) {
                     pageRouting("dashboard.html")  
                 }
                 else {
-                    document.getElementById("alertText").innerHTML = "Invalid login"
+                    showSnackbar("invalidLogin")
                 }
             })
             .catch( (error) => {
                 console.log("API Error: " + error)
+                showSnackbar("apiError")
             })
         }
         else {
