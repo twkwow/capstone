@@ -36,7 +36,7 @@ async function setEditForm(cols, _id) {
     for (const [key, value] of Object.entries(cols)) {
         const existingValue = formatDataToInput(data, value.dbField, value.type)
         if (!value.showOnly) {
-            fieldHTML += `<div>${key}</div>`
+            fieldHTML += `<div>${key} ${value.required ? '*' : ''}</div>`
             fieldHTML += `<input type="${value.type}" id="${value.dbField}Edit" type="text" class="form-input-same" value="${existingValue}">`
         }
     }
@@ -57,20 +57,26 @@ async function editRecords() {
 
     Object.values(editColumnStructure).forEach( (dbRecords) => {
         if ( !dbRecords.showOnly ) {
-            console.log(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
             editForm.append(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
         }
     })
     
     const params = new URLSearchParams(location.search);
     editForm.append("db", params.get("db")) 
+    editForm.append("location", params.get("id"))
 
     await axios.post(apiLink + "admins/database/editDb", editForm)
     .then((resp) => {
-        console.log(resp)
-        showSnackbar("dataEdit")
-        renderTable()
-        showPopup("editRecordModal", false)
+        if (resp.data.status == 200) {
+            showSnackbar("dataEdit")
+            datatableReload(resp.data.updatedData)
+            showPopup("editRecordModal", false)
+        }
+        else if ( resp.data.errorField ) {
+            document.getElementById("errorField").innerHTML = "Error input at " + resp.data.errorField
+            showSnackbar("errorField")
+            document.getElementById(resp.data.errorField + "Insert").focus()
+        }      
     }) 
     .catch((e) => {
         console.log(e)
@@ -83,7 +89,6 @@ function formatDataToInput(data, path, type) {
     const fieldPath = path.split('.'); // Split the string into parts
     const result = fieldPath.reduce((obj, key) => obj[key], data);
 
-    console.log(result)
     if (result || result === 0) {
         switch (type) {
             case "date": return moment(result).format("YYYY-MM-DD"); break;

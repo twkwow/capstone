@@ -69,6 +69,9 @@
 
     <snackbar-component snackbarId="insertAnnoucement">Annoucement Uploaded</snackbar-component>
     <snackbar-component snackbarId="deletedAnnoucement">Annoucement Deleted</snackbar-component>
+    <snackbar-component snackbarId="noPost">Please select where to post announcement</snackbar-component>
+    <snackbar-component snackbarId="apiError">API Error</snackbar-component>
+
 </body>
 
 </html>
@@ -78,10 +81,18 @@
 <script src="/app.js"></script>
 
 <script>
-    checkToken()
 
     let currentPostTo = ""
     let selectedAnnoucementId = ""
+
+    loadData()
+    setInterval(loadData, refreshTime)
+
+    function loadData() {
+        checkToken()
+        getAnnoucements()
+        console.log("Load Data")
+    }
 
     function previousAnnoucementsHTML(_id, type, title, content, admin, time) {
         return `
@@ -113,7 +124,6 @@
     async function getAnnoucements() {
         await axios.get(apiLink + "admins/annoucements/getAllAnnoucements")
         .then ( (res) => {
-            console.log(res)
             //limit show up to 5 annoucements
             const approvalArr = res.data.data.slice(0,5)
             var innerHTML = ""
@@ -128,15 +138,16 @@
             }
         })
         .catch((e) => {
-            document.getElementById("prevAnnoucements").innerHTML = e
-
+            showPopup("apiError")
         })
     }
-    getAnnoucements()
 
     async function insertAnnoucement() {
         event.preventDefault()
 
+        if (!currentPostTo) {
+            return showSnackbar("noPost")
+        }
         const title = document.getElementById('title').value
         const content = document.getElementById('content').value
         const formattedTitle = title.replace(/\n/g, '<br>');
@@ -151,11 +162,10 @@
         .then( () => {
             showSnackbar("insertAnnoucement")
             getAnnoucements()
-
         })
         .catch((e) => {
-            console.log(e)
-        } )
+            showPopup("apiError")
+        })
     }
 
     async function deleteAnnoucement() {
@@ -170,18 +180,18 @@
                 getAnnoucements()
             }
         })
+        .catch((e) => {
+            showPopup("apiError")
+        })
     }
 
     function radioSelect(id) {
         currentPostTo = id
-
         document.getElementById(id).classList.add("selected-radio-button")
 
         const otherId = (id === "toUsers") ? "toLockers" : "toUsers";
-        
         if (document.getElementById(otherId).classList.contains("selected-radio-button")) {
             document.getElementById(otherId).classList.remove("selected-radio-button");
         }
-
     }
 </script>

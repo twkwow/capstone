@@ -39,17 +39,17 @@ async function deleteRecord() {
 
     const params = new URLSearchParams(location.search);
     deleteForm.append("db", params.get("db")) 
-
+    deleteForm.append("location", params.get("id"))
     
     await axios.post(apiLink + "admins/database/deleteDb", deleteForm)
     .then((resp) => {
-        console.log(resp)
         showSnackbar("dataDelete")
-        renderTable()
+        datatableReload(resp.data.updatedData)
         showPopup("deleteRecordModal", false)
     }) 
     .catch((e) => {
         console.log(e)
+        showSnackbar("apiError")
     })
     
 }

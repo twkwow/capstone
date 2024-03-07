@@ -12,8 +12,6 @@
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    
-
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
     <script src="/components/popupModal.js" type="text/javascript" defer></script>
@@ -134,6 +132,8 @@
 
     <snackbar-component snackbarId="approve">Admin Approved</snackbar-component>
     <snackbar-component snackbarId="reject">Admin Rejected</snackbar-component>
+
+    <snackbar-component snackbarId="apiError">API Error</snackbar-component>
 </div>
 </body>
 </html>
@@ -142,10 +142,16 @@
 <script src="/app.js"></script>
 
 <script>
-    
-    checkToken()
-    renderPendingApprovals()
-    getLockerLocations()
+
+    loadData()
+    setInterval(loadData, refreshTime);
+
+    function loadData() {
+        checkToken()
+        renderPendingApprovals()
+        getLockerLocations()
+        console.log("Load Data")
+    }
 
     function pendingApprovalHTML(_id, username, email) {
         return `
@@ -179,6 +185,10 @@
             })
             document.getElementById("pendingApprovals").innerHTML = innerHTML
         })
+        .catch((e) => {
+            console.log(e)
+            showSnackbar("apiError")
+        })
     }
 
     async function getLockerLocations() {
@@ -186,55 +196,35 @@
         .then ((resp) => {
             let lockerLocationHTML = ""
             resp.data.lockerLocations.forEach((location) => {
-                console.log(typeof(location))
                 lockerLocationHTML += `
                 <div class="locker" onclick="showLockerStatus(${JSON.stringify(location).split('"').join("&quot;")})">
                     <div class="status-circle" style="background-color:${location.status == 0 ? "red" : location.status == 1 ? "green" : location.status == 2 ? "yellow" : "gray"}"> </div>
                     <img src="/resources/images/locker.png">
-                        ${location.name}
+                    ${location.name}
                 </div>
                 `
             })
-            console.log(resp)
             document.getElementById("lockerStatus").innerHTML = lockerLocationHTML
+        })
+        .catch((e) => {
+            console.log(e)
+            showSnackbar("apiError")
         })
     }
 
     function showLockerStatus(location) {
         document.getElementById("lockerStatusPopup").innerHTML = 
         `
+        <div class="locker-pop-content-text">Locker Name: ${location.name}</div>
+        <div class="locker-pop-content-text">Locker Location: ${location.address}</div>
         <div class="locker-pop-content-text">
-            <span>
-                Locker Name: ${location.name}
+            Locker Status:&nbsp;
+            <span style="color: ${location.status == 0 ? "red" : location.status == 1 ? "green" : location.status == 2 ? "yellow" : "gray"}">
+                ${location.status == 0 ? "Offline" : location.status == 1 ? "Online" : location.status == 2 ? "Require Maintenance" : "Error"}
             </span>
         </div>
-        <div class="locker-pop-content-text">
-            <span>
-                Locker Location: ${location.address}
-            </span>
-        </div>
-
-        <!--display either 1, online or offline-->
-        <div class="locker-pop-content-text">
-            <span>
-                Locker Status: 
-                <span style="color: ${location.status == 0 ? "red" : location.status == 1 ? "green" : location.status == 2 ? "yellow" : "gray"}">
-                    ${location.status == 0 ? "Offline" : location.status == 1 ? "Online" : location.status == 2 ? "Require Maintenance" : "Error"}
-                </span>
-            </span>
-        </div>
-
-        <div class="locker-pop-content-text">
-            <span>
-                Usage: 1/1
-            </span>
-        </div>
-
-        <div class="locker-pop-content-text">
-            <span>
-                Lockers active: ${location.active_hours} h
-            </span>
-        </div>
+        <div class="locker-pop-content-text">Usage: ${location.occupied}/${location.totalComp}</div>
+        <div class="locker-pop-content-text">Lockers active: ${location.active_hours} h</div>
         `
         showPopup("locker_click_status", true)
     }
@@ -250,6 +240,7 @@
         })
         .catch ((e) => {
             console.log("API Error: " + e)
+            showSnackbar("apiError")
         })
     }
 </script>

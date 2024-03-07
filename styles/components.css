@@ -217,14 +217,49 @@
 /* popup modal */
 
 /* database */
-.add-records-button {
-    margin-left: auto;
-    padding: 5px 20px;
-    border: 0;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+.table-container {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    padding-left: 20px;
 }
+
+.table-content-container {
+    height: 100%;
+}
+.datatable {
+    height:100%;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.datatable-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    margin-bottom: 30px;
+}
+.datatables-navi {
+    display: flex;
+    justify-content: space-between;
+    margin:20px 0;
+}
+.buttons-copy, .buttons-csv, .buttons-excel, .buttons-print, .buttons-pdf, .buttons-insert {   
+    min-width: fit-content;
+    padding: 5px 20px;
+    background-color: #e6e6e6;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.buttons-copy:hover, .buttons-csv:hover, .buttons-excel:hover, .buttons-print:hover, .buttons-pdf:hover, .buttons-insert:hover {
+    background-color: rgb(177, 176, 176)
+}
+
 /* database */
  
 /* editModal & deleteModal */
@@ -256,7 +291,6 @@
 
 .edit-cancel-button:hover , .delete-cancel-button:hover{
     background-color: #aaaaaa;
-
 }
 
 .edit-update-button {

@@ -15,11 +15,9 @@ class Datatable extends HTMLElement {
 
 	render() {
 		this.innerHTML = `
-            <div class="content">
-                <button type="button" class="add-records-button" onclick="handleActionButton(null, 'insert')">Insert One</button>
-                <div class="table-container">
-                
-                    <table id="dataTable" class="table table-striped" style="width:100%">
+            <div class="table-container">
+                <div class="table-content-container">
+                    <table id="dataTable" class="table table-striped" style=" font-size:14px">
                         <thead>
                             <tr>${this.headerHTML}</tr>
                         </thead>
@@ -27,18 +25,32 @@ class Datatable extends HTMLElement {
                 </div>
             </div>
       	`
+        
+        $.fn.dataTable.ext.buttons.insert = {
+            text: 'Insert One',
+            className: "buttons-insert",
+            action: function ( e, dt, node, config ) {
+                handleActionButton(null, 'insert');
+            }
+        };
         this.dataTableInstance = new DataTable( '#dataTable', {
             data: this.datatableData,
             columns: this.datatableColumns,
             columnDefs: this.datatableColumnDefs,
             processing: true,
             order: [[0, 'desc']],
-            scrollY: "60vh",
+            scrollResize: true,
+            scrollY: "100",
+            scrollCollapse: true,
+            lengthMenu: [10, 25, 50, 100],
+            // lengthChange: false,
+            dom: '<"datatable-buttons"B><"datatables-navi"lf>rt<"datatables-navi"ip>',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'insert']
         })
-        
+        $('.buttons-copy, .buttons-csv, .buttons-excel, .buttons-print,.buttons-pdf, .buttons-insert').each(function() {
+            $(this).removeClass('dt-button')
+        })
 	}	
-
-    
 }
 
 const table = document.querySelector('datatable-component');
@@ -88,6 +100,12 @@ function setDatatableOptions(data, columns, columnDefs) {
     table.columnDefs = columnDefs
 
     table.render()
+}
+
+function datatableReload(newData) {
+    const currentPage = table.dataTableInstance.page(); 
+    table.dataTableInstance.clear().rows.add(newData).draw(false);
+    table.dataTableInstance.page(currentPage).draw(false)
 }
 
 customElements.define('datatable-component', Datatable);

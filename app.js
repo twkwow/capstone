@@ -1,6 +1,7 @@
 //good fucking lord do not touch this variable
 const apiLink = "http://localhost:3000/"
 var adminProfile = {}
+const refreshTime = 5000
 
 //changing pages
 function pageRouting(link) {
@@ -13,10 +14,13 @@ async function checkToken() {
         if (resp.data.status == 200) {
             adminProfile = resp.data.user
 
-            // assign header data
             if(window.location.pathname != "/"){ 
-                document.querySelector('header-component').setAttribute('username', adminProfile.username);
-                document.querySelector('header-component').setAttribute('picture', adminProfile.profile_picture);
+                const header = document.querySelector("header-component")
+                if (!header.hasAttribute('username') && !header.hasAttribute('picture')) {
+                    // assign header data
+                    document.querySelector('header-component').setAttribute('username', adminProfile.username);
+                    document.querySelector('header-component').setAttribute('picture', adminProfile.profile_picture);
+                }
                 return null
             }
             return pageRouting("pages/dashboard.html") 

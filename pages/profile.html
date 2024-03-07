@@ -86,7 +86,7 @@
     <snackbar-component snackbarId="changePic">Profile Picture Updated</snackbar-component>
     <snackbar-component snackbarId="notCurPass">Current password is incorrect</snackbar-component>
     <snackbar-component snackbarId="passNoMatch">Passwords are not matching</snackbar-component>
-    <snackbar-component snackbarId="apiErr">API Error</snackbar-component>
+    <snackbar-component snackbarId="apiError">API Error</snackbar-component>
 </div>
 </body>
 </html>
@@ -97,7 +97,6 @@
 
 <script>
     loadTokenData()
-    console.log(adminProfile)
 
     async function loadTokenData() {
         await checkToken()
@@ -136,7 +135,7 @@
             })
             .catch((e) => {
                 console.log(e)
-                showSnackbar("apiErr")
+                showSnackbar("apiError")
             })
         }
         
@@ -155,12 +154,12 @@
 
             await axios.post(apiLink + "admins/profile/changePassword", passwordForm, {withCredentials: true})
             .then((resp) => {
-                showSnackbar(resp.data.status == 200 ? "savePassword" : resp.data.status == 401 ? "notCurPass" : "apiErr")
+                showSnackbar(resp.data.status == 200 ? "savePassword" : resp.data.status == 401 ? "notCurPass" : "apiError")
                 loadTokenData()
             })
             .catch((e) => {
                 console.log(e)
-                showSnackbar("apiErr")
+                showSnackbar("apiError")
             })
             return
         }
@@ -184,7 +183,7 @@
         })
         .catch((e) => {
             console.log(e)
-            showSnackbar("apiErr")
+            showSnackbar("apiError")
         })
     }
 </script>
