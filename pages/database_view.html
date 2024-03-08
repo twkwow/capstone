@@ -41,6 +41,8 @@
     <snackbar-component snackbarId="dataEdit">Database record updated</snackbar-component>
     <snackbar-component snackbarId="dataDelete">Database record deleted</snackbar-component>
 
+    <snackbar-component snackbarId="lockerOpened">Locker Opened</snackbar-component>
+
     <snackbar-component snackbarId="apiError">API Error</snackbar-component>
     <snackbar-component snackbarId="errorField"><div id="errorField"></div></snackbar-component>
 </div>
@@ -71,15 +73,15 @@
     
     checkToken()
     renderTable()
-    // setInterval(loadData, refreshTime)
-    setInterval(loadData, 10000) //10 sec instead of 5 to reduce lag
+    setInterval(loadData, refreshTime)
+    // setInterval(loadData, 10000) //10 sec instead of 5 to reduce lag
 
     async function loadData() {
         checkToken()
         datatableReload(await getDatabaseData())
         console.log("Load Data")
     }
-
+    
     async function getDatabaseData() {
         const params = new URLSearchParams(location.search);
         const db = params.get("db");
@@ -159,6 +161,9 @@
                     }},
                     { targets: 2, render: (data, type, row, meta) => {
                         return Boolean(data)? "Open" : "Locked";
+                    }},
+                    { targets: 4, render: (data, type, row, meta) => {
+                        return parseFloat(data.toFixed(3));
                     }},
                     { targets: 5, render: (data, type, row, meta) => {
                         return data == null ? 'N/A' : moment(data).format('DD-MMM-YYYY <br> h:mm:ss a');

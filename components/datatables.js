@@ -66,7 +66,12 @@ function handleActionButton(event, action) {
     const rowIndex = event.target.closest('td').parentNode;
     const rowData = table.dataTableInstance.row(rowIndex).data();
     
-    action == 'edit' ? setEditForm(tableColStructure, rowData._id) : setDeleteForm(rowData._id)
+    switch (action) {
+        case 'edit': setEditForm(tableColStructure, rowData._id); break;
+        case 'delete': setDeleteForm(rowData._id); break;
+        case 'open': openLocker(rowData._id); break;
+        default: return
+    }
 }
 
 function setDatatableOptions(data, columns, columnDefs) {
@@ -86,13 +91,18 @@ function setDatatableOptions(data, columns, columnDefs) {
     const tableDataColumns = dbRecords.map((record) => {
         return { data: record}
     })
+    const params = new URLSearchParams(location.search);
+    const db = params.get("db")
+    console.log(db == "lockers")
     tableDataColumns.push({
         "defaultContent": `
             <div class="actions-container">
+                ${db == "lockers" ? `<button class="edit-button" onclick="handleActionButton(event, 'open')">Open Locker</button>` : ''}
                 <button class="edit-button" onclick="handleActionButton(event, 'edit')">Edit</button>
                 <button class="delete-button" onclick="handleActionButton(event, 'delete')">Delete</button>
             </div>
-    `})
+        `
+    });
 
     table.header = headerHtml
     table.data = data
@@ -106,6 +116,20 @@ function datatableReload(newData) {
     const currentPage = table.dataTableInstance.page(); 
     table.dataTableInstance.clear().rows.add(newData).draw(false);
     table.dataTableInstance.page(currentPage).draw(false)
+}
+
+async function openLocker(lockerId) {
+
+    const lockerForm = new FormData()
+    lockerForm.append("lockerId", lockerId)
+    await axios.post(apiLink + "admins/database/openLocker", lockerForm)
+    .then(() => {
+        loadData()
+        showSnackbar("lockerOpened")
+    })
+    .catch( (e) => {
+        showSnackbar("apiError")
+    })
 }
 
 customElements.define('datatable-component', Datatable);
