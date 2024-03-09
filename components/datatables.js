@@ -15,9 +15,9 @@ class Datatable extends HTMLElement {
 
 	render() {
 		this.innerHTML = `
-            <div class="content">
-                <div class="table-container">
-                    <table id="dataTable" class="table table-striped" style="width:100%">
+            <div class="table-container">
+                <div class="table-content-container">
+                    <table id="dataTable" class="table table-striped" style=" font-size:14px">
                         <thead>
                             <tr>${this.headerHTML}</tr>
                         </thead>
@@ -39,7 +39,11 @@ class Datatable extends HTMLElement {
             columnDefs: this.datatableColumnDefs,
             processing: true,
             order: [[0, 'desc']],
-            scrollY: "55vh",
+            scrollResize: true,
+            scrollY: "100",
+            scrollCollapse: true,
+            lengthMenu: [10, 25, 50, 100],
+            // lengthChange: false,
             dom: '<"datatable-buttons"B><"datatables-navi"lf>rt<"datatables-navi"ip>',
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'insert']
         })
@@ -47,7 +51,6 @@ class Datatable extends HTMLElement {
             $(this).removeClass('dt-button')
         })
 	}	
-
 }
 
 const table = document.querySelector('datatable-component');
@@ -63,7 +66,12 @@ function handleActionButton(event, action) {
     const rowIndex = event.target.closest('td').parentNode;
     const rowData = table.dataTableInstance.row(rowIndex).data();
     
-    action == 'edit' ? setEditForm(tableColStructure, rowData._id) : setDeleteForm(rowData._id)
+    switch (action) {
+        case 'edit': setEditForm(tableColStructure, rowData._id); break;
+        case 'delete': setDeleteForm(rowData._id); break;
+        case 'open': openLocker(rowData._id); break;
+        default: return
+    }
 }
 
 function setDatatableOptions(data, columns, columnDefs) {
@@ -83,13 +91,18 @@ function setDatatableOptions(data, columns, columnDefs) {
     const tableDataColumns = dbRecords.map((record) => {
         return { data: record}
     })
+    const params = new URLSearchParams(location.search);
+    const db = params.get("db")
+    console.log(db == "lockers")
     tableDataColumns.push({
         "defaultContent": `
             <div class="actions-container">
+                ${db == "lockers" ? `<button class="edit-button" onclick="handleActionButton(event, 'open')">Open Locker</button>` : ''}
                 <button class="edit-button" onclick="handleActionButton(event, 'edit')">Edit</button>
                 <button class="delete-button" onclick="handleActionButton(event, 'delete')">Delete</button>
             </div>
-    `})
+        `
+    });
 
     table.header = headerHtml
     table.data = data
@@ -103,6 +116,20 @@ function datatableReload(newData) {
     const currentPage = table.dataTableInstance.page(); 
     table.dataTableInstance.clear().rows.add(newData).draw(false);
     table.dataTableInstance.page(currentPage).draw(false)
+}
+
+async function openLocker(lockerId) {
+
+    const lockerForm = new FormData()
+    lockerForm.append("lockerId", lockerId)
+    await axios.post(apiLink + "admins/database/openLocker", lockerForm)
+    .then(() => {
+        loadData()
+        showSnackbar("lockerOpened")
+    })
+    .catch( (e) => {
+        showSnackbar("apiError")
+    })
 }
 
 customElements.define('datatable-component', Datatable);

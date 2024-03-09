@@ -62,6 +62,7 @@ async function insertRecord(event) {
     if (db == "users") {
         const dbRecords = Object.values(insertColumnStructure).map(col => col.dbField)
         dbRecords.forEach( (dbName) => {
+            console.log(dbName)
             if (dbName != "_id") {
                 insertForm.append(dbName, document.getElementById(dbName + "Insert").value)
             }
@@ -76,10 +77,18 @@ async function insertRecord(event) {
             showPopup("insertRecordModal", false)
         }
         else if ( resp.data.errorField ) {
-            document.getElementById("errorField").innerHTML = "Error input at " + resp.data.errorField
+            const errorField = resp.data.errorField
+            document.getElementById("errorField").innerHTML = "Error input at " + errorField
             showSnackbar("errorField")
-            document.getElementById(resp.data.errorField + "Insert").focus()
-        }        
+            document.getElementById(errorField + "Insert").focus()
+        }     
+        else if ( resp.data.duplicatedKey ) {
+            const duplicateDbField = resp.data.duplicatedKey
+            const duplicateField = Object.keys(insertColumnStructure).find(key => insertColumnStructure[key].dbField ===  duplicateDbField)
+            document.getElementById("errorField").innerHTML = duplicateField + " already in use"
+            showSnackbar("errorField")
+            document.getElementById(duplicateDbField + "Insert").focus()
+        }       
     }) 
     .catch((e) => {
         console.log(e)
