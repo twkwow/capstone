@@ -122,7 +122,7 @@
             let dataCustomization = []
             if (db == 'users') {
                 headers = {
-                    "User ID": { dbField: "_id", showOnly: true},
+                    // "User ID": { dbField: "_id", showOnly: true},
                     "Username": { dbField: "web_data.username", type: "text", required: false},
                     "Full Name": { dbField: "name", type: "text", required: true},
                     "Locker ID": { dbField: "locker_id",  type: "text", required: false},
@@ -134,21 +134,21 @@
                     "Facial Data": {dbField: "auth_data.face", inputOnly: true, type: "text", required:true}
                 }
                 dataCustomization = [
-                    { targets: 1, render: (data, type, row, meta) => {
+                    { targets: 0, render: (data, type, row, meta) => {
                         return data == null ? 'N/A' : data;
                     }},
-                    { targets: 3, render: (data, type, row, meta) => {
-                        console.log()
+                    { targets: 2, render: (data, type, row, meta) => {
                         return data == null ? 'N/A' :  data.location.name + "<br>" + data._id;
                     }},
-                    { targets: 4, render: (data, type, row, meta) => {
+                    { targets: 3, render: (data, type, row, meta) => {
                         return moment(data).format('DD-MMM-YYYY');
                     }},
                 ]
             }
             else if (db == 'lockers') {
                 headers = {
-                    "Database ID": { dbField: "_id", showOnly: true},
+                    // "Database ID": { dbField: "_id", showOnly: true},
+                    "Locker Id": { dbField:"locker_id", type: "text", required: true},
                     "Current User": { dbField: "occupied_by", type: "text", required: false},
                     "Door Status": { dbField: "door_status", showOnly: true},
                     "Door Open Count": { dbField: "open_count", type: "number", required: true},
