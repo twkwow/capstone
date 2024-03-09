@@ -38,12 +38,11 @@ class Datatable extends HTMLElement {
             columns: this.datatableColumns,
             columnDefs: this.datatableColumnDefs,
             processing: true,
-            order: [[0, 'desc']],
+            // order: [[0, 'desc']],
             scrollResize: true,
             scrollY: "100",
             scrollCollapse: true,
             lengthMenu: [10, 25, 50, 100],
-            // lengthChange: false,
             dom: '<"datatable-buttons"B><"datatables-navi"lf>rt<"datatables-navi"ip>',
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'insert']
         })
@@ -65,7 +64,7 @@ function handleActionButton(event, action) {
     }
     const rowIndex = event.target.closest('td').parentNode;
     const rowData = table.dataTableInstance.row(rowIndex).data();
-    
+    console.log(rowData)
     switch (action) {
         case 'edit': setEditForm(tableColStructure, rowData._id); break;
         case 'delete': setDeleteForm(rowData._id); break;
@@ -93,7 +92,6 @@ function setDatatableOptions(data, columns, columnDefs) {
     })
     const params = new URLSearchParams(location.search);
     const db = params.get("db")
-    console.log(db == "lockers")
     tableDataColumns.push({
         "defaultContent": `
             <div class="actions-container">
@@ -118,7 +116,7 @@ function datatableReload(newData) {
     table.dataTableInstance.page(currentPage).draw(false)
 }
 
-async function openLocker(lockerId) {
+async function openLocker(lockerId) {    
 
     const lockerForm = new FormData()
     lockerForm.append("lockerId", lockerId)
