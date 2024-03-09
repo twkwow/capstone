@@ -125,7 +125,7 @@
 }
 
 .edit-button, .delete-button {
-    background-color: #e6e6e6;
+    background-color: #d8eefb;
     border: 1px solid black;
     border-radius: 5px;
     padding:5px ;
@@ -137,7 +137,10 @@
 
 
 .edit-button:hover, .delete-button:hover {
-    background-color: rgb(177, 176, 176)
+    background-color: #8595e8;
+    color: white;
+    outline: none;
+    border: none;
 }
 
 

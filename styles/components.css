@@ -1,11 +1,11 @@
 /* sidebar */
 
 .sidebar button {
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .header button {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.2;
 }
 
@@ -18,9 +18,11 @@
     width: 250px;
     height: 100vh;
     /* margin: 0 1.3rem; */
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
     flex-direction: column;
     align-items: center;
+    background-color: #d8eefb;
+    z-index: 10;
 }
 
 .sidebar-logo {
@@ -48,42 +50,52 @@
 
 .sidebar-nav-list-li {
     display: inline-block;
-    margin: 10px 10px;
+    margin: 2px 5px;
 }
 
 .sidebar-nav-btn {
     text-align: left;
     padding: 10px 10px;
-    background-color: white;
+    background-color: #d8eefb;
     width: 200px !important;
-    border: 1px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
+    border: none;
+    outline: none;
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    /* font-size: 10px; */
 }
 
 .sidebar-nav-btn:hover {
     cursor: pointer;
-    background-color: #a7b3ec;
+    background-color: #8595e8;
+    color: white;
+    border-radius: 8px;
 }
+
 
 .footer-text-lol {
     color: grey;
-    margin-top: 50px;
+    margin-top: 260px;
     text-align: center;
     list-style: none;
     font-size: 15px;
+    
 }
 
 /* header */
 .header {
-    position: relative; /* Ensure the header is positioned */
+    position: fixed; /* Ensure the header is positioned */
     z-index: 2; /* Higher z-index for the header */
     display: flex;
     border-bottom: 1px solid black;
-    height: 100px;
-    padding: 0 30px;
+    height: 70px;
+    width: calc(100% - 238px); /* Adjusting width to leave space for the sidebar */
+    padding: 0 20px;
     align-items: center;
+    left: 15.5%;
+    top: 0;
+    right: 0;
+    background-color: #ffffff;
 }
 
 .header-title {
@@ -91,6 +103,8 @@
     padding-top: 20px;
     padding-bottom: 20px;
     margin-right: auto;
+    font-size: 25px;
+    padding-left: 15px;
 }
 
 .header-img {
@@ -116,9 +130,10 @@
     padding: 5px 10px;
     margin-left: auto;
     width: auto;
-    border: 1px;
+    border: none;
+    outline: none;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
     background-color: white;
 }
 
@@ -132,20 +147,22 @@
     background: white;
     position: absolute;
     border: 1px;
-    right: -30%;
+    right: 0%;
     top: 110%;
-    width: 200px;
+    width: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 10; /* Higher z-index for the dropdown */
+    border-radius: 10px;
 }
 .profile-dropdown-item {
-    text-align: center;
+    text-align: left;
     padding: 10px;
     border: 1px;
     cursor: pointer;
 }
 .profile-dropdown-item:hover {
-    background-color: #a7b3ec;
+    background-color: #8595e8;
+    color: white;
 }
 /* header */
 
@@ -250,14 +267,17 @@
 .buttons-copy, .buttons-csv, .buttons-excel, .buttons-print, .buttons-pdf, .buttons-insert {   
     min-width: fit-content;
     padding: 5px 20px;
-    background-color: #e6e6e6;
+    background-color: #d8eefb;
     color: black;
     border: 1px solid black;
     border-radius: 5px;
 }
 
 .buttons-copy:hover, .buttons-csv:hover, .buttons-excel:hover, .buttons-print:hover, .buttons-pdf:hover, .buttons-insert:hover {
-    background-color: rgb(177, 176, 176)
+    background-color: #8595e8;
+    color: white;
+    outline: none;
+    border: none;
 }
 
 /* database */

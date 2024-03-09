@@ -14,25 +14,26 @@ class Datatable extends HTMLElement {
     set columnDefs(data) { this.datatableColumnDefs = data }
 
 	render() {
-		this.innerHTML = `
+        this.innerHTML = `
             <div class="table-container">
                 <div class="table-content-container">
-                    <table id="dataTable" class="table table-striped" style=" font-size:14px">
+                    <table id="dataTable" class="table table-striped" style="font-size:14px">
                         <thead>
                             <tr>${this.headerHTML}</tr>
                         </thead>
                     </table>
                 </div>
             </div>
-      	`
-        
+        `;
+    
         $.fn.dataTable.ext.buttons.insert = {
-            text: 'Insert One',
+            text: '<i class="fa-solid fa-plus"></i> Insert One',
             className: "buttons-insert",
             action: function ( e, dt, node, config ) {
                 handleActionButton(null, 'insert');
             }
         };
+    
         this.dataTableInstance = new DataTable( '#dataTable', {
             data: this.datatableData,
             columns: this.datatableColumns,
@@ -43,15 +44,58 @@ class Datatable extends HTMLElement {
             scrollY: "100",
             scrollCollapse: true,
             lengthMenu: [10, 25, 50, 100],
-            // lengthChange: false,
             dom: '<"datatable-buttons"B><"datatables-navi"lf>rt<"datatables-navi"ip>',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'insert']
-        })
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: '<i class="fa-solid fa-copy"></i> Copy',
+                    className: 'buttons-copy',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'csv',
+                    text: '<i class="fa-solid fa-file-csv"></i> CSV',
+                    className: 'buttons-csv',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fa-solid fa-file-excel"></i> Excel',
+                    className: 'buttons-excel',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: '<i class="fa-solid fa-file-pdf"></i> PDF',
+                    className: 'buttons-pdf',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa-solid fa-print"></i> Print',
+                    className: 'buttons-print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                'insert'
+            ]
+        });
+    
         $('.buttons-copy, .buttons-csv, .buttons-excel, .buttons-print,.buttons-pdf, .buttons-insert').each(function() {
-            $(this).removeClass('dt-button')
-        })
-	}	
-}
+            $(this).removeClass('dt-button');
+        });
+    }
+    
+}    
 
 const table = document.querySelector('datatable-component');
 var tableColStructure = {}
@@ -89,8 +133,14 @@ function setDatatableOptions(data, columns, columnDefs) {
     tableDataColumns.push({
         "defaultContent": `
             <div class="actions-container">
-                <button class="edit-button" onclick="handleActionButton(event, 'edit')">Edit</button>
-                <button class="delete-button" onclick="handleActionButton(event, 'delete')">Delete</button>
+                <button class="edit-button" onclick="handleActionButton(event, 'edit')">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Edit
+                </button>
+                <button class="delete-button" onclick="handleActionButton(event, 'delete')">
+                    <i class="fa-solid fa-trash"></i>
+                    Delete
+                </button>
             </div>
     `})
 
