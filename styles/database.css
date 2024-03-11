@@ -10,6 +10,7 @@
 .database-border-container a {
     text-decoration: none;
     color: black;
+    
 }
 
 .database-name {
@@ -38,6 +39,8 @@
     padding: 10px;
     margin-bottom: 20px;
     padding-left: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 }
 

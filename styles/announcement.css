@@ -4,7 +4,20 @@
     border-radius: 5px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    background-color: white;
 }
+
+.announce-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    /* margin-right: 30px; */
+    padding:20px;
+    min-width: 750px;
+    margin-top: 80px; /* Adjust this value according to the height of your header */
+    margin-left: 250px;
+}
+
 
 .annoucement-container {
     margin: 10px;
@@ -45,17 +58,18 @@
 }
 
 .annoucement-delete {
-    height: 25px;
+    height: 30px;
     border: 0px;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: red;
     color: white;
     margin: 5px;
     width: 70px;
 }
 
 .annoucement-delete:hover {
-    background-color: #0254ab;
+    background-color: rgb(255, 49, 49);
+    font-weight: 700;
     cursor: pointer;
 }
 
@@ -63,27 +77,30 @@
     border: 1px solid #007bff;
     border-radius: 5px;
     width: 70px;
+    height: 40px;
+    color: white;
     background-color: #007bff;
 }
 
 .announcement-confirm-pop:hover {
-    background-color: #0254ab;
+    background-color: #1c89fd;
     cursor: pointer;
+    font-weight: 700;
 
 }
 
 .announcement-cancel-pop {
-    border: 1px solid black;
+    border: 1px solid red;
     border-radius: 5px;
     width: 70px;
-    background-color: white;
+    background-color: red;
+    color: white;
 }
 
-
-
 .announcement-cancel-pop:hover {
-    background-color: rgb(190, 190, 190);
     cursor: pointer;
+    font-weight: 700;
+    background-color: rgb(255, 49, 49);
 }
 
 .announcement-confirm-pop, .announcement-cancel-pop {
@@ -125,7 +142,7 @@
 
 .add-announcement-button {
     width: 150px;
-    height: 30px;
+    height: 40px;
     border: 1px;
     border-radius: 5px;
     background-color: #007bff;
@@ -174,7 +191,7 @@
 }
 
 .radio-button {
-    height: 25px;
+    height: 30px;
     border: 1px solid grey;
     border-radius: 5px;
     background-color: white;
@@ -184,7 +201,7 @@
 }
 
 .radio-button:hover {
-    background-color: #a3a0a0;
+    font-weight: 700;
     cursor: pointer;
 }
 
