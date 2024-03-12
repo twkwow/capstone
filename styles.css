@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Tahoma !important;
+    background-color: rgb(241, 246, 255);
 }
 
 
@@ -42,4 +43,3 @@ hr {
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
-

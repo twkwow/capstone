@@ -27,8 +27,8 @@
                 <div class="content">
                     <div class="content-title">Locker Occupancy Count</div>
                     <div class="content-item">
-                        <div style="border-radius: 8px; overflow: hidden;">
-                            <img src="/resources/images/sample chart.png" style="width: 100%; height: 350px;">
+                        <div style="border-radius: 10px; overflow: hidden;">
+                            <img src="/resources/images/sample chart.png" style="width: 100%; height: 100%;">
                         </div>
                     </div>
                 </div>  
@@ -37,7 +37,7 @@
             <div class="content-split-right">
                 <div class="locker-status-container">
                     <div class="locker-status-container-title">
-                        <div class="content-title" style="text-align: center;">Analytics Types</div>
+                        <div class="content-title" style="text-align: left; padding: 25px;">Analytics Types</div>
                     </div>
                     <div class="analytics-types-container-content">
                         <div class="analytics">
@@ -66,6 +66,14 @@
 <script src="/app.js"></script>
 
 <script>
+loadData()
+    setInterval(loadData, refreshTime);
 
+    function loadData() {
+        checkToken()
+        renderPendingApprovals()
+        getLockerLocations()
+        console.log("Load Data")
+    }
     
 </script>

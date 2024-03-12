@@ -10,6 +10,7 @@
 .database-border-container a {
     text-decoration: none;
     color: black;
+    
 }
 
 .database-name {
@@ -38,6 +39,8 @@
     padding: 10px;
     margin-bottom: 20px;
     padding-left: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -125,7 +128,7 @@
 }
 
 .edit-button, .delete-button {
-    background-color: #e6e6e6;
+    background-color: #d8eefb;
     border: 1px solid black;
     border-radius: 5px;
     padding:5px ;
@@ -137,7 +140,10 @@
 
 
 .edit-button:hover, .delete-button:hover {
-    background-color: rgb(177, 176, 176)
+    background-color: #8595e8;
+    color: white;
+    outline: none;
+    border: none;
 }
 
 
