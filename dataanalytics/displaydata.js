@@ -42,6 +42,12 @@ const data = [{
 }];
 
 const layout = {
+  yaxis: {
+    title: "Locker Occupancy Count"
+  },
+  xaxis: {
+    title: "Date"
+  },
   width: 1000,
   font: {
     family: 'Tahoma',
@@ -56,7 +62,7 @@ Plotly.newPlot("myPlotBar", data, layout);
 const xArrayud = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "23:59"];
 
 //did not fill all cuz maybe havent reach today time yet
-const yArrayud = [1, 5, 7, 2, 6,];
+const yArrayud = [1, 5, 7, 2, 5,];
 
 const forecastedValue = [2, 3, 8, 2, 6, 9, 13]; 
 
@@ -79,7 +85,7 @@ const dataud = [
 ];
 
 const layoutud = {
-  title: "Locker Occupancy Count as of " + formatDate(today),
+  title: "Locker Open Count as of " + formatDate(today),
   xaxis: {
     type: 'time',
     title: "Time Of The Day"
