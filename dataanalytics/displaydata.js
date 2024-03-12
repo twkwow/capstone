@@ -54,7 +54,9 @@ Plotly.newPlot("myPlotBar", data, layout);
 
 //LINE CHART open_count against last_used
 const xArrayud = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "23:59"];
-const yArrayud = [1, 5, 7, 2, 5, 6, 10];
+
+//did not fill all cuz maybe havent reach today time yet
+const yArrayud = [1, 5, 7, 2, 6,];
 
 const forecastedValue = [2, 3, 8, 2, 6, 9, 13]; 
 
@@ -64,19 +66,20 @@ const dataud = [
     y: yArrayud,
     mode: "lines",
     type: "scatter",
-    name: "Today"
+    name: "Actual"
   },
   {
     x: xArrayud,
     y: forecastedValue,
     mode: "lines",
     type: "scatter",
-    name: "Forecasted (tomorrow)",
+    name: "Forecasted (Today)",
     line: {color: 'red'}
   }
 ];
 
 const layoutud = {
+  title: "Locker Occupancy Count as of " + formatDate(today),
   xaxis: {
     type: 'time',
     title: "Time Of The Day"
