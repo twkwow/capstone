@@ -1,8 +1,14 @@
+body {
+    display: flex;
+    overflow: hidden;
+}
+
 .content-title {
     font-weight: bold;
     width: 100%;
     padding-top: 20px;
     padding-bottom: 20px;
+    font-size: 18px;
 }
 
 .content {
@@ -12,6 +18,9 @@
     margin-bottom: 20px;
     flex-direction: column;
     padding-left: 20px;
+    display: flex;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .body {
@@ -19,41 +28,29 @@
     flex-direction: row;
 }
 
-/* might not be used */
-.content-divider {
-    border-bottom: 1px solid grey;
-    width: 100%;
-    margin-top: 30px;
-}
-
 .content-split-left {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 70%;
     /* margin-right: 30px; */
     padding:20px;
-    min-width: 750px;
+    min-width: 650px;
 }
 
 .content-split-right {
     display: flex;
     flex-direction: column;
-    width: 40%;
-    max-width: 350px;
+    width: 30%;
+    min-width: 330px;
     /* background-color: aquamarine; */
-    padding:20px;
-    margin-right: 30px;
+    padding: 20px;  
 }
 
 .locker-status-container {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    border: 0.5px solid lightgrey;
-    display: flex;
-    flex-direction: column;
     padding: 10px;
-    width: 100%;
-    min-width: 372px;
-    overflow: hidden;
 }
 
 .locker-status-container-content {
@@ -65,13 +62,14 @@
 
 .locker-status-container-content > div {
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     width: 100%;
     height: auto;
     display: flex; /* Use flexbox for image centering */
     justify-content: center; /* Center the image horizontally */
     align-items: center; /* Center the image vertically */
     flex-direction: column;
+    padding-bottom: 15px;
 }
 
 .locker {
@@ -81,13 +79,17 @@
     text-align: center;
     overflow: hidden;
     flex-direction: column;
+    transition: transform .2s;
 }
 
+.locker:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
 
 .locker img {
-    border-radius: 80px;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 70%;
+    max-height: 70%;
     display: block;
     width: auto;
     height: auto;
@@ -101,9 +103,6 @@
 
 
 /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
-.content {
-    display: flex;
-}
 
 .left_container {
     width: 60%;
@@ -127,16 +126,19 @@
     border: 1px solid lightgrey;
     height: 100px;
     margin-bottom: 30px;
+    
 }
 
 .approve_container1 {
     width: 20%;
+    
 }
 
 .approve_container2 {
     width: 50%;
     border-left: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
+    
 }
 
 .approve_container3 {
@@ -144,6 +146,7 @@
     justify-content: center;
     align-items: center;
     width: 30%;
+    
 }
 
 .approve-buttons {
@@ -186,8 +189,8 @@
 }
 
 .approve_btn {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #5183E9;
+    border-color: #5183E9;
     color: white;
 }
 
@@ -196,7 +199,8 @@
 }
 
 .reject_btn {
-    color: black;
+    color: white;
+    background-color: rgb(233, 93, 93);
 }
 
 .reject_btn:hover {

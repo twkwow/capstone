@@ -20,47 +20,45 @@
 
 <body style="display: flex;">
     <sidebar-component></sidebar-component>
-    <div class="content-container">
+    <div class="content-container" >
         <header-component headerTitle="Annoucements"></header-component>
-        <div class="body">
-            <div class="content-split-left">
-                <div class="content">
-                    <span class="content-title">Add Announcements</span>
-                    <form class="announcements-container" onsubmit="insertAnnoucement(event)">
+        <div class="announce-content">
+            <div class="content add-announcements-size">
+                <span class="content-title">Add Announcements</span>
+                <form class="add-announcements-container" onsubmit="insertAnnoucement(event)">
         
-                        <div class="add-ann-title">Post to</div>
-                        <div class="radio-button-container">
-                            <input type="button" class="radio-button" id="toUsers" value="Users App" onclick="radioSelect('toUsers')">
-                            <input type="button" class="radio-button" id="toLockers" value="Lockers" onclick="radioSelect('toLockers')">
-                        </div>
+                    <div class="add-ann-title">Post to</div>
+                    <div class="radio-button-container">
+                        <input type="button" class="radio-button" id="toUsers" value="Users App" onclick="radioSelect('toUsers')">
+                        <input type="button" class="radio-button" id="toLockers" value="Lockers" onclick="radioSelect('toLockers')">
+                    </div>
                         
-                        <div class="add-ann-title">Title</div>
-                        <div class="add-ann-content">
-                            <textarea id="title" required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
-                        </div>
+                    <div class="add-ann-title">Title</div>
+                    <div class="add-ann-content">
+                        <textarea id="title" required class="announcements-textarea" rows="1" placeholder="Add your text"></textarea>
+                    </div>
         
-                        <div class="add-ann-title">Content</div>
-                        <div class="add-ann-content">
-                            <textarea id="content" required class="announcements-textarea" rows="10" placeholder="Add your text"></textarea>
-                        </div>
+                    <div class="add-ann-title">Content</div>
+                    <div class="add-ann-content announcement-textarea-container">
+                        <textarea id="content" required class="announcements-textarea" placeholder="Add your text"></textarea>
+                    </div>
         
-                        <div class="add-ann-btn">
-                            <input type="submit" id="add_ann" class="add-announcement-button" value="Add Announcement">
-                        </div>
-                    </form>
-                </div>
+                    <div class="add-ann-btn">
+                        <input type="submit" id="add_ann" class="add-announcement-button" value="Add Announcement">
+                    </div>
+                </form>
+            </div>
 
-                <div class="content">
-                    <span class="content-title">Previous Annoucements</span>
-                    <div id="prevAnnoucements"> <!-- Previous annoucements are here --> </div>
-                </div>
+            <div class="content previous-announcemnts-size">
+                <span class="content-title">Previous Annoucements</span>
+                <div id="prevAnnoucements" class="announcements-list"> <!-- Previous annoucements are here --> </div>
             </div>
         </div>
     </div>
 
     <popupmodal-component modalId="ann-delete" modalClass="popup-container-ann-delete">
         <strong>Delete Annoucement</strong>
-        <div class="ann-delete-text1">Permanently delete the notification? You can't undo this</div>
+        <div>Permanently delete the notification? You can't undo this</div>
         <div class="pop-container">
             <button class="announcement-cancel-pop" onclick="showPopup('ann-delete', false)">Cancel</button>
             <button class="announcement-confirm-pop" onclick="showPopup('ann-delete', false); deleteAnnoucement()">Confirm</button>
@@ -98,25 +96,19 @@
         return `
         <div class="annoucement-card">
             <div class="annoucement-container">
-                <div class="annoucement-container1">
-                    <div class="annoucement-title">
-                        <span>[${type}]</span>
-                        <span>${title}</span>
-                    </div>
-                    <div class="annoucement-content">
-                        <span> ${content} </span>
-                    </div>
+                <div class="annoucement-title">
+                    <span>[${type}]</span>
+                    <span>${title}</span>
                 </div>
-                <div class="annoucement-container2">
-                    <span>${admin}</span>
-                </div>
-                <div class="annoucement-container3">
-                    <span>${time}</span>
-                </div>
-                <div class="annoucement-container4">
-                    <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
-                </div>
+                <div class="annoucement-content">${content} </div>
+                <div>Admin: ${admin}</div>
+                <div>Posted On: ${time}</div>
             </div>
+            <div class="annoucement-delete-container">
+                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
+            </div>
+            
+            
         </div>
         `
     }

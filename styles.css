@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Tahoma !important;
+    background-color: rgb(241, 246, 255);
 }
 
 
@@ -10,19 +11,27 @@ hr {
     border: 1px solid gray
 }
 
-/* button:hover {
-    filter: brightness(70%);
-} */
+button {
+    transition: background-color .2s;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+input[type=submit] {
+    transition: background-color .2s;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+}
 
 .content-container {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
-}
-
-.alert-text {
-    color:red
 }
 
 ::-webkit-scrollbar {
@@ -42,4 +51,3 @@ hr {
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
-
