@@ -23,7 +23,7 @@ const xArray = [
   "Tomorrow"
 ];
 
-const yArray = [3, 2, 10, 5, 15];
+const yArray = [3, 2, 10, 5, 10];
 
 const colors = yArray.map((value, index) => {
   if (index === yArray.length - 1) {
@@ -53,15 +53,28 @@ Plotly.newPlot("myPlotBar", data, layout);
 
 
 //LINE CHART open_count against last_used
-const xArrayud = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "23:59"]
+const xArrayud = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "23:59"];
 const yArrayud = [1, 5, 7, 2, 5, 6, 10];
 
-const dataud = [{
-  x: xArrayud,
-  y: yArrayud,
-  mode: "lines",
-  type: "scatter"
-}];
+const forecastedValue = [2, 3, 8, 2, 6, 9, 13]; 
+
+const dataud = [
+  {
+    x: xArrayud,
+    y: yArrayud,
+    mode: "lines",
+    type: "scatter",
+    name: "Today"
+  },
+  {
+    x: xArrayud,
+    y: forecastedValue,
+    mode: "lines",
+    type: "scatter",
+    name: "Forecasted (tomorrow)",
+    line: {color: 'red'}
+  }
+];
 
 const layoutud = {
   xaxis: {
