@@ -17,33 +17,27 @@
     <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
 </head>
 
-<body style="display: flex;">
+<body>
     <sidebar-component></sidebar-component>
 
     <div class="content-container">
         <header-component headerTitle="Database" ></header-component>
         
-        <div class="body">
-            <div class="content-split-left">
-                <div class="database-container">
-                    <div class="locker-status-container-title">
-                        <div class="content-title">User Database</div>
-                    </div>
-                    <div class="database-container-content">
-                        <div class="database" onclick="pageRouting('database_view.html?db=users')">
-                            <img class="database-img" src="/resources/images/locker.png">
-                            <div class="database-title">Users</div>
-                        </div>
+        <div class="databases-container-main">
+            <div class="database-container">
+                <div class="content-title">User Database</div>
+                <div class="database-container-content">
+                    <div class="database" onclick="pageRouting('database_view.html?db=users')">
+                        <img class="database-img" src="/resources/images/locker.png">
+                        <div class="database-title">Users</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="database-container">
-                    <div class="locker-status-container-title">
-                        <div class="content-title">Locker Database</div>
-                    </div>
-                    <div id="lockerDatabases" class="database-container-content">
-                        <!-- locker databases here -->
-                    </div>
+            <div class="database-container">
+                <div class="content-title">Locker Database</div>
+                <div id="lockerDatabases" class="database-container-content">
+                    <!-- locker databases here -->
                 </div>
             </div>
         </div>

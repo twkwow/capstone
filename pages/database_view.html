@@ -22,13 +22,13 @@
     <script src="/components/dbInsertRecordModal.js" type="text/javascript" defer></script>
 </head>
 
-<body style="display: flex; overflow: hidden;" >
+<body>
     <sidebar-component></sidebar-component>
 
     <div class="content-container">
         <header-component headerTitle="database_name_display_here" ></header-component>
         
-        <div class="content-split-left" style="width: 100%;">            
+        <div class="datatables-container" >
             <datatable-component></datatable-component>
         </div>
     </div>
@@ -40,6 +40,8 @@
     <snackbar-component snackbarId="dataInsert">New record added to database</snackbar-component>
     <snackbar-component snackbarId="dataEdit">Database record updated</snackbar-component>
     <snackbar-component snackbarId="dataDelete">Database record deleted</snackbar-component>
+
+    <snackbar-component snackbarId="lockerOpened">Locker Opened</snackbar-component>
 
     <snackbar-component snackbarId="apiError">API Error</snackbar-component>
     <snackbar-component snackbarId="errorField"><div id="errorField"></div></snackbar-component>
@@ -71,15 +73,15 @@
     
     checkToken()
     renderTable()
-    // setInterval(loadData, refreshTime)
-    setInterval(loadData, 10000) //10 sec instead of 5 to reduce lag
+    setInterval(loadData, refreshTime)
+    // setInterval(loadData, 10000) //10 sec instead of 5 to reduce lag
 
     async function loadData() {
         checkToken()
         datatableReload(await getDatabaseData())
         console.log("Load Data")
     }
-
+    
     async function getDatabaseData() {
         const params = new URLSearchParams(location.search);
         const db = params.get("db");
@@ -120,7 +122,7 @@
             let dataCustomization = []
             if (db == 'users') {
                 headers = {
-                    "User ID": { dbField: "_id", showOnly: true},
+                    // "User ID": { dbField: "_id", showOnly: true},
                     "Username": { dbField: "web_data.username", type: "text", required: false},
                     "Full Name": { dbField: "name", type: "text", required: true},
                     "Locker ID": { dbField: "locker_id",  type: "text", required: false},
@@ -132,21 +134,21 @@
                     "Facial Data": {dbField: "auth_data.face", inputOnly: true, type: "text", required:true}
                 }
                 dataCustomization = [
-                    { targets: 1, render: (data, type, row, meta) => {
+                    { targets: 0, render: (data, type, row, meta) => {
                         return data == null ? 'N/A' : data;
                     }},
-                    { targets: 3, render: (data, type, row, meta) => {
-                        console.log()
+                    { targets: 2, render: (data, type, row, meta) => {
                         return data == null ? 'N/A' :  data.location.name + "<br>" + data._id;
                     }},
-                    { targets: 4, render: (data, type, row, meta) => {
+                    { targets: 3, render: (data, type, row, meta) => {
                         return moment(data).format('DD-MMM-YYYY');
                     }},
                 ]
             }
             else if (db == 'lockers') {
                 headers = {
-                    "Database ID": { dbField: "_id", showOnly: true},
+                    // "Database ID": { dbField: "_id", showOnly: true},
+                    "Locker Id": { dbField:"locker_id", type: "text", required: true},
                     "Current User": { dbField: "occupied_by", type: "text", required: false},
                     "Door Status": { dbField: "door_status", showOnly: true},
                     "Door Open Count": { dbField: "open_count", type: "number", required: true},
@@ -159,6 +161,9 @@
                     }},
                     { targets: 2, render: (data, type, row, meta) => {
                         return Boolean(data)? "Open" : "Locked";
+                    }},
+                    { targets: 4, render: (data, type, row, meta) => {
+                        return parseFloat(data.toFixed(3));
                     }},
                     { targets: 5, render: (data, type, row, meta) => {
                         return data == null ? 'N/A' : moment(data).format('DD-MMM-YYYY <br> h:mm:ss a');
