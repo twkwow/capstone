@@ -1,12 +1,8 @@
 .noti-content {
     display: flex;
     flex-direction: column;
-    width: 95%;
-    /* margin-right: 30px; */
+    width: 97%;
     padding:20px;
-    min-width: 750px;
-    margin-top: 10px; /* Adjust this value according to the height of your header */
-    margin-left: 10px;
     margin-bottom: 10px;
     overflow: auto;
     height: 80vh;

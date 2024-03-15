@@ -127,3 +127,8 @@
     /* background-color: red; */
     padding:20px;
 }
+
+.bigger-icon{
+    font-size: 8.5em;
+    color: grey;
+}
