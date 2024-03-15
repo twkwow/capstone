@@ -15,6 +15,8 @@
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
     <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
+    <!-- Include your dbAddLockerModal.js script -->
+    <script src="/dbAddLockerModal.js" type="text/javascript" defer></script>
 </head>
 
 <body>
@@ -37,8 +39,9 @@
             <div class="database-container">
                 <div class="content-title">Locker Database</div>
                 <div id="lockerDatabases" class="database-container-content">
-                    <!-- locker databases here -->
+                    <!-- Placeholder for Locker databases -->
                 </div>
+                
             </div>
         </div>
     </div>
@@ -52,25 +55,40 @@
 <script src="/app.js"></script>
 
 <script>
-    checkToken()
-    setInterval(checkToken, refreshTime)
+    checkToken();
+    setInterval(checkToken, refreshTime);
 
     axios.get(apiLink + "admins/database/getAllLockerLocations")
-    .then ( (resp) => {
-        const lockerLocations = resp.data.lockerLocationData
-        let lockerHTML =""
-        lockerLocations.forEach( (data) => {
+    .then((resp) => {
+        const lockerLocations = resp.data.lockerLocationData;
+        let lockerHTML = "";
+        lockerLocations.forEach((data) => {
             lockerHTML += `
                 <div id="${data.name}" class="database" onclick="pageRouting('database_view.html?db=lockers&location=${data.name}&id=${data._id}')">
                     <img class="database-img" src="/resources/images/locker.png">
                     <div class="database-title">${data.name}</div>
                 </div>
-            `
+            `;
         });
-        document.getElementById("lockerDatabases").innerHTML = lockerHTML
+        // Append the "Add Locker" button HTML to the end of lockerHTML
+        lockerHTML += `
+            <!-- Add Locker Modal Component -->
+            <addLockerModal-component></addLockerModal-component>
+            <div id="addLocker" class="database" onclick="openAddLockerModal()">
+                <i class="fa-solid fa-plus bigger-icon"></i>
+                <div class="database-title">Add Locker</div>
+            </div>
+        `;
+        document.getElementById("lockerDatabases").innerHTML = lockerHTML;
     })
     .catch((e) => {
-            console.log(e)
-            showSnackbar("apiError")
-        })
+        console.log(e);
+        showSnackbar("apiError");
+    });
+
+    // Function to open the Add Locker modal
+    function openAddLockerModal() {
+        const addLockerModal = document.querySelector('addLockerModal-component');
+        addLockerModal.render();
+    }
 </script>
