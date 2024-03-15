@@ -52,10 +52,17 @@
     width: 250px;
     padding: 10px 20px;
     cursor: pointer;
+    background-color: #d8eefb;
+    text-align: left;
+}
+
+.lockerid-button:hover{
+    font-weight: 700;
 }
 
 .lockerid-select:hover {
-    background-color: lightgrey;
+    background-color: white;
+    font-weight: 700;
 }
 
 .dropdown-content {
@@ -63,11 +70,12 @@
     width: 250px;
     height: 200px;
     text-align: center;
-    background-color: #f1f1f1;
+    background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 3;
     overflow-y: auto;
     visibility: hidden;
+    border-radius: 10px;
 }
   
 .dropdown-items {
@@ -80,4 +88,15 @@
   
 .dropdown-items:hover {
     background-color: #ddd;
+}
+
+.dropdown-icon{
+    margin-left: 120px;
+}
+
+.content-item {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Add this line */
+    margin-top: 20px; /* Add optional margin for spacing */
 }

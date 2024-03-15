@@ -308,15 +308,17 @@
     background-color: #ffffff;
     color: black;
     border: 1px solid black;
+    height: 40px;
 }
 
 .edit-cancel-button:hover , .delete-cancel-button:hover{
-    background-color: #aaaaaa;
+    background-color: #cacaca;
 }
 
 .edit-update-button {
     background-color: #007bff;
     color: white;
+    height: 40px;
 }
 
 .edit-update-button:hover {
@@ -332,3 +334,20 @@
     background-color: rgb(178, 0, 0);
 }
 /* editModal & deleteModal */
+
+.add-locker-content-container {
+    margin-top: 20px;
+}
+
+.add-locker-content-container > div {
+    margin-bottom: 10px;
+}
+
+.add-locker-content-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}   
