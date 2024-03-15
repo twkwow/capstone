@@ -44,7 +44,7 @@ async function renderOccupancyCount() {
 
 async function reRenderOccupancyCount() {
 	const occupancyForm = new FormData()
-	occupancyForm.append("lockerId", occupancyId)
+	occupancyForm.append("locationId", occupancyId)
 	const occupancyCount = (await axios.post(apiLink + "admins/dataAnalytics/getOccupancyCount", occupancyForm)).data
 	if (!occupancyCount) {
 		showSnackbar("apiError")
@@ -87,7 +87,7 @@ async function renderDemandForecast() {
 			line: { color: "red" },
 		},
 	];
-
+	
 	const layout = {
 		title: "Locker Occupancy Count as of " + formatDate(demandForecast.date),
 		xaxis: {
@@ -109,7 +109,7 @@ async function renderDemandForecast() {
 
 async function reRenderDemandForecast() {
 	const demandForm = new FormData()
-	demandForm.append("lockerId", demandId)
+	demandForm.append("locationId", demandId)
 	const demandForecast = (await axios.post(apiLink + "admins/dataAnalytics/getDemandForecast", demandForm)).data
 	if (!demandForecast) {
 		showSnackbar("apiError")
