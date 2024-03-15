@@ -15,7 +15,7 @@ class AddLockerModal extends HTMLElement {
                 <strong>Add Locker</strong>
                 <div id="addLockerContent">
                     <!-- Form fields will be dynamically generated here -->
-                    <form class="add-locker-content-container" style="margin-top: 30px;" onsubmit="saveLocker()">
+                    <form class="add-locker-content-container" style="margin-top: 30px;" onsubmit="saveLocker(event)">
                         ${this.generateFormFields()}
                         <div class="modal-buttons-container">
                             <button type="button" class="edit-cancel-button" onclick="showPopup('addLockerModal', false)">Cancel</button>
@@ -32,7 +32,7 @@ class AddLockerModal extends HTMLElement {
         for (const field of this.fields) {
             fieldsHTML += `
                 <div>${field.label} ${field.required ? '*' : ''}</div>
-                <input type="${field.type}" id="${field.dbField}AddLocker" class="form-input-same" ${field.required ? 'required' : ''}>
+                <input type="${field.type}" id="${field.dbField}" class="form-input-same" ${field.required ? 'required' : ''}>
             `;
         }
         return fieldsHTML;
@@ -45,17 +45,28 @@ function openAddLockerModal() {
     showPopup("addLockerModal", true);
 }
 
-async function saveLocker() {
+async function saveLocker(event) {
+    event.preventDefault();
+
     const formData = new FormData();
 
-    for (const field of addLockerFields) {
-        formData.append(field, document.getElementById(field + "AddLocker").value);
-    }
+    
+    formData.append("name", document.getElementById("name").value)
+    formData.append("city", document.getElementById("city").value)
+    formData.append("address", document.getElementById("address").value)
 
-    await axios.post(apiLink + "admins/database/saveLocker", formData)
+    document.getElementById("name").value = ""
+    document.getElementById("city").value = ""
+    document.getElementById("address").value = ""
+    // for (const field of addLockerFields) {
+    //     formData.append(field, document.getElementById(field + "AddLocker").value);
+    // }
+
+    await axios.post(apiLink + "admins/database/insertLockerLocation", formData)
         .then((response) => {
             showPopup('addLockerModal', false);
-            showSnackbar("Locker added successfully");
+            showSnackbar("lockerAdded");
+            getLockerLocations()
         })
         .catch((error) => {
             console.error(error);
