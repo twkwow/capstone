@@ -2,7 +2,7 @@ class AddLockerModal extends HTMLElement {
     constructor() {
         super();
         this.fields = [
-            { label: "Name", dbField: "name", type: "text", required: true },
+            { label: "Locker Name", dbField: "name", type: "text", required: true },
             { label: "City", dbField: "city", type: "text", required: true },
             { label: "Address", dbField: "address", type: "text", required: true },
             // { label: "Status", dbField: "status", type: "text", required: true }
