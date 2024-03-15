@@ -70,4 +70,4 @@ async function saveLocker() {
         });
 }
 
-customElements.define('addLockerModal-component', AddLockerModal);
+customElements.define('add-locker-component', AddLockerModal);
