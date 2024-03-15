@@ -10,14 +10,10 @@
     <link rel="stylesheet" href="/styles/analyticscontent.css">
     <title>SecureHold</title>
     <link rel="icon" href="/resources/images/logo.png" type="image/png">
-    <link rel="icon" href="/resources/images/locker.png" type="image/png">
-    <link rel="icon" href="/resources/images/sample chart.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <script src="/components/sidebar.js" type="text/javascript" defer></script>
     <script src="/components/header.js" type="text/javascript" defer></script>
-
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="/dataanalytics/displaydata.js" type="text/javascript" defer></script>
+    <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
 </head>
 
 <body style="display: flex;">
@@ -26,79 +22,128 @@
         <header-component headerTitle="Data Analytics"></header-component>
         
         <div class="body">
-            <div class="content-split-left">
+            <div class="analytics-container">
                 <div class="content">
                     <div class="content-title">Locker Occupancy Count</div>
-                    <div class="content-item">
-                        <div style="border-radius: 10px; overflow: hidden;">
-                            <div id="myPlotBar" style="width: 100%; max-width:700px">
-                            </div>
+                    <div class="lockerid-container">
+                        <div>Locker Id:</div>
+                        <div class="lockerid-button-container">
+                            <button id="occupancyButton" class="lockerid-button">All Lockers</button>
+                            <div id="occupancyDropdown" class="dropdown-content"></div>
                         </div>
+                    </div>
+                    
+                    <div class="content-item">
+                        <div id="myPlotBar" style="width: 100%; max-width:700px"></div>
                     </div>
                 </div> 
 
                 <div class="content">
                     <div class="content-title">User Demand Forecast</div>
+                    <div class="lockerid-container">
+                        <div>Locker Id:</div>
+                        <div class="lockerid-button-container">
+                            <button id="demandButton" class="lockerid-button">All Lockers</button>
+                            <div id="demandDropdown" class="dropdown-content"></div>
+                        </div>
+                    </div>
                     <div class="content-item">
-                        <div style="border-radius: 10px; overflow: hidden;">
-                            <div id="myPlotLine" style="width: 100%; max-width:700px">
-                            </div>
+                        <div id="myPlotLine" style="width: 100%; max-width:700px">
                         </div>
                     </div>
                 </div> 
 
                 <div class="content">
+                    <button onclick="reRenderLockerUsages()">ligma 2</button>
                     <div class="content-title">User Terminal Page Engagement</div>
                     <div class="content-item">
-                        <div style="border-radius: 10px; overflow: hidden;">
-                            <div id="myPlotPie" style="width: 100%; max-width:700px">
-                            </div>
+                        <div id="myPlotPie" style="width: 100%; max-width:700px">
                         </div>
                     </div>
                 </div> 
 
             </div>
-
-            <div class="content-split-right">
-                <div class="locker-status-container">
-                    <div class="locker-status-container-title">
-                        <div class="content-title" style="text-align: left; padding: 25px;">Analytics Types</div>
-                    </div>
-                    <div class="analytics-types-container-content">
-                        <div class="analytics">
-                            <img src="/resources/images/demand forecast.png">
-                            <h4>User Demand Forecast</h4>
-                        </div>
-                    </div>
-                    <div class="analytics-types-container-content">
-                        <div class="analytics">
-                            <img src="/resources/images/user engagement.png">
-                            <h4>User Terminal Page Engagement</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
+<snackbar-component snackbarId="apiError">API Error</snackbar-component>
     
 </body>
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="/scripts/displaydata.js"></script>
 <script src="/app.js"></script>
 
 <script>
-loadData()
+    checkToken()
+    renderOccupancyCount()
+    renderDemandForecast()
+    renderLockerUsages()
+    setLockerIdDropdowns()
     setInterval(loadData, refreshTime);
 
-    function loadData() {
+    async function loadData() {
         checkToken()
-        renderPendingApprovals()
-        getLockerLocations()
+        reRenderOccupancyCount()
+        reRenderDemandForecast()
+        reRenderLockerUsages()
         console.log("Load Data")
     }
-    
+
+    let occupancyId = ""
+    let demandId = ""
+
+    async function setLockerIdDropdowns() {
+        await axios.get(apiLink + "admins/dataAnalytics/getLockerLocationIds")
+        .then((res) => {
+            const lockerIds = res.data.id
+            setupDropdown("occupancyButton", "occupancyDropdown", lockerIds);
+            setupDropdown("demandButton", "demandDropdown", lockerIds);
+        })
+        .catch((e) => {
+            console.log(e)
+            showSnackbar(apiError)
+        })
+    }
+
+    function setupDropdown(buttonId, dropdownId, lockerIds) {
+        let dropdownHTML = `<div class="dropdown-items" onclick="setLockerId('${buttonId}', '${dropdownId}', '')">All Lockers</div>`
+        lockerIds.forEach((id) => {
+            dropdownHTML += `
+                <div class="dropdown-items" onclick="setLockerId('${buttonId}', '${dropdownId}', '${id._id}')">${id._id}</div>
+            `
+        })
+        document.getElementById(dropdownId).innerHTML = dropdownHTML
+
+        let isOpen = false;
+        document.addEventListener("click", (event) => {
+            const button = document.getElementById(buttonId);
+            const dropdown = document.getElementById(dropdownId);
+            if (button.contains(event.target)) {
+                isOpen = !isOpen;
+                dropdown.style.visibility = isOpen ? 'visible' : 'hidden';
+            } 
+            else if (isOpen) {
+                isOpen = false;
+                dropdown.style.visibility = 'hidden';
+            }
+        });
+    }
+
+    async function setLockerId(buttonId, dropdownId, lockerId) {
+        document.getElementById(buttonId).innerHTML = lockerId || "All Lockers"
+        if ( buttonId == "occupancyButton") {
+            occupancyId = lockerId
+            await reRenderOccupancyCount()
+        }
+        else if ( buttonId == "demandButton") {
+            demandId = lockerId
+            await reRenderDemandForecast()
+        }
+    }
+
 </script>

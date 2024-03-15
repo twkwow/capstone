@@ -16,7 +16,8 @@
     <script src="/components/header.js" type="text/javascript" defer></script>
     <script src="/components/snackbarNotification.js" type="text/javascript" defer></script>
     <!-- Include your dbAddLockerModal.js script -->
-    <script src="/dbAddLockerModal.js" type="text/javascript" defer></script>
+    <script src="/components/popupModal.js" type="text/javascript" defer></script>
+    <script src="/components/dbAddLockerModal.js" type="text/javascript" defer></script>
 </head>
 
 <body>
@@ -46,6 +47,7 @@
         </div>
     </div>
 
+    <add-locker-component></add-locker-component>
     <snackbar-component snackbarId="apiError">API Error</snackbar-component>
 
 </body>
@@ -73,8 +75,7 @@
         // Append the "Add Locker" button HTML to the end of lockerHTML
         lockerHTML += `
             <!-- Add Locker Modal Component -->
-            <addLockerModal-component></addLockerModal-component>
-            <div id="addLocker" class="database" onclick="openAddLockerModal()">
+            <div id="addLocker" class="database" onclick="showPopup('addLockerModal', true)">
                 <i class="fa-solid fa-plus bigger-icon"></i>
                 <div class="database-title">Add Locker</div>
             </div>
@@ -85,10 +86,4 @@
         console.log(e);
         showSnackbar("apiError");
     });
-
-    // Function to open the Add Locker modal
-    function openAddLockerModal() {
-        const addLockerModal = document.querySelector('addLockerModal-component');
-        addLockerModal.render();
-    }
 </script>
