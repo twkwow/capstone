@@ -173,5 +173,5 @@ async function reRenderLockerUsages() {
 	}
 	
 	
-	Plotly.restyle("myPlotPie", newData);
+	Plotly.restyle("myPlotPie", newData);
 }
