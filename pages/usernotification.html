@@ -79,7 +79,7 @@
                             <div class="noti-container1">
                                 <div class="annoucement-content">${notification.message}</div>
                             </div>
-                            <div class="noti-container2">${notification.user.name || "Deleted User"}</div>
+                            <div class="noti-container2">${notification.user?.name || "Deleted User"}</div>
                             <div class="noti-container3">${moment(notification.timestamp).format("DD-MMM-YYYY h:mm:ss a")}</div>
                             <div class="noti-container4">
                                 <button class="annoucement-delete" onclick="selectedUserNotifications = '${notification._id}'; showPopup('ann-delete', true)">Delete</button>

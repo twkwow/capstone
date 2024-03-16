@@ -91,7 +91,8 @@
     renderDemandForecast()
     renderLockerUsages()
     setLockerIdDropdowns()
-    setInterval(loadData, refreshTime);
+    // setInterval(loadData, refreshTime);
+    setInterval(loadData, 15000); //15 sec to avoid lag
 
     async function loadData() {
         checkToken()
