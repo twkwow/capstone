@@ -1,0 +1,175 @@
+.noti-content {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    padding:20px;
+    margin-bottom: 10px;
+    overflow: auto;
+    height: 80vh;
+}
+
+.annoucement-card {
+    width: 100%;
+    border: 1px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    background-color: white;
+    flex-direction: column;
+}
+
+.noti-container {
+    margin: 10px;
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.noti-container1 {
+    flex: 1; /* Grow to fill available space */
+}
+
+.noti-container2,
+.noti-container3,
+.noti-container4 {
+    margin-left: 100px; /* Add some spacing between items */
+}
+
+.noti-container4 {
+    margin-left: 100px; /* Push delete button to the end */
+    margin-right: 30px;
+}
+
+
+.annoucement-delete {
+    height: 30px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    margin: 5px;
+    width: 70px;
+}
+
+.annoucement-delete:hover {
+    background-color: rgb(255, 49, 49);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.announcement-confirm-pop {
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    width: 70px;
+    height: 40px;
+    color: white;
+    background-color: #007bff;
+}
+
+.announcement-confirm-pop:hover {
+    background-color: #1c89fd;
+    cursor: pointer;
+    font-weight: 700;
+
+}
+
+.announcement-cancel-pop {
+    border: 1px solid red;
+    border-radius: 5px;
+    width: 70px;
+    background-color: red;
+    color: white;
+}
+
+.announcement-cancel-pop:hover {
+    cursor: pointer;
+    font-weight: 700;
+    background-color: rgb(255, 49, 49);
+}
+
+.announcement-confirm-pop, .announcement-cancel-pop {
+    text-align: center;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.pop-container {
+    display: flex;
+    justify-content: end;
+}
+.annoucement-content {
+    overflow-wrap: break-word;
+}
+.ann-delete-text {
+    color: white;
+    text-decoration: none;;
+}
+.announcements-container {
+    width: 100%;
+    border: 1px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.announcements-textarea {
+    resize: vertical;
+    width: 100%;
+    white-space: pre-wrap;
+}
+
+.add-announcement-button {
+    width: 150px;
+    height: 40px;
+    border: 1px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+.add-ann-title {
+    font-size: 15px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.add-ann-content {
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 30px;
+}
+.add-ann-btn {
+    margin: 20px;
+    display: flex;
+    justify-content: end;
+}
+.popup-container-ann-delete {
+    background-color: white;
+    width:300px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
+}
+.ann-delete-text1 {
+    text-align: left;
+    margin-top: 10px;
+}
+.radio-button-container {
+    display: flex;
+    margin-left: 20px;
+}
+
+.radio-button {
+    height: 30px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    margin: 5px;
+    width: 100px;
+}
+
+.radio-button:hover {
+    font-weight: 700;
+    cursor: pointer;
+}

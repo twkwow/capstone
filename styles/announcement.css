@@ -45,7 +45,7 @@
 }
 
 .add-announcement-button:hover {
-    background-color: #025ec0;
+    background-color: #005bbd;
     cursor: pointer;
 }
 
@@ -152,7 +152,11 @@
     margin: 10px 0;
     padding: 5px;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
+}
+
+.announce-footer{
+    font-weight: 700;
 }
 
 .annoucement-delete-container {

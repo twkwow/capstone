@@ -101,8 +101,14 @@
                     <span>${title}</span>
                 </div>
                 <div class="annoucement-content">${content} </div>
-                <div>Admin: ${admin}</div>
-                <div>Posted On: ${time}</div>
+                <div>
+                    <span class="announce-footer">Admin: </span>
+                    ${admin}
+                </div>
+                <div>
+                    <span class="announce-footer">Posted On: </span>
+                    ${time}
+                </div>
             </div>
             <div class="annoucement-delete-container">
                 <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
