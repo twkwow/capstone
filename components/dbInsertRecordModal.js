@@ -26,7 +26,22 @@ function setInsertForm(cols) {
         <form class="edit-user-content-container" style="margin-top: 10px;" onsubmit="insertRecord(event)">
     `
     for (const [key, value] of Object.entries(cols)) {
-        if (value.type) {
+        if (value.type === "lockerId") {
+            fieldHTML += `<div>${key} ${value.required ? '*' : ''}</div>`
+            fieldHTML += `
+            <div class="id-button-container">
+                <button id="lockerButton" class="id-button" onclick="dropdownInsertOnClick(event, 'lockerDropdownInsert')">
+                    <span id="lockerInputInsert"></span>
+                    <span class="id-icon">
+                        <i class="fa-solid fa-caret-down dropdown-icon"></i>
+                    </span>
+                </button>
+                <div id="lockerDropdownInsert" class="dropdown-content"></div>
+            </div>
+            `
+            setInsertLockerIdDropdowns()
+        }
+        else if (value.type) {
             fieldHTML += `
                 <div>${key} ${value.required ? '*' : ''}</div>
                 <input type="${value.type}" id="${value.dbField}Insert" type="text" class="form-input-same" ${value.required ? 'required' : ''}>
@@ -41,7 +56,6 @@ function setInsertForm(cols) {
             </div>
         </form>
     `
-
     document.getElementById("insertContent").innerHTML = fieldHTML
     showPopup("insertRecordModal", true)
 }
@@ -63,11 +77,16 @@ async function insertRecord(event) {
         const dbRecords = Object.values(insertColumnStructure).map(col => col.dbField)
         dbRecords.forEach( (dbName) => {
             console.log(dbName)
-            if (dbName != "_id") {
+            if (dbName != "_id" && dbName != "locker_id") {
                 insertForm.append(dbName, document.getElementById(dbName + "Insert").value)
             }
         })
     }
+
+    const lockerInputInsert = document.getElementById("lockerInputInsert")?.innerHTML
+	if (lockerInputInsert != undefined) {
+		insertForm.append("locker_id", lockerInputInsert)
+	}
 
     await axios.post(apiLink + "admins/database/insertDb", insertForm)
     .then((resp) => {
@@ -95,6 +114,38 @@ async function insertRecord(event) {
         showSnackbar("apiError")
     })
     
+}
+
+async function setInsertLockerIdDropdowns() {
+    await axios.get(apiLink + "admins/database/getLockerIds")
+    .then((res) => {
+        const lockerIds = res.data.id
+        let dropdownHTML = `<div class="dropdown-items" onclick="setInsertLockerId('lockerInputInsert', 'lockerDropdownInsert', '')">-</div>`
+        lockerIds.forEach((id) => {
+            dropdownHTML += `
+                <div class="dropdown-items" onclick="setInsertLockerId('lockerInputInsert', 'lockerDropdownInsert', '${id._id}')">${id._id}</div>
+            `
+        })
+        document.getElementById("lockerDropdownInsert").innerHTML = dropdownHTML
+    })
+    .catch((e) => {
+        console.log(e)
+        showSnackbar(apiError)
+    })
+}
+
+
+let isInsertDropdownOpen = false;
+function dropdownInsertOnClick(event, dropdownId) {
+    event.preventDefault()
+    isInsertDropdownOpen = !isInsertDropdownOpen;
+    document.getElementById(dropdownId).style.visibility = isInsertDropdownOpen ? 'visible' : 'hidden'; 
+}
+
+async function setInsertLockerId(lockerInputInsert, dropdownId, lockerId) {
+    document.getElementById(lockerInputInsert).innerHTML = lockerId || ""
+    document.getElementById(dropdownId).style.visibility = 'hidden'
+    isInsertDropdownOpen = false
 }
   
 customElements.define('insert-record-component', InsertRecordModal);

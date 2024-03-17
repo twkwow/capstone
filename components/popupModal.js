@@ -21,6 +21,16 @@ class PopupModal extends HTMLElement {
 
 function showPopup(id, toShow) {
 	document.getElementById(id).style.visibility = toShow ? 'visible' : 'hidden'
+
+	const dbModalDropdowns = ['lockerDropdownEdit', 'lockerDropdownInsert', 'userDropdownEdit']
+	dbModalDropdowns.forEach((id) => {
+		const dropdown = document.getElementById(id);
+		if (dropdown) {
+			isInsertDropdownOpen =  false
+			isEditDropdownOpen = false
+			dropdown.style.visibility = 'hidden';
+		}
+	});
 }
 
 customElements.define('popupmodal-component', PopupModal);

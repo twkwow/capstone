@@ -5,8 +5,6 @@ class EditRecordModal extends HTMLElement {
     }
   
     connectedCallback() {
-
-    
         this.innerHTML = `
             <popupmodal-component modalId="editRecordModal" modalClass="">
                 <strong>Edit User</strong>
@@ -35,7 +33,38 @@ async function setEditForm(cols, _id) {
     let fieldHTML = ""
     for (const [key, value] of Object.entries(cols)) {
         const existingValue = formatDataToInput(data, value.dbField, value.type)
-        if (!value.showOnly) {
+
+        if (value.type === "lockerId") {
+            fieldHTML += `<div>${key} ${value.required ? '*' : ''}</div>`
+            fieldHTML += `
+            <div class="id-button-container">
+                <button id="lockerButton" class="id-button" onclick="dropdownEditOnClick('lockerDropdownEdit')">
+                    <span id="lockerInputEdit">${existingValue}</span>
+                    <span class="id-icon">
+                        <i class="fa-solid fa-caret-down dropdown-icon"></i>
+                    </span>
+                </button>
+                <div id="lockerDropdownEdit" class="dropdown-content"></div>
+            </div>
+            `
+            setEditLockerIdDropdowns()
+        }
+        else if (value.type === "userId") {
+            fieldHTML += `<div>${key} ${value.required ? '*' : ''}</div>`
+            fieldHTML += `
+            <div class="id-button-container">
+                <button id="userButton" class="id-button" onclick="dropdownEditOnClick('userDropdownEdit')">
+                    <span id="userInputEdit">${existingValue}</span>
+                    <span class="id-icon">
+                        <i class="fa-solid fa-caret-down dropdown-icon"></i>
+                    </span>
+                </button>
+                <div id="userDropdownEdit" class="dropdown-content"></div>
+            </div>
+            `
+            setEditUserIdDropdowns()
+        }
+        else if (!value.showOnly) {
             fieldHTML += `<div>${key} ${value.required ? '*' : ''}</div>`
             fieldHTML += `<input type="${value.type}" id="${value.dbField}Edit" type="text" class="form-input-same" value="${existingValue}">`
         }
@@ -47,6 +76,7 @@ async function setEditForm(cols, _id) {
             <button class="edit-update-button" onclick="editRecords()">Update</button>
         </div>
     `
+
     document.getElementById("editContent").innerHTML = fieldHTML
     showPopup("editRecordModal", true)
 }
@@ -56,11 +86,21 @@ async function editRecords() {
     editForm.append("_id", editDbId)
 
     Object.values(editColumnStructure).forEach( (dbRecords) => {
-        if ( !dbRecords.showOnly ) {
-            editForm.append(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").value)
+        if ( !dbRecords.showOnly && dbRecords.type != "lockerId" && dbRecords.type != "userId") {
+            editForm.append(dbRecords.dbField, document.getElementById(dbRecords.dbField + "Edit").innerHTML)
         }
     })
-    
+
+    const lockerInputEdit = document.getElementById("lockerInputEdit")?.innerHTML
+	if (lockerInputEdit != undefined) {
+		editForm.append("locker_id", lockerInputEdit)
+	}
+
+    const userInputEdit = document.getElementById("userInputEdit")?.innerHTML
+	if (userInputEdit != undefined) {
+		editForm.append("occupied_by", userInputEdit)
+	}
+
     const params = new URLSearchParams(location.search);
     editForm.append("db", params.get("db")) 
     editForm.append("location", params.get("id"))
@@ -99,6 +139,55 @@ function formatDataToInput(data, path, type) {
     }
 
     return '';
+}
+
+async function setEditLockerIdDropdowns() {
+    await axios.get(apiLink + "admins/database/getLockerIds")
+    .then((res) => {
+        const lockerIds = res.data.id
+        let dropdownHTML = `<div class="dropdown-items" onclick="setEditLockerId('lockerInputEdit', 'lockerDropdownEdit', '')">-</div>`
+        lockerIds.forEach((id) => {
+            dropdownHTML += `
+                <div class="dropdown-items" onclick="setEditLockerId('lockerInputEdit', 'lockerDropdownEdit', '${id._id}')">${id._id}</div>
+            `
+        })
+        document.getElementById("lockerDropdownEdit").innerHTML = dropdownHTML
+    })
+    .catch((e) => {
+        console.log(e)
+        showSnackbar(apiError)
+    })
+}
+
+async function setEditUserIdDropdowns() {
+    await axios.get(apiLink + "admins/database/getUserIds")
+    .then((res) => {
+        const userIds = res.data.id
+        let dropdownHTML = `<div class="dropdown-items" onclick="setEditLockerId('userInputEdit', 'userDropdownEdit', '')">-</div>`
+        userIds.forEach((id) => {
+            dropdownHTML += `
+                <div class="dropdown-items" onclick="setEditLockerId('userInputEdit', 'userDropdownEdit', '${id._id}')">${id._id}</div>
+            `
+        })
+        document.getElementById("userDropdownEdit").innerHTML = dropdownHTML
+    })
+    .catch((e) => {
+        console.log(e)
+        showSnackbar(apiError)
+    })
+}
+
+
+let isEditDropdownOpen = false;
+function dropdownEditOnClick(dropdownId) {
+    isEditDropdownOpen = !isEditDropdownOpen;
+    document.getElementById(dropdownId).style.visibility = isEditDropdownOpen ? 'visible' : 'hidden'; 
+}
+
+async function setEditLockerId(lockerInputEdit, dropdownId, lockerId) {
+    document.getElementById(lockerInputEdit).innerHTML = lockerId || ""
+    document.getElementById(dropdownId).style.visibility = 'hidden'
+    isEditDropdownOpen = false
 }
 
   
