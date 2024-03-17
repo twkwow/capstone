@@ -177,9 +177,9 @@ body {
     align-items: center;
     justify-content: center;
     width: 70px;
-    height: 20px;
+    height: 30px;
     border: 1px solid;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 5px;
     padding: 10px;
 }
@@ -189,22 +189,23 @@ body {
 }
 
 .approve_btn {
-    background-color: #5183E9;
-    border-color: #5183E9;
+    background-color: #007bff;
+    border-color: #007bff;
     color: white;
 }
 
 .approve_btn:hover {
-    background-color: #055ab6;
+    background-color: #1c89fd;
+    font-weight: 700;
 }
 
 .reject_btn {
     color: white;
-    background-color: rgb(233, 93, 93);
+    background-color: red;
 }
 
 .reject_btn:hover {
-    background-color: lightgrey;
+    font-weight: 700;
 }
 .status-circle {
     width: 20px;

@@ -118,7 +118,7 @@
 
 .edit-button:hover{
     cursor: pointer;
-    background-color: #a7b3ec;
+    background-color: #d8eefb;
 }
 
 .save-button {
@@ -141,15 +141,17 @@
 }
 
 .changepassword-button{
-    background-color: white;
-    border: 1px solid grey;
+    background-color: #007bff;
+    border: 1px solid #007bff;
     border-radius: 15px;
     padding: 10px 15px;
     font-size: 16px;
     margin-left: 10px;
+    color: white;
 }
 
 .changepassword-button:hover{
     cursor: pointer;
-    background-color: #a7b3ec;
+    background-color: #1c89fd;
+    font-weight: 700;
 }
