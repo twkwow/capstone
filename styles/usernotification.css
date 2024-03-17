@@ -73,17 +73,17 @@
 }
 
 .announcement-cancel-pop {
-    border: 1px solid red;
+    border: 1px solid black;
     border-radius: 5px;
     width: 70px;
-    background-color: red;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .announcement-cancel-pop:hover {
     cursor: pointer;
     font-weight: 700;
-    background-color: rgb(255, 49, 49);
+    background-color: #cacaca;
 }
 
 .announcement-confirm-pop, .announcement-cancel-pop {

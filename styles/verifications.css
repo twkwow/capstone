@@ -65,7 +65,8 @@
 }
 
 .form-button:hover {
-    background-color: #0056b3;
+    background-color: #1c89fd;
+    font-weight: 700;
 }
 
 .forgot-password {

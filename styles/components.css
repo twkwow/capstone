@@ -275,10 +275,8 @@
 }
 
 .buttons-copy:hover, .buttons-csv:hover, .buttons-excel:hover, .buttons-print:hover, .buttons-pdf:hover, .buttons-insert:hover {
-    background-color: #8595e8;
-    color: white;
-    outline: none;
-    border: none;
+    
+    font-weight: 700;
 }
 
 /* database */
@@ -298,7 +296,7 @@
 
 .edit-cancel-button, .edit-update-button, .delete-cancel-button, .delete-delete-button {
     width: 90px;
-    height: 30px;
+    height: 40px;
     border: 1px;
     border-radius: 5px;
     margin: 0 10px;
@@ -313,6 +311,7 @@
 
 .edit-cancel-button:hover , .delete-cancel-button:hover{
     background-color: #cacaca;
+    font-weight: 700;
 }
 
 .edit-update-button {
@@ -322,7 +321,8 @@
 }
 
 .edit-update-button:hover {
-    background-color: #005bbd;
+    background-color: #1c89fd;
+    font-weight: 700;
 }
 
 .delete-delete-button {
@@ -331,7 +331,7 @@
 }
 
 .delete-delete-button:hover {
-    background-color: rgb(178, 0, 0);
+    font-weight: 700;
 }
 /* editModal & deleteModal */
 
