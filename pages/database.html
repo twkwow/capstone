@@ -68,8 +68,10 @@
             const lockerLocations = resp.data.lockerLocationData;
             let lockerHTML = "";
             lockerLocations.forEach((data) => {
+                console.log(data)
+                const encodeName = encodeURIComponent(data.name.replace("'", "&#39;"))
                 lockerHTML += `
-                    <div id="${data.name}" class="database" onclick="pageRouting('database_view.html?db=lockers&location=${data.name}&id=${data._id}')">
+                    <div id="${data.name}" class="database" onclick="pageRouting('database_view.html?db=lockers&location=${encodeName}&id=${data._id}')">
                         <img class="database-img" src="/resources/images/locker.png">
                         <div class="database-title">${data.name}</div>
                     </div>

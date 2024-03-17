@@ -125,7 +125,7 @@
                     // "User ID": { dbField: "_id", showOnly: true},
                     "Username": { dbField: "web_data.username", type: "text", required: false},
                     "Full Name": { dbField: "name", type: "text", required: true},
-                    "Locker ID": { dbField: "locker_id",  type: "text", required: false},
+                    "Locker ID": { dbField: "locker_id",  type: "lockerId", required: false},
                     "DOB": { dbField: "dob", type: "date", required: true},
                     "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},
                     "Phone No": { dbField: "phone", type: 'text', required: true},
@@ -149,7 +149,7 @@
                 headers = {
                     // "Database ID": { dbField: "_id", showOnly: true},
                     "Locker Id": { dbField:"locker_id", type: "text", required: true},
-                    "Current User": { dbField: "occupied_by", type: "text", required: false},
+                    "Current User": { dbField: "occupied_by", type: "userId", required: false},
                     "Door Status": { dbField: "door_status", showOnly: true},
                     "Door Open Count": { dbField: "open_count", type: "number", required: true},
                     "Total Usage Time (Minutes)": { dbField: "usage_minutes", type: "number", required: true},
@@ -173,4 +173,5 @@
             setDatatableOptions(resp, headers, dataCustomization)
         })
     }
+    
 </script>
