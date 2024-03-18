@@ -216,3 +216,9 @@ body {
 }
 
 /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */ /* dashboard CSS lol */
+
+.dashboard-graph{
+    display: flex;
+    /* background-color: red; */
+    /* justify-content: center; */
+}

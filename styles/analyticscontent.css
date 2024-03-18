@@ -96,6 +96,6 @@
 
 .content-item {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     margin-top: 20px; /* Add optional margin for spacing */
 }

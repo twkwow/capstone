@@ -8,9 +8,7 @@ class InsertRecordModal extends HTMLElement {
         this.innerHTML = `
             <popupmodal-component modalId="insertRecordModal" modalClass="">
                 <strong>Insert User</strong>
-                <div id="insertContent">
-                </div>
-                
+                <div id="insertContent" onclick="insertModalDropdownsClose()"></div>
             </popupmodal-component>
         `;
     }
@@ -30,7 +28,7 @@ function setInsertForm(cols) {
             fieldHTML += `<div>${key} ${value.required ? '*' : ''}</div>`
             fieldHTML += `
             <div class="id-button-container">
-                <button id="lockerButton" class="id-button" onclick="dropdownInsertOnClick(event, 'lockerDropdownInsert')">
+                <button id="lockerButton" class="id-button" onclick="event.preventDefault();dropdownInsertOnClick('lockerDropdownInsert')">
                     <span id="lockerInputInsert"></span>
                     <span class="id-icon">
                         <i class="fa-solid fa-caret-down dropdown-icon"></i>
@@ -123,7 +121,7 @@ async function setInsertLockerIdDropdowns() {
         let dropdownHTML = `<div class="dropdown-items" onclick="setInsertLockerId('lockerInputInsert', 'lockerDropdownInsert', '')">-</div>`
         lockerIds.forEach((id) => {
             dropdownHTML += `
-                <div class="dropdown-items" onclick="setInsertLockerId('lockerInputInsert', 'lockerDropdownInsert', '${id._id}')">${id._id}</div>
+                <div class="dropdown-items" onclick="setInsertLockerId('lockerInputInsert', 'lockerDropdownInsert', '${id._id}', '${id.locker_id}')">${id._id} - ${id.locker_id}</div>
             `
         })
         document.getElementById("lockerDropdownInsert").innerHTML = dropdownHTML
@@ -136,14 +134,27 @@ async function setInsertLockerIdDropdowns() {
 
 
 let isInsertDropdownOpen = false;
-function dropdownInsertOnClick(event, dropdownId) {
-    event.preventDefault()
+function dropdownInsertOnClick(dropdownId) {
     isInsertDropdownOpen = !isInsertDropdownOpen;
     document.getElementById(dropdownId).style.visibility = isInsertDropdownOpen ? 'visible' : 'hidden'; 
 }
 
-async function setInsertLockerId(lockerInputInsert, dropdownId, lockerId) {
-    document.getElementById(lockerInputInsert).innerHTML = lockerId || ""
+let isInsertDropdownCurrentOpen = false;
+function insertModalDropdownsClose() {
+    if (!isInsertDropdownCurrentOpen && isInsertDropdownOpen) {
+        isInsertDropdownCurrentOpen = true
+    }
+    else if (isInsertDropdownCurrentOpen && isInsertDropdownOpen) {
+        isInsertDropdownCurrentOpen = false
+        dropdownInsertOnClick('lockerDropdownInsert')
+    }
+    else if(!isInsertDropdownOpen) {
+        isInsertDropdownCurrentOpen = false
+    }
+}
+
+async function setInsertLockerId(lockerInputInsert, dropdownId, lockerId, lockerName) {
+    document.getElementById(lockerInputInsert).innerHTML = lockerName || ""
     document.getElementById(dropdownId).style.visibility = 'hidden'
     isInsertDropdownOpen = false
 }

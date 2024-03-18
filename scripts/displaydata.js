@@ -2,11 +2,13 @@ function formatDate(date) {
 	return moment(date).format("DD/MMM/yyyy");
 };
 
+
+
 //how many assigned locker compartment per locker location for example 2/25
-async function renderOccupancyCount() {
+async function renderOccupancyCount(width) {
 	const occupancyCount = (await axios.post(apiLink + "admins/dataAnalytics/getOccupancyCount")).data
 	if (!occupancyCount) {
-		showSnackbar("apiError")
+		return showSnackbar("apiError")
 	}
 	//x-axis dates
 	const xAxis = occupancyCount.xAxis.map((x) => formatDate(x))
@@ -32,13 +34,16 @@ async function renderOccupancyCount() {
 
 	const layout = {
 		yaxis: { 'range': [0, occupancyCount.yAxisPeak]},
-		width: 1000,
+		width: width,
+		margin: {
+			b:100,
+			t:20
+		},
 		font: {
 			family: "Tahoma",
 			size: 18,
 		},
 	};
-
 	Plotly.newPlot("myPlotBar", data, layout);
 }
 
@@ -47,7 +52,7 @@ async function reRenderOccupancyCount() {
 	occupancyForm.append("locationId", occupancyId)
 	const occupancyCount = (await axios.post(apiLink + "admins/dataAnalytics/getOccupancyCount", occupancyForm)).data
 	if (!occupancyCount) {
-		showSnackbar("apiError")
+		return showSnackbar("apiError")
 	}
 
 	const newXAxis = occupancyCount.xAxis.map((x) =>  formatDate(x))
@@ -67,7 +72,7 @@ async function reRenderOccupancyCount() {
 async function renderDemandForecast() {
 	const demandForecast = (await axios.post(apiLink + "admins/dataAnalytics/getDemandForecast")).data
 	if (!demandForecast) {
-		showSnackbar("apiError")
+		return showSnackbar("apiError")
 	}
 
 	const data = [
@@ -97,7 +102,7 @@ async function renderDemandForecast() {
 		yaxis: {
 			title: "Locker Open Count",
 		},
-		width: 1000,
+		width: 1150,
 		font: {
 			family: "Tahoma",
 			size: 18,
@@ -112,8 +117,7 @@ async function reRenderDemandForecast() {
 	demandForm.append("locationId", demandId)
 	const demandForecast = (await axios.post(apiLink + "admins/dataAnalytics/getDemandForecast", demandForm)).data
 	if (!demandForecast) {
-		showSnackbar("apiError")
-		return
+		return showSnackbar("apiError")
 	}
 	const newData = {
         x: [demandForecast.xAxis],
@@ -122,18 +126,6 @@ async function reRenderDemandForecast() {
 
 	const newLayout = {
 		title: "Locker Occupancy Count as of " + formatDate(demandForecast.date),
-		xaxis: {
-            type: "time",
-            title: "Time Of The Day",
-        },
-        yaxis: {
-            title: "Locker Open Count",
-        },
-        width: 1000,
-        font: {
-            family: "Tahoma",
-            size: 18,
-        },
 	};
 
 	Plotly.update("myPlotLine", newData, newLayout)
@@ -142,6 +134,9 @@ async function reRenderDemandForecast() {
 //pie CHART usage_minutes against location
 async function renderLockerUsages() {
 	const lockerUsages = (await axios.get(apiLink + "admins/dataAnalytics/getLockerUsages")).data
+	if (!lockerUsages)  {
+		return showSnackbar("apiError")
+	}
 
 	const data = [
 		{
@@ -154,7 +149,7 @@ async function renderLockerUsages() {
 	
 	const layout = {
 		title: "Locker Usage Duration (in minutes)",
-		width: 1000,
+		width: 1100,
 		font: {
 			family: "Tahoma",
 			size: 18,
@@ -166,6 +161,9 @@ async function renderLockerUsages() {
 
 async function reRenderLockerUsages() {
 	const lockerUsages = (await axios.get(apiLink + "admins/dataAnalytics/getLockerUsages")).data
+	if (!lockerUsages)  {
+		return showSnackbar("apiError")
+	}
 
 	const newData = {
 		labels: [lockerUsages.labels],
@@ -173,5 +171,41 @@ async function reRenderLockerUsages() {
 	}
 	
 	
-	Plotly.restyle("myPlotPie", newData);
+	Plotly.restyle("myPlotPie", newData);
+}
+
+async function renderRegisteredWeb() {
+	const users = (await axios.get(apiLink + "admins/dataAnalytics/getRegisteredWebUsers")).data
+	if (!users) {
+		return showSnackbar("apiError")
+	}
+	const datapie2 = [{
+		labels: ["Registered Users", "Unregistered Users"],
+		values: [users.registered, users.total - users.registered],
+		type: "pie",
+		hole:.3
+	}];
+
+	const layoutpie2 = {
+		width:1100,
+		font: {
+			family: 'Tahoma',
+			size: 18
+		} 
+	};
+
+	Plotly.newPlot("myPlotPie2", datapie2, layoutpie2);
+}
+
+async function reRenderRegisteredWeb() {
+	const users = (await axios.get(apiLink + "admins/dataAnalytics/getRegisteredWebUsers")).data
+	if (!users) {
+		return showSnackbar("apiError")
+	}
+
+	const newData = {
+		values: [[users.registered, users.total - users.registered]]
+	}
+
+	Plotly.restyle("myPlotPie2", newData);
 }

@@ -27,7 +27,9 @@ function showPopup(id, toShow) {
 		const dropdown = document.getElementById(id);
 		if (dropdown) {
 			isInsertDropdownOpen =  false
+			isInsertDropdownCurrentOpen = false
 			isEditDropdownOpen = false
+			isEditDropdownCurrentOpen = false
 			dropdown.style.visibility = 'hidden';
 		}
 	});

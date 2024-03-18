@@ -109,7 +109,6 @@ function handleActionButton(event, action) {
     }
     const rowIndex = event.target.closest('td').parentNode;
     const rowData = table.dataTableInstance.row(rowIndex).data();
-    console.log(rowData)
     switch (action) {
         case 'edit': setEditForm(tableColStructure, rowData._id); break;
         case 'delete': setDeleteForm(rowData._id); break;

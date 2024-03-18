@@ -69,6 +69,14 @@
                     </div>
                 </div> 
 
+                <div class="content">
+                    <div class="content-title">User Terminal Page Engagement</div>
+                    <div class="content-item">
+                        <div id="myPlotPie2" style="width: 100%; max-width:700px">
+                        </div>
+                    </div>
+                </div> 
+
             </div>
         </div>
     </div>
@@ -87,18 +95,20 @@
 
 <script>
     checkToken()
-    renderOccupancyCount()
+    renderOccupancyCount(1100)
     renderDemandForecast()
     renderLockerUsages()
     setLockerIdDropdowns()
-    // setInterval(loadData, refreshTime);
-    setInterval(loadData, 15000); //15 sec to avoid lag
+    renderRegisteredWeb()
+    setInterval(loadData, refreshTime);
+    // setInterval(loadData, 15000); //15 sec to avoid lag
 
     async function loadData() {
         checkToken()
         reRenderOccupancyCount()
         reRenderDemandForecast()
         reRenderLockerUsages()
+        reRenderRegisteredWeb()
         console.log("Load Data")
     }
 
@@ -119,10 +129,11 @@
     }
 
     function setupDropdown(buttonId, dropdownId, lockerIds) {
-        let dropdownHTML = `<div class="dropdown-items" onclick="setLockerId('${buttonId}', '${dropdownId}', '')">All Lockers</div>`
+        let dropdownHTML = `<div class="dropdown-items" onclick="setLockerId('${buttonId}', '${dropdownId}', '', '')">All Lockers</div>`
         lockerIds.forEach((id) => {
+            const formattedName = id.name.replace(/'/g, "\'+'")
             dropdownHTML += `
-                <div class="dropdown-items" onclick="setLockerId('${buttonId}', '${dropdownId}', '${id._id}')">${id._id}</div>
+                <div class="dropdown-items" onclick="setLockerId('${buttonId}', '${dropdownId}', '${id._id}', '${formattedName}')">${id.name}</div>
             `
         })
         document.getElementById(dropdownId).innerHTML = dropdownHTML
@@ -142,8 +153,8 @@
         });
     }
 
-    async function setLockerId(buttonId, dropdownId, lockerId) {
-        document.getElementById(buttonId).innerHTML = lockerId || "All Lockers"
+    async function setLockerId(buttonId, dropdownId, lockerId, lockerName) {
+        document.getElementById(buttonId).innerHTML = lockerName || "All Lockers"
         if ( buttonId == "occupancyButton") {
             occupancyId = lockerId
             await reRenderOccupancyCount()
