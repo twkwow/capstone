@@ -140,7 +140,10 @@ function setDatatableOptions(data, columns, columnDefs) {
     tableDataColumns.push({
         "defaultContent": `
             <div class="actions-container">
-                ${db == "lockers" ? `<button class="edit-button" onclick="handleActionButton(event, 'open')">Open Locker</button>` : ''}
+                ${db == "lockers" ? `<button class="edit-button" onclick="handleActionButton(event, 'open')">
+                <i class="fa-solid fa-door-open"></i>
+                Open Locker
+                </button>` : ''}
                 <button class="edit-button" onclick="handleActionButton(event, 'edit')">
                     <i class="fa-solid fa-pen-to-square"></i>
                     Edit

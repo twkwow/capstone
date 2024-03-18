@@ -44,7 +44,7 @@
                     </div>
         
                     <div class="add-ann-btn">
-                        <input type="submit" id="add_ann" class="add-announcement-button" value="Add Announcement">
+                        <input type="submit" id="add_ann" class="add-announcement-button" value="Add Announcement ">
                     </div>
                 </form>
             </div>
@@ -111,7 +111,10 @@
                 </div>
             </div>
             <div class="annoucement-delete-container">
-                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">Delete</button>
+                <button class="annoucement-delete" onclick="selectedAnnoucementId = '${_id}'; showPopup('ann-delete', true)">
+                    <i class="fa-solid fa-trash"></i>
+                    Delete
+                </button>
             </div>
             
             

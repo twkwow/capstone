@@ -39,7 +39,10 @@
         <strong>Delete Annoucement</strong>
         <div class="ann-delete-text1">Permanently delete the notification? You can't undo this</div>
         <div class="pop-container">
-            <button class="announcement-cancel-pop" onclick="showPopup('ann-delete', false)">Cancel</button>
+            <button class="announcement-cancel-pop" onclick="showPopup('ann-delete', false)">
+                <i class="fa-solid fa-ban"></i>
+                Cancel
+            </button>
             <button class="announcement-confirm-pop" onclick="showPopup('ann-delete', false); deleteUserNotification()">Confirm</button>
         </div>
     </popupmodal-component>
@@ -82,7 +85,10 @@
                             <div class="noti-container2">${notification.user.name || "Deleted User"}</div>
                             <div class="noti-container3">${moment(notification.timestamp).format("DD-MMM-YYYY h:mm:ss a")}</div>
                             <div class="noti-container4">
-                                <button class="annoucement-delete" onclick="selectedUserNotifications = '${notification._id}'; showPopup('ann-delete', true)">Delete</button>
+                                <button class="annoucement-delete" onclick="selectedUserNotifications = '${notification._id}'; showPopup('ann-delete', true)">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete
+                                </button>
                             </div>
                         </div>
                     </div>

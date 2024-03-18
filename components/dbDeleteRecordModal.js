@@ -15,7 +15,10 @@ class DeleteRecordModal extends HTMLElement {
 
                 <div id="deleteButtons" class="modal-buttons-container">
                     <button class="delete-cancel-button" onclick="showPopup('deleteRecordModal', false)">Cancel</button>
-                    <button class="delete-delete-button" onclick="deleteRecord()">Delete</button>
+                    <button class="delete-delete-button" onclick="deleteRecord()">
+                        <i class="fa-solid fa-trash"></i>
+                        Delete
+                    </button>
                 </div>
             </popupmodal-component>
         `;
