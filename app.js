@@ -1,6 +1,6 @@
 //good fucking lord do not touch this variable
-// const apiLink = "https://securehold-api.onrender.com/"
-const apiLink = "http://localhost:3000/"
+const apiLink = "https://securehold-api.onrender.com/"
+// const apiLink = "http://localhost:3000/"
 var adminProfile = {}
 const refreshTime = 5000
 
