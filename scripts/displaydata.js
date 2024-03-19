@@ -12,7 +12,7 @@ async function renderOccupancyCount(width) {
 	}
 	//x-axis dates
 	const xAxis = occupancyCount.xAxis.map((x) => formatDate(x))
-	xAxis.push("Tommorow")
+	xAxis.push("Today's Prediction")
 
 	//data
 	const yAxis = occupancyCount.yAxis
@@ -48,6 +48,7 @@ async function renderOccupancyCount(width) {
 }
 
 async function reRenderOccupancyCount() {
+	
 	const occupancyForm = new FormData()
 	occupancyForm.append("locationId", occupancyId)
 	const occupancyCount = (await axios.post(apiLink + "admins/dataAnalytics/getOccupancyCount", occupancyForm)).data
