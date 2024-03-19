@@ -2,7 +2,7 @@
 const apiLink = "https://securehold-api.onrender.com/"
 // const apiLink = "http://localhost:3000/"
 var adminProfile = {}
-const refreshTime = 5000
+const refreshTime = 3000
 
 //changing pages
 function pageRouting(link) {

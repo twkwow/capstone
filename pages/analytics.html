@@ -101,17 +101,19 @@
     setInterval(loadData, refreshTime);
     // setInterval(loadData, 15000); //15 sec to avoid lag
 
+    let occupancyId = ""
+    let demandId = ""
+
     async function loadData() {
         checkToken()
-        reRenderOccupancyCount()
-        reRenderDemandForecast()
-        reRenderLockerUsages()
+        reRenderOccupancyCount(occupancyId)
+        reRenderDemandForecast(demandId)
+        // reRenderLockerUsages()
         reRenderRegisteredWeb()
         console.log("Load Data")
     }
 
-    let occupancyId = ""
-    let demandId = ""
+    
 
     async function setLockerIdDropdowns() {
         await axios.get(apiLink + "admins/dataAnalytics/getLockerLocationIds")
@@ -155,12 +157,12 @@
         if ( buttonId == "occupancyButton") {
             document.getElementById("occupancyFilter").innerHTML = lockerName || "All Lockers"
             occupancyId = lockerId
-            await reRenderOccupancyCount()
+            await reRenderOccupancyCount(occupancyId)
         }
         else if ( buttonId == "demandButton") {
             document.getElementById("demandFilter").innerHTML = lockerName || "All Lockers"
             demandId = lockerId
-            await reRenderDemandForecast()
+            await reRenderDemandForecast(demandId)
         }
     }
 

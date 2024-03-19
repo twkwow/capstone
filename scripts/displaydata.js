@@ -47,7 +47,7 @@ async function renderOccupancyCount(width) {
 	Plotly.newPlot("myPlotBar", data, layout);
 }
 
-async function reRenderOccupancyCount() {
+async function reRenderOccupancyCount(occupancyId) {
 	
 	const occupancyForm = new FormData()
 	occupancyForm.append("locationId", occupancyId)
@@ -113,7 +113,7 @@ async function renderDemandForecast() {
 	Plotly.newPlot("myPlotLine", data, layout);
 }
 
-async function reRenderDemandForecast() {
+async function reRenderDemandForecast(demandId) {
 	const demandForm = new FormData()
 	demandForm.append("locationId", demandId)
 	const demandForecast = (await axios.post(apiLink + "admins/dataAnalytics/getDemandForecast", demandForm)).data
