@@ -12,7 +12,7 @@ async function renderOccupancyCount(width) {
 	}
 	//x-axis dates
 	const xAxis = occupancyCount.xAxis.map((x) => formatDate(x))
-	xAxis.push("Today's Prediction")
+	xAxis.push("Tommorow")
 
 	//data
 	const yAxis = occupancyCount.yAxis
@@ -94,7 +94,7 @@ async function renderDemandForecast() {
 	];
 	
 	const layout = {
-		title: "Locker Occupancy Count as of " + formatDate(demandForecast.date),
+		title: "Locker Open Count as of " + formatDate(demandForecast.date),
 		xaxis: {
 			type: "time",
 			title: "Time Of The Day",
