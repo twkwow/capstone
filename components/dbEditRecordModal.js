@@ -99,13 +99,11 @@ async function editRecords() {
 
     const lockerInputEdit = document.getElementById("lockerInputEdit")?.innerHTML
 	if (lockerInputEdit != undefined) {
-        console.log(editLockerId, "editlockerId")
 		editForm.append("locker_id", editLockerId)
 	}
 
     const userInputEdit = document.getElementById("userInputEdit")?.innerHTML
     if (userInputEdit != undefined) {
-        console.log(userInputEdit, "userInputEdit")
 		editForm.append("occupied_by", editUserId)
 	}   
 
@@ -134,8 +132,13 @@ async function editRecords() {
 }
 
 function formatDataToInput(data, path, type) {
-    const fieldPath = path.split('.'); // Split the string into parts
-    const result = fieldPath.reduce((obj, key) => obj[key], data);
+    const fieldPath = path.split('.');
+    const result = fieldPath.reduce((obj, key) => {
+        if (obj == null) {
+            return;
+        }
+        return obj[key];
+    }, data)
 
     if (result || result === 0) {
         switch (type) {
@@ -218,7 +221,6 @@ async function setEditDropdownId(dropdownInputEdit, dropdownId, id, name) {
     else if (dropdownInputEdit == "userInputEdit") {
         editUserId = id
     }
-    editUserId = id
     document.getElementById(dropdownInputEdit).innerHTML = name || ""
     document.getElementById(dropdownId).style.visibility = 'hidden'
     isEditDropdownOpen = false

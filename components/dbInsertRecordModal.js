@@ -15,6 +15,7 @@ class InsertRecordModal extends HTMLElement {
 }
 
 let insertColumnStructure = {}
+let insertLockerId = ""
 
 function setInsertForm(cols) {
 
@@ -83,7 +84,7 @@ async function insertRecord(event) {
 
     const lockerInputInsert = document.getElementById("lockerInputInsert")?.innerHTML
 	if (lockerInputInsert != undefined) {
-		insertForm.append("locker_id", lockerInputInsert)
+		insertForm.append("locker_id", insertLockerId)
 	}
 
     await axios.post(apiLink + "admins/database/insertDb", insertForm)
@@ -154,6 +155,9 @@ function insertModalDropdownsClose() {
 }
 
 async function setInsertLockerId(lockerInputInsert, dropdownId, lockerId, lockerName) {
+    if (lockerInputInsert == "lockerInputInsert") {
+        insertLockerId = lockerId
+    }
     document.getElementById(lockerInputInsert).innerHTML = lockerName || ""
     document.getElementById(dropdownId).style.visibility = 'hidden'
     isInsertDropdownOpen = false

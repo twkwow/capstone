@@ -29,7 +29,7 @@
                         <div>Locker Id:</div>
                         <div class="lockerid-button-container">
                             <button id="occupancyButton" class="lockerid-button">
-                                All Lockers
+                                <span id="occupancyFilter">All Lockers</span>
                                 <i class="fa-solid fa-caret-down dropdown-icon"></i>
                             </button>
                             <div id="occupancyDropdown" class="dropdown-content"></div>
@@ -47,7 +47,7 @@
                         <div>Locker Id:</div>
                         <div class="lockerid-button-container">
                             <button id="demandButton" class="lockerid-button">
-                                All Lockers
+                                <span id="demandFilter">All Lockers</span>
                                 <i class="fa-solid fa-caret-down dropdown-icon"></i>
                             </button>
                             <div id="demandDropdown" class="dropdown-content"></div>
@@ -154,12 +154,13 @@
     }
 
     async function setLockerId(buttonId, dropdownId, lockerId, lockerName) {
-        document.getElementById(buttonId).innerHTML = lockerName || "All Lockers"
         if ( buttonId == "occupancyButton") {
+            document.getElementById("occupancyFilter").innerHTML = lockerName || "All Lockers"
             occupancyId = lockerId
             await reRenderOccupancyCount()
         }
         else if ( buttonId == "demandButton") {
+            document.getElementById("demandFilter").innerHTML = lockerName || "All Lockers"
             demandId = lockerId
             await reRenderDemandForecast()
         }

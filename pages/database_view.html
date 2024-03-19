@@ -123,8 +123,8 @@
             if (db == 'users') {
                 headers = {
                     // "User ID": { dbField: "_id", showOnly: true},
-                    "Username": { dbField: "web_data.username", type: "text", required: false},
                     "Full Name": { dbField: "name", type: "text", required: true},
+                    "Username": { dbField: "web_data.username", type: "text", required: false},
                     "Locker ID": { dbField: "locker_id",  type: "lockerId", required: false},
                     "DOB": { dbField: "dob", type: "date", required: true},
                     "NRIC / Passport": { dbField: "nric_passport", type: "text", required: true},
@@ -134,11 +134,11 @@
                     "Facial Data": {dbField: "auth_data.face", inputOnly: true, type: "text", required:true}
                 }
                 dataCustomization = [
-                    { targets: 0, render: (data, type, row, meta) => {
+                    { targets: 1, render: (data, type, row, meta) => {
                         return data == null ? 'N/A' : data;
                     }},
                     { targets: 2, render: (data, type, row, meta) => {
-                        return data == null ? 'N/A' :  data.location.name + "<br>" + data._id;
+                        return data == null ? 'N/A' :  data.locker_id + '<br>' + data.location.name;
                     }},
                     { targets: 3, render: (data, type, row, meta) => {
                         return moment(data).format('DD-MMM-YYYY');

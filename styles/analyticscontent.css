@@ -54,6 +54,8 @@
     cursor: pointer;
     background-color: #d8eefb;
     text-align: left;
+    display: flex;
+    text-wrap: nowrap;
 }
 
 .lockerid-button:hover{
@@ -91,7 +93,7 @@
 }
 
 .dropdown-icon{
-    margin-left: 120px;
+    margin-left: auto;
 }
 
 .content-item {
