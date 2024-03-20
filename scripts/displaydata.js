@@ -126,7 +126,7 @@ async function reRenderDemandForecast(demandId) {
     };
 
 	const newLayout = {
-		title: "Locker Occupancy Count as of " + formatDate(demandForecast.date),
+		title: "Locker Open Count as of " + formatDate(demandForecast.date),
 	};
 
 	Plotly.update("myPlotLine", newData, newLayout)
